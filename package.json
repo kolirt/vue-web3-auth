@@ -1,0 +1,85 @@
+{
+  "name": "@kolirt/vue-web3-auth",
+  "version": "0.0.0",
+  "description": "Web3 authentication for Vue3 apps based on WalletConnect v2",
+  "author": "kolirt",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vuejs",
+    "web3",
+    "web3vue",
+    "vueweb3",
+    "metamask",
+    "ethereum",
+    "wallet",
+    "walletconnect",
+    "dapp",
+    "web3modal",
+    "web3modalvue",
+    "crypto",
+    "web3auth",
+    "wagmi",
+    "viem",
+    "ethers"
+  ],
+  "scripts": {
+    "build-lib": "run-p type-check-lib build-only-lib",
+    "build-only-lib": "vite build -c vite.lib.config.ts",
+    "type-check-lib": "vue-tsc --noEmit -p tsconfig.lib.json --composite false",
+    "dev-docs": "vite serve -c vite.demo.config.ts",
+    "build-docs": "vite build -c vite.demo.config.ts",
+    "preview-docs": "vite preview -c vite.demo.config.ts"
+  },
+  "private": false,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "typings": "./dist/vue-web3-auth.d.ts",
+  "main": "./dist/vue-web3-auth.umd.cjs",
+  "module": "./dist/vue-web3-auth.js",
+  "exports": {
+    ".": {
+      "types": "./dist/vue-web3-auth.d.ts",
+      "import": "./dist/vue-web3-auth.js",
+      "require": "./dist/vue-web3-auth.umd.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kolirt/vue-web3-auth"
+  },
+  "bugs": {
+    "url": "https://github.com/kolirt/vue-web3-auth/issues"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@wagmi/core": "^1.2.0",
+    "@web3modal/ethereum": "^2.4.5",
+    "@web3modal/html": "^2.4.5",
+    "bootstrap": "5.3.0",
+    "js-event-bus": "^1.1.1",
+    "viem": "^1.0.7",
+    "vue": "^3.3.2"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@tsconfig/node18": "^2.0.1",
+    "@types/node": "^18.16.8",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/tsconfig": "^0.4.0",
+    "eslint": "^8.39.0",
+    "eslint-plugin-vue": "^9.11.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~5.0.4",
+    "vite": "^4.3.5",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-tsc": "^1.6.4"
+  }
+}
