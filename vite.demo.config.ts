@@ -17,7 +17,7 @@ export default defineConfig({
         }
     },
     build: {
-        outDir: resolve(__dirname, './docs'),
+        outDir: resolve(__dirname, './demo'),
         emptyOutDir: true,
     },
 })

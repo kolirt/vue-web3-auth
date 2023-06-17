@@ -1,0 +1,11 @@
+.github
+demo
+lib
+src
+.gitignore
+env.d.ts
+index.html
+Makefile
+tsconfig*
+yarn.lock
+vite.*
