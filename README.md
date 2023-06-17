@@ -5,9 +5,6 @@
   <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" />
 </p>
 
-<a href="https://www.buymeacoffee.com/kolirt" target="_blank">
-  <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
-</a>
 
 Simple WalletConnect v2 integration package for Vue3 apps.
 
@@ -22,7 +19,10 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Faq](#faq)
 - [License](#license)
 
-[//]: # (# Web3 authentication for Vue3 apps)
+<a href="https://www.buymeacoffee.com/kolirt" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
+</a>
+
 # Getting started
 
 ## Installation
