@@ -1,6 +1,8 @@
+import type { BlockTag } from 'viem/src/types/block';
 import type { Chain } from '@wagmi/core';
 import * as Chains from '@wagmi/core/chains';
 import type { ComputedRef } from 'vue';
+import MulticallAbi from './utils/abi/multicall.json';
 import type { Plugin as Plugin_2 } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
 
@@ -38,6 +40,30 @@ declare enum Event_2 {
 export { Event_2 as Event }
 
 export declare function getAvailableChains(): Chain[];
+
+export declare function multicall(params: MulticallArgs): Promise<unknown[]>;
+
+export { MulticallAbi }
+
+declare type MulticallArgs = {
+    chainId?: number;
+    calls: MulticallContract[];
+    multicallAddress?: `0x${string}`;
+    batchSize?: number;
+    allowFailure?: boolean;
+} & ({
+    blockNumber?: bigint;
+    blockTag?: never;
+} | {
+    blockNumber?: never;
+    blockTag?: BlockTag;
+});
+
+declare type MulticallContract = {
+    abi: {};
+    contractAddress: string;
+    calls: [string, Array<any>?][];
+};
 
 export declare type Options = {
     autoInit?: boolean;

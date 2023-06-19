@@ -1,6 +1,7 @@
 import type {Chain} from '@wagmi/core'
 import type {ThemeCtrlState} from '@web3modal/core'
 import type {EthereumClient} from '@web3modal/ethereum'
+import type {BlockTag} from 'viem/src/types/block'
 
 export type Options = {
     autoInit?: boolean // when true, plugin WalletConnect will init automatically
@@ -36,3 +37,23 @@ export type AccountState = {
     bufferAccount: any,
     currentAccount: any
 }
+
+export type MulticallContract = {
+    abi: {}
+    contractAddress: string
+    calls: [string, Array<any>?][]
+}
+
+export type MulticallArgs = {
+    chainId?: number
+    calls: MulticallContract[]
+    multicallAddress?: `0x${string}`
+    batchSize?: number
+    allowFailure?: boolean
+} & ({
+    blockNumber?: bigint
+    blockTag?: never
+} | {
+    blockNumber?: never
+    blockTag?: BlockTag
+})

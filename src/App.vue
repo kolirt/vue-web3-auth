@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {computed, reactive} from 'vue'
 import type {Chain} from '../lib'
+import {computed, reactive} from 'vue'
 import {
   $off,
   $on,
@@ -12,7 +12,7 @@ import {
   Event,
   getAvailableChains,
   selectChain,
-  switchChain as masterWwitchChain
+  switchChain as masterSwitchChain
 } from '../lib'
 
 const loading = reactive({
@@ -66,7 +66,7 @@ async function disconnect() {
 async function switchChain(chain: Chain) {
   if (!loading.switchingTo[chain.id]) {
     loading.switchingTo[chain.id] = true
-    await masterWwitchChain(chain)
+    await masterSwitchChain(chain)
         .finally(() => {
           loading.switchingTo[chain.id] = false
         })
@@ -91,8 +91,8 @@ const availableChains = computed(() => {
     <div class="bg-body-secondary p-5 rounded">
       <div class="mb-3 d-grid gap-2 d-sm-flex">
         <img
-            src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js"/>
-        <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum"/>
+            src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js" alt="vuejs"/>
+        <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" alt="dapp"/>
       </div>
 
       <iframe src="https://ghbtns.com/github-btn.html?user=kolirt&repo=vue-web3-auth&type=star&count=true&size=large"

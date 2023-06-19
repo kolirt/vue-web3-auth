@@ -1,10 +1,10 @@
 dev:
-	yarn dev-docs
+	yarn dev-demo
 build:
-	yarn build-lib && yarn build-docs
-build-docs:
-	yarn build-docs
+	yarn build-lib && yarn build-demo
+build-demo:
+	yarn build-demo
 build-lib:
 	yarn build-lib
 preview:
-	yarn preview-docs
+	yarn preview-demo

@@ -25,6 +25,11 @@ export {
 } from './chain'
 
 export {
+    multicall,
+    MulticallAbi
+} from './multicall'
+
+export {
     Event
 } from './enums'
 
