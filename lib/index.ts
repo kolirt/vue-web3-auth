@@ -25,14 +25,19 @@ export {
 } from './chain'
 
 export {
-    multicall,
-    MulticallAbi
+    readContract
+} from './contract'
+
+export {
+    multicall
 } from './multicall'
 
 export {
-    Event
+    Events
 } from './enums'
 
 export {
     Chains
 }
+
+export * from './utils/abi'

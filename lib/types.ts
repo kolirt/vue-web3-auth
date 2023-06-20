@@ -18,7 +18,7 @@ export type {Chain}
 
 export type ConnectedAccount = {
     connected: boolean,
-    address?: string,
+    address?: `0x${string}`,
     shortAddress?: string
 }
 
@@ -57,3 +57,14 @@ export type MulticallArgs = {
     blockNumber?: never
     blockTag?: BlockTag
 })
+
+export type ReadContract = {
+    chain?: number,
+    address: `0x${string}`,
+    abi: any,
+    functionName: string,
+    args?: any[],
+    account?: `0x${string}`,
+    blockNumber?: bigint,
+    blockTag?: BlockTag
+}

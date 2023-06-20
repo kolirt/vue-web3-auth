@@ -2,17 +2,16 @@ import type { BlockTag } from 'viem/src/types/block';
 import type { Chain } from '@wagmi/core';
 import * as Chains from '@wagmi/core/chains';
 import type { ComputedRef } from 'vue';
-import MulticallAbi from './utils/abi/multicall.json';
 import type { Plugin as Plugin_2 } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
 
-export declare function $off(event: Event_2, callback: (...args: any) => void): void;
+export declare function $off(event: Events, callback: (...args: any) => void): void;
 
-export declare function $on(event: Event_2, callback: (...args: any) => void): void;
+export declare function $on(event: Events, callback: (...args: any) => void): void;
 
 export declare const account: {
     connected: boolean;
-    address?: string | undefined;
+    address?: `0x${string}` | undefined;
     shortAddress?: string | undefined;
 };
 
@@ -30,20 +29,94 @@ export declare function createWeb3Auth(options: Options): Plugin_2;
 
 export declare function disconnect(): Promise<void>;
 
-declare enum Event_2 {
+export declare const erc20ABI: ({
+    inputs: never[];
+    payable: boolean;
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
+    name?: undefined;
+    constant?: undefined;
+    outputs?: undefined;
+} | {
+    anonymous: boolean;
+    inputs: {
+        indexed: boolean;
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    type: string;
+    payable?: undefined;
+    stateMutability?: undefined;
+    constant?: undefined;
+    outputs?: undefined;
+} | {
+    constant: boolean;
+    inputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    outputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    payable: boolean;
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
+})[];
+
+export declare enum Events {
     Connected = "connected",
     Disconnected = "disconnect",
     ChainSwitched = "chain_switched",
     UnknownChain = "unknown_chain",
     ModalStateChanged = "modal_state_changed"
 }
-export { Event_2 as Event }
 
 export declare function getAvailableChains(): Chain[];
 
 export declare function multicall(params: MulticallArgs): Promise<unknown[]>;
 
-export { MulticallAbi }
+export declare const multicallABI: ({
+    inputs: {
+        components: {
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    outputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    stateMutability: string;
+    type: string;
+} | {
+    inputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    outputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    stateMutability: string;
+    type: string;
+})[];
 
 declare type MulticallArgs = {
     chainId?: number;
@@ -75,6 +148,19 @@ export declare type Options = {
     logEnabled?: boolean;
     web3modalOptions?: ThemeCtrlState;
 };
+
+declare type ReadContract = {
+    chain?: number;
+    address: `0x${string}`;
+    abi: any;
+    functionName: string;
+    args?: any[];
+    account?: `0x${string}`;
+    blockNumber?: bigint;
+    blockTag?: BlockTag;
+};
+
+export declare function readContract(data: ReadContract): Promise<unknown[]>;
 
 export declare function selectChain(): Promise<void>;
 

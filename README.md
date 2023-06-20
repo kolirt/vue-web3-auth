@@ -15,6 +15,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Usage](#usage)
     - [Connect wallet button](#connect-wallet-button)
     - [Multicall](#multicall)
+    - [ReadContract](#readcontract)
 - [Demo](#demo)
 - [Example](#example)
 - [Faq](#faq)
@@ -77,12 +78,12 @@ import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
 
 ## Multicall
 ```js
-import {MulticallAbi, multicall, chain} from '@kolirt/vue-web3-auth'
+import {multicallABI, multicall, chain} from '@kolirt/vue-web3-auth'
 
 let data = await multicall({
   calls: [
     {
-      abi: MulticallAbi,
+      abi: multicallABI,
       contractAddress: chain.value.contracts.multicall3.address,
       calls: [
         ['getEthBalance', ['0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9']],
@@ -103,6 +104,26 @@ let data = await multicall({
  * ]
  */
 ```
+
+## ReadContract
+
+```js
+import {erc20ABI, readContract} from '@kolirt/vue-web3-auth'
+
+let data = await readContract({
+  address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', // wbnb on bsc
+  abi: erc20ABI,
+  functionName: 'balanceOf',
+  args: ['0x36696169c63e42cd08ce11f5deebbcebae652050']
+})
+
+/**
+ * Result in data
+ * 
+ * 107109316688516684525777n
+ */
+```
+
 
 # Demo
 [Demo here](https://kolirt.github.io/vue-web3-auth/).

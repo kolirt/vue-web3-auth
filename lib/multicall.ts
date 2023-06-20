@@ -1,6 +1,5 @@
 import type {MulticallArgs} from './types'
 import {multicall as masterMulticall} from '@wagmi/core'
-import MulticallAbi from './utils/abi/multicall.json'
 
 export async function multicall(params: MulticallArgs) {
     const contracts: any[] = []
@@ -25,8 +24,4 @@ export async function multicall(params: MulticallArgs) {
         batchSize: params.batchSize,
         allowFailure: params.allowFailure
     })
-}
-
-export {
-    MulticallAbi
 }

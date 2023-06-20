@@ -8,7 +8,7 @@ import {$emit} from './event'
 import {$log} from './log'
 import {initWeb3Modal, web3Modal} from './web3Modal'
 import {state as optionsState} from './options'
-import {Event} from './enums'
+import {Events} from './enums'
 
 let onChangeHandler: any
 export const state = reactive<WcState>({
@@ -31,11 +31,11 @@ async function onChange(
     ) {
         await disconnect()
         if (prevBufferChain) {
-            $emit(Event.Disconnected)
+            $emit(Events.Disconnected)
             $log(`account ${newBufferAccount.address} disconnected from ${toLowerCase(prevBufferChain.name)} chain.`)
         }
 
-        $emit(Event.UnknownChain, {chain: newBufferChain})
+        $emit(Events.UnknownChain, {chain: newBufferChain})
         $log('switched to unsupported chain.')
 
         return
@@ -43,25 +43,25 @@ async function onChange(
 
     if (prevBufferAccount?.address !== newBufferAccount?.address && (!prevBufferChain?.unsupported)) {
         if (prevBufferAccount) {
-            $emit(Event.Disconnected)
+            $emit(Events.Disconnected)
             $log(`account ${prevBufferAccount.address} disconnected from ${toLowerCase(prevBufferChain.name)} chain.`)
         }
 
         if (newBufferAccount) {
-            $emit(Event.Connected, {chain: chainState.bufferChain, account: accountState.bufferAccount})
+            $emit(Events.Connected, {chain: chainState.bufferChain, account: accountState.bufferAccount})
             $log(`account ${newBufferAccount.address} connected to ${toLowerCase(newBufferChain.name)} chain.`)
         }
     }
 
     if (prevBufferChain && newBufferChain && prevBufferChain.id !== newBufferChain.id) {
         if (optionsState.reconnectToChain) {
-            $emit(Event.Disconnected)
+            $emit(Events.Disconnected)
             $log(`account ${prevBufferAccount.address} disconnected from ${toLowerCase(prevBufferChain.name)} chain.`)
 
-            $emit(Event.Connected, {chain: chainState.bufferChain, account: accountState.bufferAccount})
+            $emit(Events.Connected, {chain: chainState.bufferChain, account: accountState.bufferAccount})
             $log(`account ${newBufferAccount.address} connected to ${toLowerCase(newBufferChain.name)} chain.`)
         } else {
-            $emit(Event.ChainSwitched, {chain: newBufferChain})
+            $emit(Events.ChainSwitched, {chain: newBufferChain})
             $log(`account ${newBufferAccount.address} switched to ${toLowerCase(newBufferChain.name)} chain.`)
         }
     }

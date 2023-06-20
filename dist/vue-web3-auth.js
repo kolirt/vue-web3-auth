@@ -1,10 +1,10 @@
-import * as z from "@wagmi/core/chains";
-import { reactive as b, computed as w, ref as $, watch as g, toRaw as y } from "vue";
-import { disconnect as T, configureChains as M, createConfig as E, watchNetwork as I, watchAccount as v, multicall as S } from "@wagmi/core";
-import { w3mProvider as U, w3mConnectors as D, EthereumClient as j } from "@web3modal/ethereum";
+import * as Y from "@wagmi/core/chains";
+import { reactive as m, computed as v, ref as w, watch as C, toRaw as f } from "vue";
+import { disconnect as g, configureChains as k, createConfig as I, watchNetwork as x, watchAccount as $, readContract as E, multicall as S } from "@wagmi/core";
+import { w3mProvider as U, w3mConnectors as _, EthereumClient as D } from "@web3modal/ethereum";
 import { Web3Modal as N } from "@web3modal/html";
-import x from "js-event-bus";
-var H = {
+import j from "js-event-bus";
+var A = {
   id: 1,
   network: "homestead",
   name: "Ethereum",
@@ -49,10 +49,10 @@ var H = {
     }
   }
 };
-const F = H, e = b({
+const L = A, n = m({
   autoInit: !0,
   projectId: "",
-  chains: [F],
+  chains: [L],
   autoConnect: !0,
   disconnectUnknownChain: !0,
   reconnectToChain: !0,
@@ -62,128 +62,888 @@ const F = H, e = b({
     themeVariables: {}
   }
 });
-function W(t) {
-  "autoInit" in t && (e.autoInit = t.autoInit), "projectId" in t && (e.projectId = t.projectId), "chains" in t && (e.chains = t.chains), "autoConnect" in t && (e.autoConnect = t.autoConnect), "disconnectUnknownChain" in t && (e.disconnectUnknownChain = t.disconnectUnknownChain), "reconnectToChain" in t && (e.reconnectToChain = t.reconnectToChain), "logEnabled" in t && (e.logEnabled = t.logEnabled), "web3modalOptions" in t && ("themeMode" in t.web3modalOptions && (e.web3modalOptions.themeMode = t.web3modalOptions.themeMode), "themeVariables" in t.web3modalOptions && (e.web3modalOptions.themeVariables = t.web3modalOptions.themeVariables));
+function H(e) {
+  "autoInit" in e && (n.autoInit = e.autoInit), "projectId" in e && (n.projectId = e.projectId), "chains" in e && (n.chains = e.chains), "autoConnect" in e && (n.autoConnect = e.autoConnect), "disconnectUnknownChain" in e && (n.disconnectUnknownChain = e.disconnectUnknownChain), "reconnectToChain" in e && (n.reconnectToChain = e.reconnectToChain), "logEnabled" in e && (n.logEnabled = e.logEnabled), "web3modalOptions" in e && ("themeMode" in e.web3modalOptions && (n.web3modalOptions.themeMode = e.web3modalOptions.themeMode), "themeVariables" in e.web3modalOptions && (n.web3modalOptions.themeVariables = e.web3modalOptions.themeVariables));
 }
-const s = b({
+const o = m({
   bufferChain: null,
   currentChain: null
-}), Q = w(() => s.currentChain ? s.currentChain : e.chains[0]);
-function X() {
-  return e.chains;
+}), R = v(() => o.currentChain ? o.currentChain : n.chains[0]);
+function O() {
+  return n.chains;
 }
-async function Y(t) {
-  var n;
-  o.value || p(), await ((n = k.client) == null ? void 0 : n.switchNetwork({ chainId: t.id }));
+async function X(e) {
+  var t;
+  u.value || b(), await ((t = M.client) == null ? void 0 : t.switchNetwork({ chainId: e.id }));
 }
 async function Z() {
-  var t;
-  o.value || p(), await ((t = o.value) == null ? void 0 : t.openModal({
+  var e;
+  u.value || b(), await ((e = u.value) == null ? void 0 : e.openModal({
     route: "SelectNetwork"
   }));
 }
-function l(...t) {
-  e.logEnabled && console.log("[WC]", ...t);
+function l(...e) {
+  n.logEnabled && console.log("[WC]", ...e);
 }
-var c = /* @__PURE__ */ ((t) => (t.Connected = "connected", t.Disconnected = "disconnect", t.ChainSwitched = "chain_switched", t.UnknownChain = "unknown_chain", t.ModalStateChanged = "modal_state_changed", t))(c || {});
-const C = new x();
-function d(t, ...n) {
-  t === c.Connected || t === c.Disconnected ? (s.currentChain = s.bufferChain, r.currentAccount = r.bufferAccount) : t === c.ChainSwitched && (s.currentChain = s.bufferChain), C.emit(t, null, ...n);
+var s = /* @__PURE__ */ ((e) => (e.Connected = "connected", e.Disconnected = "disconnect", e.ChainSwitched = "chain_switched", e.UnknownChain = "unknown_chain", e.ModalStateChanged = "modal_state_changed", e))(s || {});
+const h = new j();
+function r(e, ...t) {
+  e === s.Connected || e === s.Disconnected ? (o.currentChain = o.bufferChain, c.currentAccount = c.bufferAccount) : e === s.ChainSwitched && (o.currentChain = o.bufferChain), h.emit(e, null, ...t);
 }
-function O(t, n) {
-  C.on(t, n), e.logEnabled && l(`Subscribe for ${t} event.`);
+function B(e, t) {
+  h.on(e, t), n.logEnabled && l(`Subscribe for ${e} event.`);
 }
-function B(t, n) {
-  C.detach(t, n), e.logEnabled && l(`Unsubscribe for ${t} event.`);
+function ee(e, t) {
+  h.detach(e, t), n.logEnabled && l(`Unsubscribe for ${e} event.`);
 }
-const o = $(null);
-function A(t) {
-  var n;
-  o.value = new N(
+const u = w(null);
+function F(e) {
+  var t;
+  u.value = new N(
     {
-      projectId: e.projectId,
-      ...(e == null ? void 0 : e.web3modalOptions) || []
+      projectId: n.projectId,
+      ...(n == null ? void 0 : n.web3modalOptions) || []
     },
-    t
-  ), (n = o.value) == null || n.subscribeModal(({ open: a }) => {
-    d(c.ModalStateChanged, a);
+    e
+  ), (t = u.value) == null || t.subscribeModal(({ open: a }) => {
+    r(s.ModalStateChanged, a);
   });
 }
-const r = b({
+const c = m({
   bufferAccount: null,
   currentAccount: null
-}), h = b({
+}), p = m({
   connected: !1,
   address: void 0,
   shortAddress: void 0
 });
-async function L() {
-  await T();
+async function W() {
+  await g();
 }
-async function tt(t) {
-  var n, a;
-  o.value || p(), t instanceof Event && (t = e.chains[0]), (n = o.value) == null || n.setDefaultChain(t || e.chains[0]), await ((a = o.value) == null ? void 0 : a.openModal({
+async function te(e) {
+  var t, a;
+  u.value || b(), e instanceof Event && (e = n.chains[0]), (t = u.value) == null || t.setDefaultChain(e || n.chains[0]), await ((a = u.value) == null ? void 0 : a.openModal({
     route: "ConnectWallet"
   }));
 }
-async function nt() {
-  var t;
-  o.value || p(), await ((t = o.value) == null ? void 0 : t.openModal({
+async function ne() {
+  var e;
+  u.value || b(), await ((e = u.value) == null ? void 0 : e.openModal({
     route: "Account"
   }));
 }
-function V(t = "") {
-  return `${t.slice(0, 5)}...${t.slice(-4)}`;
+function P(e = "") {
+  return `${e.slice(0, 5)}...${e.slice(-4)}`;
 }
-g(() => r.currentAccount, (t) => {
-  t ? (h.connected = !0, h.address = t.address, h.shortAddress = V(t.address)) : (h.connected = !1, h.address = void 0, h.shortAddress = void 0);
+C(() => c.currentAccount, (e) => {
+  e ? (p.connected = !0, p.address = e.address, p.shortAddress = P(e.address)) : (p.connected = !1, p.address = void 0, p.shortAddress = void 0);
 });
-let f;
-const k = b({
+let T;
+const M = m({
   client: null
 });
-function m(t) {
-  return String(t).toLowerCase();
+function y(e) {
+  return String(e).toLowerCase();
 }
-async function _([t, n], [a, i]) {
-  if (e.disconnectUnknownChain && (!a && e.disconnectUnknownChain || a) && n && !e.chains.some((u) => u.id === n.id)) {
-    await L(), i && (d(c.Disconnected), l(`account ${t.address} disconnected from ${m(i.name)} chain.`)), d(c.UnknownChain, { chain: n }), l("switched to unsupported chain.");
+async function V([e, t], [a, i]) {
+  if (n.disconnectUnknownChain && (!a && n.disconnectUnknownChain || a) && t && !n.chains.some((d) => d.id === t.id)) {
+    await W(), i && (r(s.Disconnected), l(`account ${e.address} disconnected from ${y(i.name)} chain.`)), r(s.UnknownChain, { chain: t }), l("switched to unsupported chain.");
     return;
   }
-  (a == null ? void 0 : a.address) !== (t == null ? void 0 : t.address) && !(i != null && i.unsupported) && (a && (d(c.Disconnected), l(`account ${a.address} disconnected from ${m(i.name)} chain.`)), t && (d(c.Connected, { chain: s.bufferChain, account: r.bufferAccount }), l(`account ${t.address} connected to ${m(n.name)} chain.`))), i && n && i.id !== n.id && (e.reconnectToChain ? (d(c.Disconnected), l(`account ${a.address} disconnected from ${m(i.name)} chain.`), d(c.Connected, { chain: s.bufferChain, account: r.bufferAccount }), l(`account ${t.address} connected to ${m(n.name)} chain.`)) : (d(c.ChainSwitched, { chain: n }), l(`account ${t.address} switched to ${m(n.name)} chain.`)));
+  (a == null ? void 0 : a.address) !== (e == null ? void 0 : e.address) && !(i != null && i.unsupported) && (a && (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`)), e && (r(s.Connected, { chain: o.bufferChain, account: c.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`))), i && t && i.id !== t.id && (n.reconnectToChain ? (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`), r(s.Connected, { chain: o.bufferChain, account: c.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`)) : (r(s.ChainSwitched, { chain: t }), l(`account ${e.address} switched to ${y(t.name)} chain.`)));
 }
-function R([t, n], [a, i]) {
-  clearTimeout(f), f = setTimeout(_, 200, [t, n], [a, i]);
+function z([e, t], [a, i]) {
+  clearTimeout(T), T = setTimeout(V, 200, [e, t], [a, i]);
 }
-function p() {
-  if (o.value)
+function b() {
+  if (u.value)
     return;
-  const { publicClient: t } = M(y(e.chains), [U({ projectId: e.projectId })]), n = E({
-    autoConnect: e.autoConnect,
-    connectors: D({
-      projectId: e.projectId,
+  const { publicClient: e } = k(f(n.chains), [U({ projectId: n.projectId })]), t = I({
+    autoConnect: n.autoConnect,
+    connectors: _({
+      projectId: n.projectId,
       version: 2,
-      chains: y(e.chains)
+      chains: f(n.chains)
     }),
-    publicClient: t
+    publicClient: e
   });
-  I((i) => {
-    var u;
-    (u = i.chain) != null && u.unsupported && (i.chain.name = "Unsupported"), s.bufferChain = i.chain || null;
-  }), v((i) => {
-    r.bufferAccount = i.address ? i : null;
-  }), g([() => r.bufferAccount, () => s.bufferChain], R);
-  const a = new j(n, y(e.chains));
-  k.client = a, A(a);
+  x((i) => {
+    var d;
+    (d = i.chain) != null && d.unsupported && (i.chain.name = "Unsupported"), o.bufferChain = i.chain || null;
+  }), $((i) => {
+    c.bufferAccount = i.address ? i : null;
+  }), C([() => c.bufferAccount, () => o.bufferChain], z);
+  const a = new D(t, f(n.chains));
+  M.client = a, F(a);
 }
-function et(t) {
+function ae(e) {
   return {
     install() {
-      W(t), p();
+      H(e), b();
     }
   };
 }
-const at = [
+async function ie(e) {
+  return E({
+    chainId: e.chain || R.value.id,
+    address: e.address,
+    abi: e.abi,
+    functionName: e.functionName,
+    args: e.args || [],
+    account: p.address,
+    blockNumber: e.blockNumber,
+    blockTag: e.blockTag
+  });
+}
+async function se(e) {
+  const t = [];
+  return e.calls.forEach((a) => {
+    a.calls.forEach(([i, d]) => {
+      t.push({
+        address: a.contractAddress,
+        abi: a.abi,
+        functionName: i,
+        args: d
+      });
+    });
+  }), await S({
+    chainId: e.chainId,
+    contracts: t,
+    multicallAddress: e.multicallAddress,
+    blockTag: e.blockTag,
+    blockNumber: e.blockNumber,
+    batchSize: e.batchSize,
+    allowFailure: e.allowFailure
+  });
+}
+const ue = [
+  {
+    inputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256"
+      },
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      }
+    ],
+    name: "Burn",
+    type: "event"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256"
+      }
+    ],
+    name: "Mint",
+    type: "event"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount0In",
+        type: "uint256"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount1In",
+        type: "uint256"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount0Out",
+        type: "uint256"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "amount1Out",
+        type: "uint256"
+      },
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      }
+    ],
+    name: "Swap",
+    type: "event"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !1,
+        internalType: "uint112",
+        name: "reserve0",
+        type: "uint112"
+      },
+      {
+        indexed: !1,
+        internalType: "uint112",
+        name: "reserve1",
+        type: "uint112"
+      }
+    ],
+    name: "Sync",
+    type: "event"
+  },
+  {
+    anonymous: !1,
+    inputs: [
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: !0,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: !1,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "DOMAIN_SEPARATOR",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "MINIMUM_LIQUIDITY",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "PERMIT_TYPEHASH",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      }
+    ],
+    name: "burn",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "decimals",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "factory",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "getReserves",
+    outputs: [
+      {
+        internalType: "uint112",
+        name: "_reserve0",
+        type: "uint112"
+      },
+      {
+        internalType: "uint112",
+        name: "_reserve1",
+        type: "uint112"
+      },
+      {
+        internalType: "uint32",
+        name: "_blockTimestampLast",
+        type: "uint32"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token0",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "_token1",
+        type: "address"
+      }
+    ],
+    name: "initialize",
+    outputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "kLast",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      }
+    ],
+    name: "mint",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "nonces",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256"
+      },
+      {
+        internalType: "uint8",
+        name: "v",
+        type: "uint8"
+      },
+      {
+        internalType: "bytes32",
+        name: "r",
+        type: "bytes32"
+      },
+      {
+        internalType: "bytes32",
+        name: "s",
+        type: "bytes32"
+      }
+    ],
+    name: "permit",
+    outputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "price0CumulativeLast",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "price1CumulativeLast",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      }
+    ],
+    name: "skim",
+    outputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount0Out",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount1Out",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes"
+      }
+    ],
+    name: "swap",
+    outputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [],
+    name: "sync",
+    outputs: [],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "token0",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "token1",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "totalSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !0,
+    inputs: [],
+    name: "totalBurned",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: !1,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "transfer",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: !1,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: !1,
+    stateMutability: "nonpayable",
+    type: "function"
+  }
+], oe = [
   {
     inputs: [
       {
@@ -324,42 +1084,23 @@ const at = [
     type: "function"
   }
 ];
-async function it(t) {
-  const n = [];
-  return t.calls.forEach((a) => {
-    a.calls.forEach(([i, u]) => {
-      n.push({
-        address: a.contractAddress,
-        abi: a.abi,
-        functionName: i,
-        args: u
-      });
-    });
-  }), await S({
-    chainId: t.chainId,
-    contracts: n,
-    multicallAddress: t.multicallAddress,
-    blockTag: t.blockTag,
-    blockNumber: t.blockNumber,
-    batchSize: t.batchSize,
-    allowFailure: t.allowFailure
-  });
-}
 export {
-  B as $off,
-  O as $on,
-  z as Chains,
-  c as Event,
-  at as MulticallAbi,
-  h as account,
-  nt as accountDetails,
-  Q as chain,
-  tt as connect,
-  et as createWeb3Auth,
-  L as disconnect,
-  X as getAvailableChains,
-  it as multicall,
+  ee as $off,
+  B as $on,
+  Y as Chains,
+  s as Events,
+  p as account,
+  ne as accountDetails,
+  R as chain,
+  te as connect,
+  ae as createWeb3Auth,
+  W as disconnect,
+  ue as erc20ABI,
+  O as getAvailableChains,
+  se as multicall,
+  oe as multicallABI,
+  ie as readContract,
   Z as selectChain,
-  V as shortAddressFilter,
-  Y as switchChain
+  P as shortAddressFilter,
+  X as switchChain
 };

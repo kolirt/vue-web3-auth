@@ -9,7 +9,7 @@ import {
   chain,
   connect as masterConnect,
   disconnect as masterDisconnect,
-  Event,
+  Events,
   getAvailableChains,
   selectChain,
   switchChain as masterSwitchChain
@@ -31,11 +31,11 @@ async function connect(chain?: Chain) {
         loading.connecting = false
       }
 
-      $off(Event.ModalStateChanged, handler)
+      $off(Events.ModalStateChanged, handler)
     }
   }
 
-  $on(Event.ModalStateChanged, handler)
+  $on(Events.ModalStateChanged, handler)
 
   if (chain) {
     loading.connectingTo[chain.id] = true
@@ -51,15 +51,15 @@ async function disconnect() {
 
   const handler = () => {
     loading.logouting = false
-    $off(Event.Disconnected, handler)
+    $off(Events.Disconnected, handler)
   }
 
-  $on(Event.Disconnected, handler)
+  $on(Events.Disconnected, handler)
 
   await masterDisconnect()
       .catch(() => {
         loading.logouting = false
-        $off(Event.Disconnected, handler)
+        $off(Events.Disconnected, handler)
       })
 }
 
@@ -91,7 +91,8 @@ const availableChains = computed(() => {
     <div class="bg-body-secondary p-5 rounded">
       <div class="mb-3 d-grid gap-2 d-sm-flex">
         <img
-            src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js" alt="vuejs"/>
+            src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js"
+            alt="vuejs"/>
         <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" alt="dapp"/>
       </div>
 

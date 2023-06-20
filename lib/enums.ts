@@ -1,4 +1,4 @@
-export enum Event {
+export enum Events {
     Connected = 'connected',
     Disconnected = 'disconnect',
     ChainSwitched = 'chain_switched',
