@@ -1,10 +1,9 @@
-<h1 align="center">Web3 authentication for Vue3 apps based on WalletConnect v2</h1>
+<h1 align="center">Web3 authentication for Vue3 apps based on WalletConnect v2 and wagmi</h1>
 
 <p style="display: flex; align-content: center; justify-content: center;">
   <img src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js" />
   <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" />
 </p>
-
 
 Simple WalletConnect v2 integration package for Vue3 apps.
 
