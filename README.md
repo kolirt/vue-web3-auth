@@ -78,7 +78,7 @@ import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
 ```
 
 ## Multicall
-```js
+```ts
 import {multicallABI, multicall, chain} from '@kolirt/vue-web3-auth'
 
 let data = await multicall({
@@ -108,7 +108,7 @@ let data = await multicall({
 
 ## ReadContract
 
-```js
+```ts
 import {erc20ABI, readContract} from '@kolirt/vue-web3-auth'
 
 let data = await readContract({
@@ -127,7 +127,7 @@ let data = await readContract({
 
 ## WriteContract
 
-```js
+```ts
 import {erc20ABI, writeContract} from '@kolirt/vue-web3-auth'
 
 let data = await writeContract({
@@ -140,7 +140,7 @@ let data = await writeContract({
 
 ## EstimateWriteContractGas
 
-```js
+```ts
 import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
 
 const gas = await estimateWriteContractGas({
