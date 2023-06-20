@@ -25,7 +25,8 @@ export {
 } from './chain'
 
 export {
-    readContract
+    readContract,
+    writeContract
 } from './contract'
 
 export {

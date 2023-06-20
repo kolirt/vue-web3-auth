@@ -4,6 +4,7 @@ import * as Chains from '@wagmi/core/chains';
 import type { ComputedRef } from 'vue';
 import type { Plugin as Plugin_2 } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
+import type { TransactionReceipt } from 'viem';
 
 export declare function $off(event: Events, callback: (...args: any) => void): void;
 
@@ -165,5 +166,23 @@ export declare function selectChain(): Promise<void>;
 export declare function shortAddressFilter(value?: string): string;
 
 export declare function switchChain(newChain: Chain): Promise<void>;
+
+declare type WriteContract = {
+    chainId?: number;
+    address: `0x${string}`;
+    abi: any;
+    functionName: string;
+    args?: any[];
+    account?: `0x${string}`;
+    gas?: bigint;
+    gasPrice?: bigint;
+    maxFeePerGas?: bigint;
+    maxPriorityFeePerGas?: bigint;
+    nonce?: number;
+    value?: bigint;
+    confirmations?: number;
+};
+
+export declare function writeContract(data: WriteContract): Promise<TransactionReceipt>;
 
 export { }
