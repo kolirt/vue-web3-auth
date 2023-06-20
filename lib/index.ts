@@ -26,7 +26,8 @@ export {
 
 export {
     readContract,
-    writeContract
+    writeContract,
+    estimateWriteContractGas
 } from './contract'
 
 export {

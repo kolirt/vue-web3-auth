@@ -70,6 +70,8 @@ export declare const erc20ABI: ({
     anonymous?: undefined;
 })[];
 
+export declare function estimateWriteContractGas(data: WriteContract): Promise<bigint>;
+
 export declare enum Events {
     Connected = "connected",
     Disconnected = "disconnect",

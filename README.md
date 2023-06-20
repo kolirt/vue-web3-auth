@@ -137,6 +137,19 @@ let data = await writeContract({
 })
 ```
 
+## EstimateWriteContractGas
+
+```js
+import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
+
+const gas = await estimateWriteContractGas({
+  abi: erc20ABI,
+  address: '0x55d398326f99059fF775485246999027B3197955',
+  functionName: 'approve',
+  args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
+}).catch(e => {})
+```
+
 # Demo
 [Demo here](https://kolirt.github.io/vue-web3-auth/).
 
