@@ -1,8 +1,8 @@
-import * as Y from "@wagmi/core/chains";
-import { reactive as m, computed as v, ref as w, watch as C, toRaw as f } from "vue";
-import { disconnect as g, configureChains as k, createConfig as I, watchNetwork as x, watchAccount as $, readContract as E, multicall as S } from "@wagmi/core";
-import { w3mProvider as U, w3mConnectors as _, EthereumClient as D } from "@web3modal/ethereum";
-import { Web3Modal as N } from "@web3modal/html";
+import * as P from "@wagmi/core/chains";
+import { reactive as m, computed as w, ref as k, watch as C, toRaw as h } from "vue";
+import { disconnect as M, configureChains as v, createConfig as $, watchNetwork as I, watchAccount as E, readContract as S, multicall as x } from "@wagmi/core";
+import { w3mProvider as U, w3mConnectors as D, EthereumClient as N } from "@web3modal/ethereum";
+import { Web3Modal as _ } from "@web3modal/html";
 import j from "js-event-bus";
 var A = {
   id: 1,
@@ -49,10 +49,10 @@ var A = {
     }
   }
 };
-const L = A, n = m({
+const F = A, n = m({
   autoInit: !0,
   projectId: "",
-  chains: [L],
+  chains: [F],
   autoConnect: !0,
   disconnectUnknownChain: !0,
   reconnectToChain: !0,
@@ -65,20 +65,20 @@ const L = A, n = m({
 function H(e) {
   "autoInit" in e && (n.autoInit = e.autoInit), "projectId" in e && (n.projectId = e.projectId), "chains" in e && (n.chains = e.chains), "autoConnect" in e && (n.autoConnect = e.autoConnect), "disconnectUnknownChain" in e && (n.disconnectUnknownChain = e.disconnectUnknownChain), "reconnectToChain" in e && (n.reconnectToChain = e.reconnectToChain), "logEnabled" in e && (n.logEnabled = e.logEnabled), "web3modalOptions" in e && ("themeMode" in e.web3modalOptions && (n.web3modalOptions.themeMode = e.web3modalOptions.themeMode), "themeVariables" in e.web3modalOptions && (n.web3modalOptions.themeVariables = e.web3modalOptions.themeVariables));
 }
-const o = m({
+const c = m({
   bufferChain: null,
   currentChain: null
-}), R = v(() => o.currentChain ? o.currentChain : n.chains[0]);
-function O() {
+}), V = w(() => c.currentChain ? c.currentChain : n.chains[0]);
+function Y() {
   return n.chains;
 }
-async function X(e) {
+async function Z(e) {
   var t;
-  u.value || b(), await ((t = M.client) == null ? void 0 : t.switchNetwork({ chainId: e.id }));
+  o.value || b(), await ((t = g.client) == null ? void 0 : t.switchNetwork({ chainId: e.id }));
 }
-async function Z() {
+async function O() {
   var e;
-  u.value || b(), await ((e = u.value) == null ? void 0 : e.openModal({
+  o.value || b(), await ((e = o.value) == null ? void 0 : e.openModal({
     route: "SelectNetwork"
   }));
 }
@@ -86,95 +86,95 @@ function l(...e) {
   n.logEnabled && console.log("[WC]", ...e);
 }
 var s = /* @__PURE__ */ ((e) => (e.Connected = "connected", e.Disconnected = "disconnect", e.ChainSwitched = "chain_switched", e.UnknownChain = "unknown_chain", e.ModalStateChanged = "modal_state_changed", e))(s || {});
-const h = new j();
+const f = new j();
 function r(e, ...t) {
-  e === s.Connected || e === s.Disconnected ? (o.currentChain = o.bufferChain, c.currentAccount = c.bufferAccount) : e === s.ChainSwitched && (o.currentChain = o.bufferChain), h.emit(e, null, ...t);
+  e === s.Connected || e === s.Disconnected ? (c.currentChain = c.bufferChain, d.currentAccount = d.bufferAccount) : e === s.ChainSwitched && (c.currentChain = c.bufferChain), f.emit(e, null, ...t);
 }
 function B(e, t) {
-  h.on(e, t), n.logEnabled && l(`Subscribe for ${e} event.`);
+  f.on(e, t), n.logEnabled && l(`Subscribe for ${e} event.`);
 }
 function ee(e, t) {
-  h.detach(e, t), n.logEnabled && l(`Unsubscribe for ${e} event.`);
+  f.detach(e, t), n.logEnabled && l(`Unsubscribe for ${e} event.`);
 }
-const u = w(null);
-function F(e) {
+const o = k(null);
+function W(e) {
   var t;
-  u.value = new N(
+  o.value = new _(
     {
       projectId: n.projectId,
       ...(n == null ? void 0 : n.web3modalOptions) || []
     },
     e
-  ), (t = u.value) == null || t.subscribeModal(({ open: a }) => {
+  ), (t = o.value) == null || t.subscribeModal(({ open: a }) => {
     r(s.ModalStateChanged, a);
   });
 }
-const c = m({
+const d = m({
   bufferAccount: null,
   currentAccount: null
-}), p = m({
+}), u = m({
   connected: !1,
   address: void 0,
   shortAddress: void 0
 });
-async function W() {
-  await g();
+async function L() {
+  await M();
 }
 async function te(e) {
   var t, a;
-  u.value || b(), e instanceof Event && (e = n.chains[0]), (t = u.value) == null || t.setDefaultChain(e || n.chains[0]), await ((a = u.value) == null ? void 0 : a.openModal({
+  o.value || b(), e instanceof Event && (e = n.chains[0]), (t = o.value) == null || t.setDefaultChain(e || n.chains[0]), await ((a = o.value) == null ? void 0 : a.openModal({
     route: "ConnectWallet"
   }));
 }
 async function ne() {
   var e;
-  u.value || b(), await ((e = u.value) == null ? void 0 : e.openModal({
+  o.value || b(), await ((e = o.value) == null ? void 0 : e.openModal({
     route: "Account"
   }));
 }
-function P(e = "") {
+function R(e = "") {
   return `${e.slice(0, 5)}...${e.slice(-4)}`;
 }
-C(() => c.currentAccount, (e) => {
-  e ? (p.connected = !0, p.address = e.address, p.shortAddress = P(e.address)) : (p.connected = !1, p.address = void 0, p.shortAddress = void 0);
+C(() => d.currentAccount, (e) => {
+  e ? (u.connected = !0, u.address = e.address, u.shortAddress = R(e.address)) : (u.connected = !1, u.address = void 0, u.shortAddress = void 0);
 });
 let T;
-const M = m({
+const g = m({
   client: null
 });
 function y(e) {
   return String(e).toLowerCase();
 }
-async function V([e, t], [a, i]) {
-  if (n.disconnectUnknownChain && (!a && n.disconnectUnknownChain || a) && t && !n.chains.some((d) => d.id === t.id)) {
-    await W(), i && (r(s.Disconnected), l(`account ${e.address} disconnected from ${y(i.name)} chain.`)), r(s.UnknownChain, { chain: t }), l("switched to unsupported chain.");
+async function z([e, t], [a, i]) {
+  if (n.disconnectUnknownChain && (!a && n.disconnectUnknownChain || a) && t && !n.chains.some((p) => p.id === t.id)) {
+    await L(), i && (r(s.Disconnected), l(`account ${e.address} disconnected from ${y(i.name)} chain.`)), r(s.UnknownChain, { chain: t }), l("switched to unsupported chain.");
     return;
   }
-  (a == null ? void 0 : a.address) !== (e == null ? void 0 : e.address) && !(i != null && i.unsupported) && (a && (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`)), e && (r(s.Connected, { chain: o.bufferChain, account: c.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`))), i && t && i.id !== t.id && (n.reconnectToChain ? (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`), r(s.Connected, { chain: o.bufferChain, account: c.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`)) : (r(s.ChainSwitched, { chain: t }), l(`account ${e.address} switched to ${y(t.name)} chain.`)));
+  (a == null ? void 0 : a.address) !== (e == null ? void 0 : e.address) && !(i != null && i.unsupported) && (a && (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`)), e && (r(s.Connected, { chain: c.bufferChain, account: d.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`))), i && t && i.id !== t.id && (n.reconnectToChain ? (r(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`), r(s.Connected, { chain: c.bufferChain, account: d.bufferAccount }), l(`account ${e.address} connected to ${y(t.name)} chain.`)) : (r(s.ChainSwitched, { chain: t }), l(`account ${e.address} switched to ${y(t.name)} chain.`)));
 }
-function z([e, t], [a, i]) {
-  clearTimeout(T), T = setTimeout(V, 200, [e, t], [a, i]);
+function G([e, t], [a, i]) {
+  clearTimeout(T), T = setTimeout(z, 200, [e, t], [a, i]);
 }
 function b() {
-  if (u.value)
+  if (o.value)
     return;
-  const { publicClient: e } = k(f(n.chains), [U({ projectId: n.projectId })]), t = I({
+  const { publicClient: e } = v(h(n.chains), [U({ projectId: n.projectId })]), t = $({
     autoConnect: n.autoConnect,
-    connectors: _({
+    connectors: D({
       projectId: n.projectId,
       version: 2,
-      chains: f(n.chains)
+      chains: h(n.chains)
     }),
     publicClient: e
   });
-  x((i) => {
-    var d;
-    (d = i.chain) != null && d.unsupported && (i.chain.name = "Unsupported"), o.bufferChain = i.chain || null;
-  }), $((i) => {
-    c.bufferAccount = i.address ? i : null;
-  }), C([() => c.bufferAccount, () => o.bufferChain], z);
-  const a = new D(t, f(n.chains));
-  M.client = a, F(a);
+  I((i) => {
+    var p;
+    (p = i.chain) != null && p.unsupported && (i.chain.name = "Unsupported"), c.bufferChain = i.chain || null;
+  }), E((i) => {
+    d.bufferAccount = i.address ? i : null;
+  }), C([() => d.bufferAccount, () => c.bufferChain], G);
+  const a = new N(t, h(n.chains));
+  g.client = a, W(a);
 }
 function ae(e) {
   return {
@@ -184,13 +184,13 @@ function ae(e) {
   };
 }
 async function ie(e) {
-  return E({
-    chainId: e.chain || R.value.id,
+  return S({
+    chainId: e.chainId || V.value.id,
     address: e.address,
     abi: e.abi,
     functionName: e.functionName,
     args: e.args || [],
-    account: p.address,
+    account: e.account || u.address,
     blockNumber: e.blockNumber,
     blockTag: e.blockTag
   });
@@ -198,15 +198,15 @@ async function ie(e) {
 async function se(e) {
   const t = [];
   return e.calls.forEach((a) => {
-    a.calls.forEach(([i, d]) => {
+    a.calls.forEach(([i, p]) => {
       t.push({
         address: a.contractAddress,
         abi: a.abi,
         functionName: i,
-        args: d
+        args: p
       });
     });
-  }), await S({
+  }), await x({
     chainId: e.chainId,
     contracts: t,
     multicallAddress: e.multicallAddress,
@@ -216,34 +216,37 @@ async function se(e) {
     allowFailure: e.allowFailure
   });
 }
-const ue = [
+const oe = [
   {
-    inputs: [],
-    payable: !1,
-    stateMutability: "nonpayable",
+    inputs: [
+      { internalType: "string", name: "name_", type: "string" },
+      {
+        internalType: "string",
+        name: "symbol_",
+        type: "string"
+      },
+      { internalType: "uint8", name: "decimals_", type: "uint8" },
+      {
+        internalType: "uint256",
+        name: "initialBalance_",
+        type: "uint256"
+      },
+      { internalType: "address payable", name: "feeReceiver_", type: "address" }
+    ],
+    stateMutability: "payable",
     type: "constructor"
   },
   {
     anonymous: !1,
     inputs: [
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
+      { indexed: !0, internalType: "address", name: "owner", type: "address" },
       {
         indexed: !0,
         internalType: "address",
         name: "spender",
         type: "address"
       },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      }
+      { indexed: !1, internalType: "uint256", name: "value", type: "uint256" }
     ],
     name: "Approval",
     type: "event"
@@ -251,699 +254,163 @@ const ue = [
   {
     anonymous: !1,
     inputs: [
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount0",
-        type: "uint256"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount1",
-        type: "uint256"
-      },
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "Burn",
-    type: "event"
-  },
-  {
-    anonymous: !1,
-    inputs: [
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount0",
-        type: "uint256"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount1",
-        type: "uint256"
-      }
-    ],
-    name: "Mint",
-    type: "event"
-  },
-  {
-    anonymous: !1,
-    inputs: [
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount0In",
-        type: "uint256"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount1In",
-        type: "uint256"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount0Out",
-        type: "uint256"
-      },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "amount1Out",
-        type: "uint256"
-      },
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "Swap",
-    type: "event"
-  },
-  {
-    anonymous: !1,
-    inputs: [
-      {
-        indexed: !1,
-        internalType: "uint112",
-        name: "reserve0",
-        type: "uint112"
-      },
-      {
-        indexed: !1,
-        internalType: "uint112",
-        name: "reserve1",
-        type: "uint112"
-      }
-    ],
-    name: "Sync",
-    type: "event"
-  },
-  {
-    anonymous: !1,
-    inputs: [
-      {
-        indexed: !0,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
+      { indexed: !0, internalType: "address", name: "from", type: "address" },
       {
         indexed: !0,
         internalType: "address",
         name: "to",
         type: "address"
       },
-      {
-        indexed: !1,
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      }
+      { indexed: !1, internalType: "uint256", name: "value", type: "uint256" }
     ],
     name: "Transfer",
     type: "event"
   },
   {
-    constant: !0,
-    inputs: [],
-    name: "DOMAIN_SEPARATOR",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "MINIMUM_LIQUIDITY",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "PERMIT_TYPEHASH",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
     inputs: [
+      { internalType: "address", name: "owner", type: "address" },
       {
         internalType: "address",
-        name: "",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "",
+        name: "spender",
         type: "address"
       }
     ],
     name: "allowance",
     outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
+      { internalType: "uint256", name: "", type: "uint256" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !1,
     inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      },
+      { internalType: "address", name: "spender", type: "address" },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256"
       }
     ],
     name: "approve",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
+      { internalType: "bool", name: "", type: "bool" }
     ],
-    payable: !1,
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: !0,
     inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
+      { internalType: "address", name: "account", type: "address" }
     ],
     name: "balanceOf",
     outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
+      { internalType: "uint256", name: "", type: "uint256" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !1,
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "burn",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "amount0",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount1",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: !0,
     inputs: [],
     name: "decimals",
     outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8"
-      }
+      { internalType: "uint8", name: "", type: "uint8" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !0,
-    inputs: [],
-    name: "factory",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "getReserves",
-    outputs: [
-      {
-        internalType: "uint112",
-        name: "_reserve0",
-        type: "uint112"
-      },
-      {
-        internalType: "uint112",
-        name: "_reserve1",
-        type: "uint112"
-      },
-      {
-        internalType: "uint32",
-        name: "_blockTimestampLast",
-        type: "uint32"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !1,
     inputs: [
+      { internalType: "address", name: "spender", type: "address" },
       {
-        internalType: "address",
-        name: "_token0",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "_token1",
-        type: "address"
+        internalType: "uint256",
+        name: "subtractedValue",
+        type: "uint256"
       }
     ],
-    name: "initialize",
-    outputs: [],
-    payable: !1,
+    name: "decreaseAllowance",
+    outputs: [
+      { internalType: "bool", name: "", type: "bool" }
+    ],
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: !0,
-    inputs: [],
-    name: "kLast",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !1,
     inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "mint",
-    outputs: [
+      { internalType: "address", name: "spender", type: "address" },
       {
         internalType: "uint256",
-        name: "liquidity",
+        name: "addedValue",
         type: "uint256"
       }
     ],
-    payable: !1,
+    name: "increaseAllowance",
+    outputs: [
+      { internalType: "bool", name: "", type: "bool" }
+    ],
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: !0,
     inputs: [],
     name: "name",
     outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
+      { internalType: "string", name: "", type: "string" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !0,
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "nonces",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !1,
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "deadline",
-        type: "uint256"
-      },
-      {
-        internalType: "uint8",
-        name: "v",
-        type: "uint8"
-      },
-      {
-        internalType: "bytes32",
-        name: "r",
-        type: "bytes32"
-      },
-      {
-        internalType: "bytes32",
-        name: "s",
-        type: "bytes32"
-      }
-    ],
-    name: "permit",
-    outputs: [],
-    payable: !1,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "price0CumulativeLast",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "price1CumulativeLast",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !1,
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "skim",
-    outputs: [],
-    payable: !1,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: !1,
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount0Out",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount1Out",
-        type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes"
-      }
-    ],
-    name: "swap",
-    outputs: [],
-    payable: !1,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: !0,
     inputs: [],
     name: "symbol",
     outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
+      { internalType: "string", name: "", type: "string" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !1,
-    inputs: [],
-    name: "sync",
-    outputs: [],
-    payable: !1,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "token0",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
-    inputs: [],
-    name: "token1",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !0,
     inputs: [],
     name: "totalSupply",
     outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
+      { internalType: "uint256", name: "", type: "uint256" }
     ],
-    payable: !1,
     stateMutability: "view",
     type: "function"
   },
   {
-    constant: !0,
-    inputs: [],
-    name: "totalBurned",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: !1,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: !1,
     inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
+      { internalType: "address", name: "recipient", type: "address" },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256"
       }
     ],
     name: "transfer",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
+      { internalType: "bool", name: "", type: "bool" }
     ],
-    payable: !1,
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: !1,
     inputs: [
+      { internalType: "address", name: "sender", type: "address" },
       {
         internalType: "address",
-        name: "from",
+        name: "recipient",
         type: "address"
       },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      }
+      { internalType: "uint256", name: "amount", type: "uint256" }
     ],
     name: "transferFrom",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
+      { internalType: "bool", name: "", type: "bool" }
     ],
-    payable: !1,
     stateMutability: "nonpayable",
     type: "function"
   }
-], oe = [
+], ce = [
   {
     inputs: [
       {
@@ -1087,20 +554,20 @@ const ue = [
 export {
   ee as $off,
   B as $on,
-  Y as Chains,
+  P as Chains,
   s as Events,
-  p as account,
+  u as account,
   ne as accountDetails,
-  R as chain,
+  V as chain,
   te as connect,
   ae as createWeb3Auth,
-  W as disconnect,
-  ue as erc20ABI,
-  O as getAvailableChains,
+  L as disconnect,
+  oe as erc20ABI,
+  Y as getAvailableChains,
   se as multicall,
-  oe as multicallABI,
+  ce as multicallABI,
   ie as readContract,
-  Z as selectChain,
-  P as shortAddressFilter,
-  X as switchChain
+  O as selectChain,
+  R as shortAddressFilter,
+  Z as switchChain
 };

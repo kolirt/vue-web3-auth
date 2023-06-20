@@ -30,13 +30,15 @@ export declare function createWeb3Auth(options: Options): Plugin_2;
 export declare function disconnect(): Promise<void>;
 
 export declare const erc20ABI: ({
-    inputs: never[];
-    payable: boolean;
+    inputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
     stateMutability: string;
     type: string;
     anonymous?: undefined;
     name?: undefined;
-    constant?: undefined;
     outputs?: undefined;
 } | {
     anonymous: boolean;
@@ -48,12 +50,9 @@ export declare const erc20ABI: ({
     }[];
     name: string;
     type: string;
-    payable?: undefined;
     stateMutability?: undefined;
-    constant?: undefined;
     outputs?: undefined;
 } | {
-    constant: boolean;
     inputs: {
         internalType: string;
         name: string;
@@ -65,7 +64,6 @@ export declare const erc20ABI: ({
         name: string;
         type: string;
     }[];
-    payable: boolean;
     stateMutability: string;
     type: string;
     anonymous?: undefined;
@@ -133,7 +131,7 @@ declare type MulticallArgs = {
 });
 
 declare type MulticallContract = {
-    abi: {};
+    abi: any;
     contractAddress: string;
     calls: [string, Array<any>?][];
 };
@@ -150,7 +148,7 @@ export declare type Options = {
 };
 
 declare type ReadContract = {
-    chain?: number;
+    chainId?: number;
     address: `0x${string}`;
     abi: any;
     functionName: string;

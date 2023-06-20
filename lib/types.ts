@@ -17,15 +17,15 @@ export type Options = {
 export type {Chain}
 
 export type ConnectedAccount = {
-    connected: boolean,
-    address?: `0x${string}`,
+    connected: boolean
+    address?: `0x${string}`
     shortAddress?: string
 }
 
 export type BufferChain = Chain & { unsupported?: boolean }
 
 export type ChainState = {
-    bufferChain: BufferChain | null,
+    bufferChain: BufferChain | null
     currentChain: BufferChain | null
 }
 
@@ -34,12 +34,12 @@ export type WcState = {
 }
 
 export type AccountState = {
-    bufferAccount: any,
+    bufferAccount: any
     currentAccount: any
 }
 
 export type MulticallContract = {
-    abi: {}
+    abi: any
     contractAddress: string
     calls: [string, Array<any>?][]
 }
@@ -59,12 +59,28 @@ export type MulticallArgs = {
 })
 
 export type ReadContract = {
-    chain?: number,
-    address: `0x${string}`,
-    abi: any,
-    functionName: string,
-    args?: any[],
-    account?: `0x${string}`,
-    blockNumber?: bigint,
+    chainId?: number
+    address: `0x${string}`
+    abi: any
+    functionName: string
+    args?: any[]
+    account?: `0x${string}`
+    blockNumber?: bigint
     blockTag?: BlockTag
+}
+
+export type WriteContract = {
+    chainId?: number
+    address: `0x${string}`
+    abi: any
+    functionName: string
+    args?: any[]
+    account?: `0x${string}`
+    gas?: bigint
+    gasPrice?: bigint
+    maxFeePerGas?: bigint
+    maxPriorityFeePerGas?: bigint
+    nonce?: number
+    value?: bigint
+    confirmations?: number
 }

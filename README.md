@@ -15,6 +15,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [Connect wallet button](#connect-wallet-button)
     - [Multicall](#multicall)
     - [ReadContract](#readcontract)
+    - [WriteContract](#writecontract)
 - [Demo](#demo)
 - [Example](#example)
 - [Faq](#faq)
@@ -123,6 +124,18 @@ let data = await readContract({
  */
 ```
 
+## WriteContract
+
+```js
+import {erc20ABI, writeContract} from '@kolirt/vue-web3-auth'
+
+let data = await writeContract({
+  abi: erc20ABI,
+  address: '0x55d398326f99059fF775485246999027B3197955',
+  functionName: 'approve',
+  args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
+})
+```
 
 # Demo
 [Demo here](https://kolirt.github.io/vue-web3-auth/).
