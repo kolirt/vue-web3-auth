@@ -9,3 +9,4 @@ Makefile
 tsconfig*
 yarn.lock
 vite.*
+.env
