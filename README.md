@@ -16,6 +16,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [Multicall](#multicall)
     - [ReadContract](#readcontract)
     - [WriteContract](#writecontract)
+    - [EstimateWriteContractGas](#estimatewritecontractgas)
 - [Demo](#demo)
 - [Example](#example)
 - [Faq](#faq)
