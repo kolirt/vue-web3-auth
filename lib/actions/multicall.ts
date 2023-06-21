@@ -1,4 +1,4 @@
-import type {MulticallArgs} from './types'
+import type {MulticallArgs} from '../types'
 import {multicall as masterMulticall} from '@wagmi/core'
 
 export async function multicall(params: MulticallArgs) {

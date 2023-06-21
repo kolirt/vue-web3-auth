@@ -1,13 +1,8 @@
 import * as Chains from '@wagmi/core/chains'
 
-export type {Chain, Options} from './types'
+export * from './actions'
 
-export {createWeb3Auth} from './plugin'
-
-export {
-    $on,
-    $off
-} from './event'
+export * from './utils/abi'
 
 export {
     connect,
@@ -25,37 +20,18 @@ export {
 } from './chain'
 
 export {
-    fetchBalance
-} from './actions/balance'
-
-export {
-    fetchBlockNumber
-} from './actions/block'
-
-export {
-    fetchToken
-} from './actions/token'
-
-export {
-    readContract,
-    writeContract,
-    estimateWriteContractGas
-} from './actions/contract'
-
-export {
-    fetchGasPrice
-} from './actions/gas'
-
-export {
-    multicall
-} from './multicall'
-
-export {
     Events
 } from './enums'
 
 export {
+    $on,
+    $off
+} from './event'
+
+export {createWeb3Auth} from './plugin'
+
+export type {Chain, Options} from './types'
+
+export {
     Chains
 }
-
-export * from './utils/abi'

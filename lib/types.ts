@@ -106,3 +106,8 @@ export type FetchFeeData = {
 export type FetchBlockNumber = {
     chainId?: number
 }
+
+export type FetchTransaction = {
+    chainId?: number
+    hash: `0x${string}`
+}
