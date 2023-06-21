@@ -1,4 +1,4 @@
-import type {Chain} from '@wagmi/core'
+import type {Chain, Unit} from '@wagmi/core'
 import type {ThemeCtrlState} from '@web3modal/core'
 import type {EthereumClient} from '@web3modal/ethereum'
 import type {BlockTag} from 'viem/src/types/block'
@@ -83,4 +83,12 @@ export type WriteContract = {
     nonce?: number
     value?: bigint
     confirmations?: number
+}
+
+export type FetchBalance = {
+    chainId?: number
+    address: `0x${string}`
+    formatUnits?: Unit
+    token?: `0x${string}`
+
 }

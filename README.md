@@ -14,6 +14,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Usage](#usage)
     - [Connect wallet button](#connect-wallet-button)
     - [Multicall](#multicall)
+    - [FetchBalance](#fetchbalance)
     - [ReadContract](#readcontract)
     - [WriteContract](#writecontract)
     - [EstimateWriteContractGas](#estimatewritecontractgas)
@@ -103,6 +104,42 @@ let data = await multicall({
  *  {result: 133515691552422277n, status: "success"},
  *  {result: 2080909582708869960n, status: "success"}
  * ]
+ */
+```
+
+## FetchBalance
+```js
+import {fetchBalance} from '@kolirt/vue-web3-auth'
+
+let bnbBalance = await fetchBalance({
+  address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9'
+})
+
+/**
+ * Result in bnbBalance
+ *
+ * {
+ *  decimals: 18,
+ *  formatted: '1.908669631824871303',
+ *  symbol: 'BNB',
+ *  value: 1908669631824871303n
+ * }
+ */
+
+let tokenBalance = await fetchBalance({
+  address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
+  token: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
+})
+
+/**
+ * Result in tokenBalance
+ *
+ * {
+ *  decimals: 18,
+ *  formatted: '0',
+ *  symbol: 'WBNB',
+ *  value: 0n
+ * }
  */
 ```
 
