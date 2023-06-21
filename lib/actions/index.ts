@@ -25,5 +25,6 @@ export {
 } from './token'
 
 export {
-    fetchTransaction
+    fetchTransaction,
+    sendTransaction
 } from './transaction'

@@ -16,6 +16,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [FetchGasPrice](#fetchgasprice)
     - [FetchBlockNumber](#fetchblocknumber)
     - [FetchTransaction](#fetchtransaction)
+    - [SendTransaction](#sendtransaction)
     - [Multicall](#multicall)
     - [FetchBalance](#fetchbalance)
     - [FetchToken](#fetchtoken)
@@ -119,6 +120,16 @@ import {fetchTransaction} from '@kolirt/vue-web3-auth'
 
 let txn = await fetchTransaction({
   hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
+})
+```
+
+## SendTransaction
+```js
+import {sendTransaction} from '@kolirt/vue-web3-auth'
+
+let txn = await sendTransaction({
+  to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
+  value: 1n
 })
 ```
 

@@ -111,3 +111,16 @@ export type FetchTransaction = {
     chainId?: number
     hash: `0x${string}`
 }
+
+export type SendTransaction = {
+    chainId?: number
+    to: string
+    account?: `0x${string}`
+    gas?: bigint
+    gasPrice?: bigint
+    maxFeePerGas?: bigint
+    maxPriorityFeePerGas?: bigint
+    nonce?: number
+    value?: bigint
+    confirmations?: number
+}
