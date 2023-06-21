@@ -91,9 +91,7 @@ let data = await fetchGasPrice()
  *
  * {
  *  formatted: {
- *   gasPrice: '3',
- *   maxFeePerGas: null,
- *   maxPriorityFeePerGas: null
+ *   gasPrice: '3'
  *  },
  *  gasPrice: 3000000000n
  * }
