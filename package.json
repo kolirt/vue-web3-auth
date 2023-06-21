@@ -1,6 +1,6 @@
 {
   "name": "@kolirt/vue-web3-auth",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Web3 authentication for Vue3 apps based on WalletConnect v2",
   "author": "kolirt",
   "license": "MIT",

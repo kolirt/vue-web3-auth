@@ -85,6 +85,13 @@ export type WriteContract = {
     confirmations?: number
 }
 
+export type WatchContractEvent = {
+    chainId?: number
+    address: `0x${string}` | `0x${string}`[]
+    abi: any
+    eventName: string
+}
+
 export type FetchBalance = {
     chainId?: number
     address: `0x${string}`

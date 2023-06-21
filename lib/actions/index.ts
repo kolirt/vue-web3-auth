@@ -13,6 +13,10 @@ export {
 } from './contract'
 
 export {
+    watchContractEvent
+} from './event'
+
+export {
     fetchGasPrice
 } from './gas'
 

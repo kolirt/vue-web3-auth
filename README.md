@@ -23,6 +23,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [FetchToken](#fetchtoken)
     - [ReadContract](#readcontract)
     - [WriteContract](#writecontract)
+    - [WatchContractEvent](#watchcontractevent)
     - [EstimateWriteContractGas](#estimatewritecontractgas)
 - [Demo](#demo)
 - [Example](#example)
@@ -36,7 +37,6 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 # Getting started
 
 ## Installation
-
 Use yarn or npm to install the package `@kolirt/vue-web3-auth`.
 
 ```bash
@@ -46,7 +46,6 @@ yarn add @kolirt/vue-web3-auth
 ```
 
 ## Setup
-
 Add dependencies to your `main.js`:
 
 ```javascript
@@ -231,7 +230,6 @@ let data = await fetchToken({
 ```
 
 ## ReadContract
-
 ```ts
 import {erc20ABI, readContract} from '@kolirt/vue-web3-auth'
 
@@ -250,7 +248,6 @@ let data = await readContract({
 ```
 
 ## WriteContract
-
 ```ts
 import {erc20ABI, writeContract} from '@kolirt/vue-web3-auth'
 
@@ -262,8 +259,21 @@ let data = await writeContract({
 })
 ```
 
-## EstimateWriteContractGas
+## WatchContractEvent
+The function works on the basis of pooling, not on the websockets
+```js
+import {erc20ABI, watchContractEvent} from '@kolirt/vue-web3-auth'
 
+const unwatch = watchContractEvent({
+  address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  abi: erc20ABI,
+  eventName: 'Transfer'
+}, (log) => {
+  console.log(log)
+})
+```
+
+## EstimateWriteContractGas
 ```ts
 import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
 
