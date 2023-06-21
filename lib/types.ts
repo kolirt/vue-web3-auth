@@ -97,3 +97,8 @@ export type FetchToken = {
     address: `0x${string}`
     formatUnits?: Unit
 }
+
+export type FetchFeeData = {
+    chainId?: number
+    formatUnits?: Unit
+}

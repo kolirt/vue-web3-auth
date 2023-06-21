@@ -40,6 +40,10 @@ export {
 } from './contract'
 
 export {
+    fetchGasPrice
+} from './gas'
+
+export {
     multicall
 } from './multicall'
 

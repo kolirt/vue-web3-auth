@@ -13,6 +13,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [Setup](#setup)
 - [Usage](#usage)
     - [Connect wallet button](#connect-wallet-button)
+    - [FetchGasPrice](#fetchgasprice)
     - [Multicall](#multicall)
     - [FetchBalance](#fetchbalance)
     - [FetchToken](#fetchtoken)
@@ -77,6 +78,26 @@ import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
     Connect wallet
   </button>
 </template>
+```
+
+## FetchGasPrice
+```js
+import {fetchGasPrice} from '@kolirt/vue-web3-auth'
+
+let data = await fetchGasPrice()
+
+/**
+ * Result in data
+ *
+ * {
+ *  formatted: {
+ *   gasPrice: '3',
+ *   maxFeePerGas: null,
+ *   maxPriorityFeePerGas: null
+ *  },
+ *  gasPrice: 3000000000n
+ * }
+ */
 ```
 
 ## Multicall
