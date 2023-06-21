@@ -32,6 +32,8 @@ export {createWeb3Auth} from './plugin'
 
 export type {Chain, Options} from './types'
 
+export {init} from './wc'
+
 export {
     Chains
 }
