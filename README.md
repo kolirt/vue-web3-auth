@@ -17,6 +17,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [FetchBlockNumber](#fetchblocknumber)
     - [FetchTransaction](#fetchtransaction)
     - [SendTransaction](#sendtransaction)
+    - [SignMessage](#signmessage)
     - [Multicall](#multicall)
     - [FetchBalance](#fetchbalance)
     - [FetchToken](#fetchtoken)
@@ -131,6 +132,13 @@ let txn = await sendTransaction({
   to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
   value: 1n
 })
+```
+
+## SignMessage
+```js
+import {signMessage} from '@kolirt/vue-web3-auth'
+
+const signature = await signMessage('test message')
 ```
 
 ## Multicall

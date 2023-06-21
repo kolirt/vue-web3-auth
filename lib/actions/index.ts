@@ -17,6 +17,10 @@ export {
 } from './gas'
 
 export {
+    signMessage
+} from './message'
+
+export {
     multicall
 } from './multicall'
 
