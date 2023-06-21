@@ -1,6 +1,6 @@
-import type {FetchFeeData} from './types'
+import type {FetchFeeData} from '../types'
 import {fetchFeeData as masterFetchFeeData} from '@wagmi/core'
-import {chain} from './chain'
+import {chain} from '../chain'
 
 export function fetchGasPrice(data?: FetchFeeData) {
     return masterFetchFeeData({

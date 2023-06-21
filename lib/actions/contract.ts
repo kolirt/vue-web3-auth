@@ -1,12 +1,12 @@
-import type {ReadContract, WriteContract} from './types'
+import type {ReadContract, WriteContract} from '../types'
 import {
     getPublicClient,
     readContract as masterReadContract,
     writeContract as masterWriteContract,
     waitForTransaction
 } from '@wagmi/core'
-import {chain} from './chain'
-import {account} from './account'
+import {chain} from '../chain'
+import {account} from '../account'
 
 export async function readContract(data: ReadContract) {
     return masterReadContract({

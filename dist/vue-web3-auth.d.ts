@@ -2,9 +2,13 @@ import type { BlockTag } from 'viem/src/types/block';
 import type { Chain } from '@wagmi/core';
 import * as Chains from '@wagmi/core/chains';
 import type { ComputedRef } from 'vue';
+import type { FetchBalanceResult } from '@wagmi/core';
+import type { FetchFeeDataResult } from '@wagmi/core';
+import type { FetchTokenResult } from '@wagmi/core';
 import type { Plugin as Plugin_2 } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
 import type { TransactionReceipt } from 'viem';
+import type { Unit } from '@wagmi/core';
 
 export declare function $off(event: Events, callback: (...args: any) => void): void;
 
@@ -79,6 +83,36 @@ export declare enum Events {
     UnknownChain = "unknown_chain",
     ModalStateChanged = "modal_state_changed"
 }
+
+declare type FetchBalance = {
+    chainId?: number;
+    address: `0x${string}`;
+    formatUnits?: Unit;
+    token?: `0x${string}`;
+};
+
+export declare function fetchBalance(data: FetchBalance): Promise<FetchBalanceResult>;
+
+declare type FetchBlockNumber = {
+    chainId?: number;
+};
+
+export declare function fetchBlockNumber(data?: FetchBlockNumber): Promise<bigint>;
+
+declare type FetchFeeData = {
+    chainId?: number;
+    formatUnits?: Unit;
+};
+
+export declare function fetchGasPrice(data?: FetchFeeData): Promise<FetchFeeDataResult>;
+
+declare type FetchToken = {
+    chainId?: number;
+    address: `0x${string}`;
+    formatUnits?: Unit;
+};
+
+export declare function fetchToken(data: FetchToken): Promise<FetchTokenResult>;
 
 export declare function getAvailableChains(): Chain[];
 

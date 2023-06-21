@@ -98,6 +98,19 @@ let data = await fetchGasPrice()
  */
 ```
 
+## FetchBlockNumber
+```js
+import {fetchBlockNumber} from '@kolirt/vue-web3-auth'
+
+let data = await fetchBlockNumber()
+
+/**
+ * Result in data
+ *
+ * 29288229n
+ */
+```
+
 ## Multicall
 ```ts
 import {multicallABI, multicall, chain} from '@kolirt/vue-web3-auth'

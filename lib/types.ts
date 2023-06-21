@@ -102,3 +102,7 @@ export type FetchFeeData = {
     chainId?: number
     formatUnits?: Unit
 }
+
+export type FetchBlockNumber = {
+    chainId?: number
+}
