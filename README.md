@@ -14,6 +14,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Usage](#usage)
     - [Connect wallet button](#connect-wallet-button)
     - [FetchGasPrice](#fetchgasprice)
+    - [FetchBlockNumber](#fetchblocknumber)
     - [Multicall](#multicall)
     - [FetchBalance](#fetchbalance)
     - [FetchToken](#fetchtoken)
