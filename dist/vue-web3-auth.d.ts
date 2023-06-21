@@ -7,6 +7,7 @@ import type { FetchFeeDataResult } from '@wagmi/core';
 import type { FetchTokenResult } from '@wagmi/core';
 import type { Plugin as Plugin_2 } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
+import type { Transaction } from 'viem';
 import type { TransactionReceipt } from 'viem';
 import type { Unit } from '@wagmi/core';
 
@@ -114,7 +115,16 @@ declare type FetchToken = {
 
 export declare function fetchToken(data: FetchToken): Promise<FetchTokenResult>;
 
+declare type FetchTransaction = {
+    chainId?: number;
+    hash: `0x${string}`;
+};
+
+export declare function fetchTransaction(data: FetchTransaction): Promise<Transaction>;
+
 export declare function getAvailableChains(): Chain[];
+
+export declare function init(): void;
 
 export declare function multicall(params: MulticallArgs): Promise<unknown[]>;
 
@@ -199,9 +209,35 @@ export declare function readContract(data: ReadContract): Promise<unknown[]>;
 
 export declare function selectChain(): Promise<void>;
 
+declare type SendTransaction = {
+    chainId?: number;
+    to: string;
+    account?: `0x${string}`;
+    gas?: bigint;
+    gasPrice?: bigint;
+    maxFeePerGas?: bigint;
+    maxPriorityFeePerGas?: bigint;
+    nonce?: number;
+    value?: bigint;
+    confirmations?: number;
+};
+
+export declare function sendTransaction(data: SendTransaction): Promise<TransactionReceipt>;
+
 export declare function shortAddressFilter(value?: string): string;
 
+export declare function signMessage(message: string): Promise<`0x${string}`>;
+
 export declare function switchChain(newChain: Chain): Promise<void>;
+
+declare type WatchContractEvent = {
+    chainId?: number;
+    address: `0x${string}` | `0x${string}`[];
+    abi: any;
+    eventName: string;
+};
+
+export declare function watchContractEvent(data: WatchContractEvent, callback: (log: any) => void): () => void;
 
 declare type WriteContract = {
     chainId?: number;
