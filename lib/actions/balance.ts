@@ -1,4 +1,6 @@
-import type {FetchBalance} from '../types'
+import type {FetchBalance, FetchBalanceOptions} from '../types'
+import type {FetchBalanceResult} from '@wagmi/core'
+import {ref, watch} from 'vue'
 import {fetchBalance as masterFetchBalance} from '@wagmi/core'
 import {chain} from '../chain'
 
@@ -9,4 +11,101 @@ export function fetchBalance(data: FetchBalance) {
         token: data.token,
         formatUnits: data.formatUnits
     })
+}
+
+export function useFetchBalance(params: FetchBalance, options?: FetchBalanceOptions) {
+    const loaded = ref(false)
+    const fetching = ref(false)
+    const data = ref<FetchBalanceResult>({
+        decimals: 0,
+        formatted: '',
+        symbol: '',
+        value: 0n
+    })
+
+    let timeoutHandler: number
+    let updateHandler: number
+    let currentChain = params.chainId || chain.value.id
+    const fetchOptions: FetchBalanceOptions = {
+        disableAutoFetch: options?.disableAutoFetch || false,
+        autoReloadTime: options?.autoReloadTime || 30000,
+        disableAutoReload: options?.disableAutoReload || false
+    }
+
+    async function fetch() {
+        if (!fetching.value || !loaded.value) {
+            fetching.value = true
+
+            await fetchBalance(params)
+                .then(fetchData => {
+                    if (fetchData.value !== data.value.value || !loaded.value) {
+                        data.value.decimals = fetchData.decimals
+                        data.value.formatted = fetchData.formatted
+                        data.value.symbol = fetchData.symbol
+                        data.value.value = fetchData.value
+                    }
+                })
+                .finally(() => {
+                    loaded.value = true
+                    fetching.value = false
+
+                    runTimeout()
+                })
+        }
+    }
+
+    function reload() {
+        clearTimeout(timeoutHandler)
+        return fetch()
+    }
+
+    function disableAutoReload() {
+        fetchOptions.disableAutoReload = true
+    }
+
+    function runTimeout() {
+        if (fetchOptions.disableAutoReload !== true) {
+            // @ts-ignore
+            timeoutHandler = setTimeout(reload, fetchOptions.autoReloadTime || 30000)
+        }
+    }
+
+    function resetData() {
+        loaded.value = false
+        data.value = {
+            decimals: 0,
+            formatted: '',
+            symbol: '',
+            value: 0n
+        }
+    }
+
+    function update() {
+        clearTimeout(updateHandler)
+        currentChain = chain.value.id
+        resetData()
+        reload()
+    }
+
+    if (fetchOptions.disableAutoFetch !== true) {
+        fetch()
+    }
+
+    if (params.chainId === undefined) {
+        watch(() => chain.value.id, (newChainId) => {
+            if (newChainId !== currentChain) {
+                // @ts-ignore
+                updateHandler = setTimeout(update)
+            }
+        })
+    }
+
+    return {
+        loaded,
+        fetching,
+        data,
+        fetch,
+        reload,
+        disableAutoReload
+    }
 }

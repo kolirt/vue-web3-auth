@@ -99,6 +99,12 @@ export type FetchBalance = {
     token?: `0x${string}`
 }
 
+export type FetchBalanceOptions = {
+    disableAutoFetch?: boolean
+    autoReloadTime?: number
+    disableAutoReload?: boolean
+}
+
 export type FetchToken = {
     chainId?: number
     address: `0x${string}`

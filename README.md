@@ -1,6 +1,6 @@
 <h1 align="center">Web3 authentication for Vue3 apps based on WalletConnect v2 and wagmi</h1>
 
-<p style="display: flex; align-content: center; justify-content: center;">
+<p align="center">
   <img src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js" />
   <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" />
 </p>
@@ -8,23 +8,27 @@
 Simple WalletConnect v2 integration package for Vue3 apps.
 
 **Table of Contents**
+
 - [Getting started](#getting-started)
     - [Installation](#installation)
     - [Setup](#setup)
 - [Usage](#usage)
-    - [Connect wallet button](#connect-wallet-button)
-    - [FetchGasPrice](#fetchgasprice)
-    - [FetchBlockNumber](#fetchblocknumber)
-    - [FetchTransaction](#fetchtransaction)
-    - [SendTransaction](#sendtransaction)
-    - [SignMessage](#signmessage)
-    - [Multicall](#multicall)
-    - [FetchBalance](#fetchbalance)
-    - [FetchToken](#fetchtoken)
-    - [ReadContract](#readcontract)
-    - [WriteContract](#writecontract)
-    - [WatchContractEvent](#watchcontractevent)
-    - [EstimateWriteContractGas](#estimatewritecontractgas)
+    - [Basic usage](#basic-usage)
+        - [Connect wallet button](#connect-wallet-button)
+        - [FetchGasPrice](#fetchgasprice)
+        - [FetchBlockNumber](#fetchblocknumber)
+        - [FetchTransaction](#fetchtransaction)
+        - [SendTransaction](#sendtransaction)
+        - [SignMessage](#signmessage)
+        - [Multicall](#multicall)
+        - [FetchBalance](#fetchbalance)
+        - [FetchToken](#fetchtoken)
+        - [ReadContract](#readcontract)
+        - [WriteContract](#writecontract)
+        - [WatchContractEvent](#watchcontractevent)
+        - [EstimateWriteContractGas](#estimatewritecontractgas)
+    - [Composable](#composable)
+        - [UseFetchBalance](#usefetchbalance)
 - [Demo](#demo)
 - [Example](#example)
 - [Faq](#faq)
@@ -37,6 +41,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 # Getting started
 
 ## Installation
+
 Use yarn or npm to install the package `@kolirt/vue-web3-auth`.
 
 ```bash
@@ -46,6 +51,7 @@ yarn add @kolirt/vue-web3-auth
 ```
 
 ## Setup
+
 Add dependencies to your `main.js`:
 
 ```javascript
@@ -55,20 +61,25 @@ import {Chains, createWeb3Auth} from '@kolirt/vue-web3-auth'
 const app = createApp({...})
 
 app.use(createWeb3Auth({
-  projectId: '', // generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
-  chains: [
-    Chains.bsc,
-    Chains.mainnet,
-    Chains.polygon
-  ]
+    projectId: '', // generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
+    chains: [
+        Chains.bsc,
+        Chains.mainnet,
+        Chains.polygon
+    ]
 }))
 
 app.mount('#app')
 ```
 
 # Usage
-## Connect wallet button
+
+## Basic usage
+
+### Connect wallet button
+
 ```vue
+
 <script setup lang="ts">
 import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
 </script>
@@ -83,7 +94,8 @@ import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
 </template>
 ```
 
-## FetchGasPrice
+### FetchGasPrice
+
 ```js
 import {fetchGasPrice} from '@kolirt/vue-web3-auth'
 
@@ -101,7 +113,8 @@ let data = await fetchGasPrice()
  */
 ```
 
-## FetchBlockNumber
+### FetchBlockNumber
+
 ```js
 import {fetchBlockNumber} from '@kolirt/vue-web3-auth'
 
@@ -114,53 +127,57 @@ let data = await fetchBlockNumber()
  */
 ```
 
-## FetchTransaction
+### FetchTransaction
+
 ```js
 import {fetchTransaction} from '@kolirt/vue-web3-auth'
 
 let txn = await fetchTransaction({
-  hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
+    hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
 })
 ```
 
-## SendTransaction
+### SendTransaction
+
 ```js
 import {sendTransaction} from '@kolirt/vue-web3-auth'
 
 let txn = await sendTransaction({
-  to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
-  value: 1n
+    to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
+    value: 1n
 })
 ```
 
-## SignMessage
+### SignMessage
+
 ```js
 import {signMessage} from '@kolirt/vue-web3-auth'
 
 const signature = await signMessage('test message')
 ```
 
-## Multicall
+### Multicall
+
 ```ts
 import {multicallABI, multicall, chain} from '@kolirt/vue-web3-auth'
 
 let data = await multicall({
-  calls: [
-    {
-      abi: multicallABI,
-      contractAddress: chain.value.contracts.multicall3.address,
-      calls: [
-        ['getEthBalance', ['0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9']],
-        ['getEthBalance', ['0x295e26495CEF6F69dFA69911d9D8e4F3bBadB89B']],
-        ['getEthBalance', ['0x2465176C461AfB316ebc773C61fAEe85A6515DAA']]
-      ]
-    }
-  ]
+    calls: [
+        {
+            abi: multicallABI,
+            contractAddress: chain.value.contracts.multicall3.address,
+            calls: [
+                ['getEthBalance', ['0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9']],
+                ['getEthBalance', ['0x295e26495CEF6F69dFA69911d9D8e4F3bBadB89B']],
+                ['getEthBalance', ['0x2465176C461AfB316ebc773C61fAEe85A6515DAA']]
+            ]
+        }
+    ]
 })
 
 /**
  * Result in data
- * 
+ *
  * [
  *  {result: 1908669631824871303n, status: "success"},
  *  {result: 133515691552422277n, status: "success"},
@@ -169,12 +186,13 @@ let data = await multicall({
  */
 ```
 
-## FetchBalance
+### FetchBalance
+
 ```js
 import {fetchBalance} from '@kolirt/vue-web3-auth'
 
 let bnbBalance = await fetchBalance({
-  address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9'
+    address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9'
 })
 
 /**
@@ -189,8 +207,8 @@ let bnbBalance = await fetchBalance({
  */
 
 let tokenBalance = await fetchBalance({
-  address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
-  token: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
+    address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
+    token: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
 })
 
 /**
@@ -205,12 +223,13 @@ let tokenBalance = await fetchBalance({
  */
 ```
 
-## FetchToken
+### FetchToken
+
 ```js
 import {fetchToken} from '@kolirt/vue-web3-auth'
 
 let data = await fetchToken({
-  address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
+    address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
 })
 
 /**
@@ -229,70 +248,99 @@ let data = await fetchToken({
  */
 ```
 
-## ReadContract
+### ReadContract
+
 ```ts
 import {erc20ABI, readContract} from '@kolirt/vue-web3-auth'
 
 let data = await readContract({
-  address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', // wbnb on bsc
-  abi: erc20ABI,
-  functionName: 'balanceOf',
-  args: ['0x36696169c63e42cd08ce11f5deebbcebae652050']
+    address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', // wbnb on bsc
+    abi: erc20ABI,
+    functionName: 'balanceOf',
+    args: ['0x36696169c63e42cd08ce11f5deebbcebae652050']
 })
 
 /**
  * Result in data
- * 
+ *
  * 107109316688516684525777n
  */
 ```
 
-## WriteContract
+### WriteContract
+
 ```ts
 import {erc20ABI, writeContract} from '@kolirt/vue-web3-auth'
 
 let data = await writeContract({
-  abi: erc20ABI,
-  address: '0x55d398326f99059fF775485246999027B3197955',
-  functionName: 'approve',
-  args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
+    abi: erc20ABI,
+    address: '0x55d398326f99059fF775485246999027B3197955',
+    functionName: 'approve',
+    args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
 })
 ```
 
-## WatchContractEvent
+### WatchContractEvent
+
 The function works on the basis of pooling, not on the websockets
+
 ```js
 import {erc20ABI, watchContractEvent} from '@kolirt/vue-web3-auth'
 
 const unwatch = watchContractEvent({
-  address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-  abi: erc20ABI,
-  eventName: 'Transfer'
+    address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    abi: erc20ABI,
+    eventName: 'Transfer'
 }, (log) => {
-  console.log(log)
+    console.log(log)
 })
 ```
 
-## EstimateWriteContractGas
+### EstimateWriteContractGas
+
 ```ts
 import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
 
 const gas = await estimateWriteContractGas({
-  abi: erc20ABI,
-  address: '0x55d398326f99059fF775485246999027B3197955',
-  functionName: 'approve',
-  args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
-}).catch(e => {})
+    abi: erc20ABI,
+    address: '0x55d398326f99059fF775485246999027B3197955',
+    functionName: 'approve',
+    args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
+}).catch(e => {
+})
+```
+
+## Composable
+
+### UseFetchBalance
+```js
+import {useFetchBalance} from '@kolirt/vue-web3-auth'
+
+// use `fetch` for manual init when `disableAutoFetch` is `true`
+const {
+    loaded, fetching, data, 
+    fetch, reload, disableAutoReload
+} = useFetchBalance({
+    address: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9'
+}, {
+    disableAutoFetch: false,
+    autoReloadTime: 30000,
+    disableAutoReload: false
+})
 ```
 
 # Demo
+
 [Demo here](https://kolirt.github.io/vue-web3-auth/).
 
 # Example
+
 [Example here](https://github.com/kolirt/vue-web3-auth/blob/master/src).
 
 # FAQ
+
 Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) to get answers for most asked questions.
 
 # License
+
 [MIT](https://github.com/kolirt/vue-web3-auth/blob/master/LICENSE).

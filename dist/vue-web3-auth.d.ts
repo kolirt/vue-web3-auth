@@ -6,6 +6,7 @@ import type { FetchBalanceResult } from '@wagmi/core';
 import type { FetchFeeDataResult } from '@wagmi/core';
 import type { FetchTokenResult } from '@wagmi/core';
 import type { Plugin as Plugin_2 } from 'vue';
+import type { Ref } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
 import type { Transaction } from 'viem';
 import type { TransactionReceipt } from 'viem';
@@ -93,6 +94,12 @@ declare type FetchBalance = {
 };
 
 export declare function fetchBalance(data: FetchBalance): Promise<FetchBalanceResult>;
+
+declare type FetchBalanceOptions = {
+    disableAutoFetch?: boolean;
+    autoReloadTime?: number;
+    disableAutoReload?: boolean;
+};
 
 declare type FetchBlockNumber = {
     chainId?: number;
@@ -229,6 +236,20 @@ export declare function shortAddressFilter(value?: string): string;
 export declare function signMessage(message: string): Promise<`0x${string}`>;
 
 export declare function switchChain(newChain: Chain): Promise<void>;
+
+export declare function useFetchBalance(params: FetchBalance, options?: FetchBalanceOptions): {
+    loaded: Ref<boolean>;
+    fetching: Ref<boolean>;
+    data: Ref<{
+        decimals: number;
+        formatted: string;
+        symbol: string;
+        value: bigint;
+    }>;
+    fetch: () => Promise<void>;
+    reload: () => Promise<void>;
+    disableAutoReload: () => void;
+};
 
 declare type WatchContractEvent = {
     chainId?: number;

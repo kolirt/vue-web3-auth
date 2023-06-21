@@ -1,5 +1,6 @@
 export {
-    fetchBalance
+    fetchBalance,
+    useFetchBalance
 } from './balance'
 
 export {

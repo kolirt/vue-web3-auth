@@ -1,10 +1,10 @@
-import * as ne from "@wagmi/core/chains";
-import { configureChains as k, createConfig as I, watchNetwork as M, watchAccount as $, disconnect as P, fetchBalance as x, fetchBlockNumber as E, readContract as F, writeContract as N, waitForTransaction as C, getPublicClient as U, watchContractEvent as G, fetchFeeData as S, signMessage as D, multicall as _, fetchToken as j, fetchTransaction as A, sendTransaction as H } from "@wagmi/core";
-import { reactive as h, toRaw as f, watch as w, ref as V, computed as W } from "vue";
-import { Web3Modal as L } from "@web3modal/html";
-import R from "js-event-bus";
-import { w3mProvider as z, w3mConnectors as q, EthereumClient as J } from "@web3modal/ethereum";
-var K = {
+import * as ye from "@wagmi/core/chains";
+import { reactive as b, toRaw as w, watch as I, ref as g, computed as S } from "vue";
+import { configureChains as R, createConfig as _, watchNetwork as j, watchAccount as D, disconnect as H, fetchBalance as V, fetchBlockNumber as W, readContract as L, writeContract as z, waitForTransaction as F, getPublicClient as q, watchContractEvent as J, fetchFeeData as K, signMessage as Q, multicall as X, fetchToken as Y, fetchTransaction as Z, sendTransaction as O } from "@wagmi/core";
+import { Web3Modal as B } from "@web3modal/html";
+import ee from "js-event-bus";
+import { w3mProvider as ne, w3mConnectors as te, EthereumClient as ae } from "@web3modal/ethereum";
+var ie = {
   id: 1,
   network: "homestead",
   name: "Ethereum",
@@ -49,10 +49,10 @@ var K = {
     }
   }
 };
-const Q = K, t = h({
+const se = ie, t = b({
   autoInit: !0,
   projectId: "",
-  chains: [Q],
+  chains: [se],
   autoConnect: !0,
   disconnectUnknownChain: !0,
   reconnectToChain: !0,
@@ -62,153 +62,204 @@ const Q = K, t = h({
     themeVariables: {}
   }
 });
-function X(e) {
+function ce(e) {
   "autoInit" in e && (t.autoInit = e.autoInit), "projectId" in e && (t.projectId = e.projectId), "chains" in e && (t.chains = e.chains), "autoConnect" in e && (t.autoConnect = e.autoConnect), "disconnectUnknownChain" in e && (t.disconnectUnknownChain = e.disconnectUnknownChain), "reconnectToChain" in e && (t.reconnectToChain = e.reconnectToChain), "logEnabled" in e && (t.logEnabled = e.logEnabled), "web3modalOptions" in e && ("themeMode" in e.web3modalOptions && (t.web3modalOptions.themeMode = e.web3modalOptions.themeMode), "themeVariables" in e.web3modalOptions && (t.web3modalOptions.themeVariables = e.web3modalOptions.themeVariables));
 }
-function l(...e) {
+function u(...e) {
   t.logEnabled && console.log("[WC]", ...e);
 }
-var s = /* @__PURE__ */ ((e) => (e.Connected = "connected", e.Disconnected = "disconnect", e.ChainSwitched = "chain_switched", e.UnknownChain = "unknown_chain", e.ModalStateChanged = "modal_state_changed", e))(s || {});
-let g;
-const v = h({
+var o = /* @__PURE__ */ ((e) => (e.Connected = "connected", e.Disconnected = "disconnect", e.ChainSwitched = "chain_switched", e.UnknownChain = "unknown_chain", e.ModalStateChanged = "modal_state_changed", e))(o || {});
+let x;
+const E = b({
   client: null
 });
-function y(e) {
+function h(e) {
   return String(e).toLowerCase();
 }
-async function Y([e, n], [a, i]) {
-  if (t.disconnectUnknownChain && (!a && t.disconnectUnknownChain || a) && n && !t.chains.some((p) => p.id === n.id)) {
-    await O(), i && (d(s.Disconnected), l(`account ${e.address} disconnected from ${y(i.name)} chain.`)), d(s.UnknownChain, { chain: n }), l("switched to unsupported chain.");
+async function oe([e, n], [a, i]) {
+  if (t.disconnectUnknownChain && (!a && t.disconnectUnknownChain || a) && n && !t.chains.some((c) => c.id === n.id)) {
+    await le(), i && (m(o.Disconnected), u(`account ${e.address} disconnected from ${h(i.name)} chain.`)), m(o.UnknownChain, { chain: n }), u("switched to unsupported chain.");
     return;
   }
-  (a == null ? void 0 : a.address) !== (e == null ? void 0 : e.address) && !(i != null && i.unsupported) && (a && (d(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`)), e && (d(s.Connected, { chain: r.bufferChain, account: m.bufferAccount }), l(`account ${e.address} connected to ${y(n.name)} chain.`))), i && n && i.id !== n.id && (t.reconnectToChain ? (d(s.Disconnected), l(`account ${a.address} disconnected from ${y(i.name)} chain.`), d(s.Connected, { chain: r.bufferChain, account: m.bufferAccount }), l(`account ${e.address} connected to ${y(n.name)} chain.`)) : (d(s.ChainSwitched, { chain: n }), l(`account ${e.address} switched to ${y(n.name)} chain.`)));
+  (a == null ? void 0 : a.address) !== (e == null ? void 0 : e.address) && !(i != null && i.unsupported) && (a && (m(o.Disconnected), u(`account ${a.address} disconnected from ${h(i.name)} chain.`)), e && (m(o.Connected, { chain: l.bufferChain, account: p.bufferAccount }), u(`account ${e.address} connected to ${h(n.name)} chain.`))), i && n && i.id !== n.id && (t.reconnectToChain ? (m(o.Disconnected), u(`account ${a.address} disconnected from ${h(i.name)} chain.`), m(o.Connected, { chain: l.bufferChain, account: p.bufferAccount }), u(`account ${e.address} connected to ${h(n.name)} chain.`)) : (m(o.ChainSwitched, { chain: n }), u(`account ${e.address} switched to ${h(n.name)} chain.`)));
 }
-function Z([e, n], [a, i]) {
-  clearTimeout(g), g = setTimeout(Y, 200, [e, n], [a, i]);
+function re([e, n], [a, i]) {
+  clearTimeout(x), x = setTimeout(oe, 200, [e, n], [a, i]);
 }
-function b() {
-  if (o.value)
+function f() {
+  if (r.value)
     return;
-  const { publicClient: e } = k(f(t.chains), [z({ projectId: t.projectId })]), n = I({
+  const { publicClient: e } = R(w(t.chains), [ne({ projectId: t.projectId })]), n = _({
     autoConnect: t.autoConnect,
-    connectors: q({
+    connectors: te({
       projectId: t.projectId,
       version: 2,
-      chains: f(t.chains)
+      chains: w(t.chains)
     }),
     publicClient: e
   });
-  M((i) => {
-    var p;
-    (p = i.chain) != null && p.unsupported && (i.chain.name = "Unsupported"), r.bufferChain = i.chain || null;
-  }), $((i) => {
-    m.bufferAccount = i.address ? i : null;
-  }), w([() => m.bufferAccount, () => r.bufferChain], Z);
-  const a = new J(n, f(t.chains));
-  v.client = a, ee(a);
+  j((i) => {
+    var c;
+    (c = i.chain) != null && c.unsupported && (i.chain.name = "Unsupported"), l.bufferChain = i.chain || null;
+  }), D((i) => {
+    p.bufferAccount = i.address ? i : null;
+  }), I([() => p.bufferAccount, () => l.bufferChain], re);
+  const a = new ae(n, w(t.chains));
+  E.client = a, de(a);
 }
-const m = h({
+const p = b({
   bufferAccount: null,
   currentAccount: null
-}), u = h({
+}), d = b({
   connected: !1,
   address: void 0,
   shortAddress: void 0
 });
-async function O() {
-  await P();
+async function le() {
+  await H();
 }
-async function oe(e) {
+async function ge(e) {
   var n, a;
-  o.value || b(), e instanceof Event && (e = t.chains[0]), (n = o.value) == null || n.setDefaultChain(e || t.chains[0]), await ((a = o.value) == null ? void 0 : a.openModal({
+  r.value || f(), e instanceof Event && (e = t.chains[0]), (n = r.value) == null || n.setDefaultChain(e || t.chains[0]), await ((a = r.value) == null ? void 0 : a.openModal({
     route: "ConnectWallet"
   }));
 }
-async function re() {
+async function ve() {
   var e;
-  o.value || b(), await ((e = o.value) == null ? void 0 : e.openModal({
+  r.value || f(), await ((e = r.value) == null ? void 0 : e.openModal({
     route: "Account"
   }));
 }
-function B(e = "") {
+function ue(e = "") {
   return `${e.slice(0, 5)}...${e.slice(-4)}`;
 }
-w(() => m.currentAccount, (e) => {
-  e ? (u.connected = !0, u.address = e.address, u.shortAddress = B(e.address)) : (u.connected = !1, u.address = void 0, u.shortAddress = void 0);
+I(() => p.currentAccount, (e) => {
+  e ? (d.connected = !0, d.address = e.address, d.shortAddress = ue(e.address)) : (d.connected = !1, d.address = void 0, d.shortAddress = void 0);
 });
-const T = new R();
-function d(e, ...n) {
-  e === s.Connected || e === s.Disconnected ? (r.currentChain = r.bufferChain, m.currentAccount = m.bufferAccount) : e === s.ChainSwitched && (r.currentChain = r.bufferChain), T.emit(e, null, ...n);
+const k = new ee();
+function m(e, ...n) {
+  e === o.Connected || e === o.Disconnected ? (l.currentChain = l.bufferChain, p.currentAccount = p.bufferAccount) : e === o.ChainSwitched && (l.currentChain = l.bufferChain), k.emit(e, null, ...n);
 }
-function le(e, n) {
-  T.on(e, n), t.logEnabled && l(`Subscribe for ${e} event.`);
+function Ce(e, n) {
+  k.on(e, n), t.logEnabled && u(`Subscribe for ${e} event.`);
 }
-function ue(e, n) {
-  T.detach(e, n), t.logEnabled && l(`Unsubscribe for ${e} event.`);
+function we(e, n) {
+  k.detach(e, n), t.logEnabled && u(`Unsubscribe for ${e} event.`);
 }
-const o = V(null);
-function ee(e) {
+const r = g(null);
+function de(e) {
   var n;
-  o.value = new L(
+  r.value = new B(
     {
       projectId: t.projectId,
       ...(t == null ? void 0 : t.web3modalOptions) || []
     },
     e
-  ), (n = o.value) == null || n.subscribeModal(({ open: a }) => {
-    d(s.ModalStateChanged, a);
+  ), (n = r.value) == null || n.subscribeModal(({ open: a }) => {
+    m(o.ModalStateChanged, a);
   });
 }
-const r = h({
+const l = b({
   bufferChain: null,
   currentChain: null
-}), c = W(() => r.currentChain ? r.currentChain : t.chains[0]);
-function de() {
+}), s = S(() => l.currentChain ? l.currentChain : t.chains[0]);
+function Ie() {
   return t.chains;
 }
-async function me(e) {
+async function ke(e) {
   var n;
-  o.value || b(), await ((n = v.client) == null ? void 0 : n.switchNetwork({ chainId: e.id }));
+  r.value || f(), await ((n = E.client) == null ? void 0 : n.switchNetwork({ chainId: e.id }));
 }
-async function pe() {
+async function Me() {
   var e;
-  o.value || b(), await ((e = o.value) == null ? void 0 : e.openModal({
+  r.value || f(), await ((e = r.value) == null ? void 0 : e.openModal({
     route: "SelectNetwork"
   }));
 }
-function ye(e) {
-  return x({
-    chainId: e.chainId || c.value.id,
+function me(e) {
+  return V({
+    chainId: e.chainId || s.value.id,
     address: e.address,
     token: e.token,
     formatUnits: e.formatUnits
   });
 }
-function he(e) {
-  return E({
-    chainId: (e == null ? void 0 : e.chainId) || c.value.id
+function $e(e, n) {
+  const a = g(!1), i = g(!1), c = g({
+    decimals: 0,
+    formatted: "",
+    symbol: "",
+    value: 0n
+  });
+  let M, $, P = e.chainId || s.value.id;
+  const T = {
+    disableAutoFetch: (n == null ? void 0 : n.disableAutoFetch) || !1,
+    autoReloadTime: (n == null ? void 0 : n.autoReloadTime) || 3e4,
+    disableAutoReload: (n == null ? void 0 : n.disableAutoReload) || !1
+  };
+  async function v() {
+    (!i.value || !a.value) && (i.value = !0, await me(e).then((y) => {
+      (y.value !== c.value.value || !a.value) && (c.value.decimals = y.decimals, c.value.formatted = y.formatted, c.value.symbol = y.symbol, c.value.value = y.value);
+    }).finally(() => {
+      a.value = !0, i.value = !1, U();
+    }));
+  }
+  function C() {
+    return clearTimeout(M), v();
+  }
+  function N() {
+    T.disableAutoReload = !0;
+  }
+  function U() {
+    T.disableAutoReload !== !0 && (M = setTimeout(C, T.autoReloadTime || 3e4));
+  }
+  function A() {
+    a.value = !1, c.value = {
+      decimals: 0,
+      formatted: "",
+      symbol: "",
+      value: 0n
+    };
+  }
+  function G() {
+    clearTimeout($), P = s.value.id, A(), C();
+  }
+  return T.disableAutoFetch !== !0 && v(), e.chainId === void 0 && I(() => s.value.id, (y) => {
+    y !== P && ($ = setTimeout(G));
+  }), {
+    loaded: a,
+    fetching: i,
+    data: c,
+    fetch: v,
+    reload: C,
+    disableAutoReload: N
+  };
+}
+function Pe(e) {
+  return W({
+    chainId: (e == null ? void 0 : e.chainId) || s.value.id
   });
 }
-async function be(e) {
-  return F({
-    chainId: e.chainId || c.value.id,
+async function xe(e) {
+  return L({
+    chainId: e.chainId || s.value.id,
     address: e.address,
     abi: e.abi,
     functionName: e.functionName,
     args: e.args || [],
-    account: e.account || u.address,
+    account: e.account || d.address,
     blockNumber: e.blockNumber,
     blockTag: e.blockTag
   });
 }
-async function fe(e) {
-  const { hash: n } = await N({
-    chainId: e.chainId || c.value.id,
+async function Fe(e) {
+  const { hash: n } = await z({
+    chainId: e.chainId || s.value.id,
     address: e.address,
     abi: e.abi,
     functionName: e.functionName,
     args: e.args || [],
-    account: e.account || u.address,
+    account: e.account || d.address,
     gas: e.gas,
     gasPrice: e.gasPrice,
     maxFeePerGas: e.maxFeePerGas,
@@ -216,20 +267,20 @@ async function fe(e) {
     nonce: e.nonce,
     value: e.value
   });
-  return C({
-    chainId: e.chainId || c.value.id,
+  return F({
+    chainId: e.chainId || s.value.id,
     hash: n,
     confirmations: e.confirmations || 1
   });
 }
-async function Te(e) {
-  return await U({ chainId: e.chainId || c.value.id }).estimateContractGas({
+async function Ee(e) {
+  return await q({ chainId: e.chainId || s.value.id }).estimateContractGas({
     address: e.address,
     abi: e.abi,
     functionName: e.functionName,
     args: e.args || [],
     // @ts-ignore
-    account: e.account || u.address,
+    account: e.account || d.address,
     gasPrice: e.gasPrice,
     maxFeePerGas: e.maxFeePerGas,
     maxPriorityFeePerGas: e.maxPriorityFeePerGas,
@@ -237,37 +288,37 @@ async function Te(e) {
     value: e.value
   });
 }
-function ge(e, n) {
-  return G({
-    chainId: (e == null ? void 0 : e.chainId) || c.value.id,
+function Ne(e, n) {
+  return J({
+    chainId: (e == null ? void 0 : e.chainId) || s.value.id,
     address: e.address,
     abi: e.abi,
     eventName: e.eventName
   }, n);
 }
-function Ce(e) {
-  return S({
-    chainId: (e == null ? void 0 : e.chainId) || c.value.id,
+function Ue(e) {
+  return K({
+    chainId: (e == null ? void 0 : e.chainId) || s.value.id,
     formatUnits: e == null ? void 0 : e.formatUnits
   });
 }
-function we(e) {
-  return D({
+function Ae(e) {
+  return Q({
     message: e
   });
 }
-async function ve(e) {
+async function Ge(e) {
   const n = [];
   return e.calls.forEach((a) => {
-    a.calls.forEach(([i, p]) => {
+    a.calls.forEach(([i, c]) => {
       n.push({
         address: a.contractAddress,
         abi: a.abi,
         functionName: i,
-        args: p
+        args: c
       });
     });
-  }), await _({
+  }), await X({
     chainId: e.chainId,
     contracts: n,
     multicallAddress: e.multicallAddress,
@@ -277,22 +328,22 @@ async function ve(e) {
     allowFailure: e.allowFailure
   });
 }
-function ke(e) {
-  return j({
-    chainId: e.chainId || c.value.id,
+function Se(e) {
+  return Y({
+    chainId: e.chainId || s.value.id,
     address: e.address,
     formatUnits: e.formatUnits
   });
 }
-function Ie(e) {
-  return A({
-    chainId: e.chainId || c.value.id,
+function Re(e) {
+  return Z({
+    chainId: e.chainId || s.value.id,
     hash: e.hash
   });
 }
-async function Me(e) {
-  const { hash: n } = await H({
-    chainId: e.chainId || c.value.id,
+async function _e(e) {
+  const { hash: n } = await O({
+    chainId: e.chainId || s.value.id,
     to: e.to,
     account: e.account,
     gas: e.gas,
@@ -302,13 +353,13 @@ async function Me(e) {
     nonce: e.nonce,
     value: e.value
   });
-  return C({
-    chainId: e.chainId || c.value.id,
+  return F({
+    chainId: e.chainId || s.value.id,
     hash: n,
     confirmations: e.confirmations || 1
   });
 }
-const $e = [
+const je = [
   {
     inputs: [
       { internalType: "string", name: "name_", type: "string" },
@@ -502,7 +553,7 @@ const $e = [
     stateMutability: "nonpayable",
     type: "function"
   }
-], Pe = [
+], De = [
   {
     inputs: [
       {
@@ -643,41 +694,42 @@ const $e = [
     type: "function"
   }
 ];
-function xe(e) {
+function He(e) {
   return {
     install() {
-      X(e), b();
+      ce(e), f();
     }
   };
 }
 export {
-  ue as $off,
-  le as $on,
-  ne as Chains,
-  s as Events,
-  u as account,
-  re as accountDetails,
-  c as chain,
-  oe as connect,
-  xe as createWeb3Auth,
-  O as disconnect,
-  $e as erc20ABI,
-  Te as estimateWriteContractGas,
-  ye as fetchBalance,
-  he as fetchBlockNumber,
-  Ce as fetchGasPrice,
-  ke as fetchToken,
-  Ie as fetchTransaction,
-  de as getAvailableChains,
-  b as init,
-  ve as multicall,
-  Pe as multicallABI,
-  be as readContract,
-  pe as selectChain,
-  Me as sendTransaction,
-  B as shortAddressFilter,
-  we as signMessage,
-  me as switchChain,
-  ge as watchContractEvent,
-  fe as writeContract
+  we as $off,
+  Ce as $on,
+  ye as Chains,
+  o as Events,
+  d as account,
+  ve as accountDetails,
+  s as chain,
+  ge as connect,
+  He as createWeb3Auth,
+  le as disconnect,
+  je as erc20ABI,
+  Ee as estimateWriteContractGas,
+  me as fetchBalance,
+  Pe as fetchBlockNumber,
+  Ue as fetchGasPrice,
+  Se as fetchToken,
+  Re as fetchTransaction,
+  Ie as getAvailableChains,
+  f as init,
+  Ge as multicall,
+  De as multicallABI,
+  xe as readContract,
+  Me as selectChain,
+  _e as sendTransaction,
+  ue as shortAddressFilter,
+  Ae as signMessage,
+  ke as switchChain,
+  $e as useFetchBalance,
+  Ne as watchContractEvent,
+  Fe as writeContract
 };
