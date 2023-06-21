@@ -90,5 +90,10 @@ export type FetchBalance = {
     address: `0x${string}`
     formatUnits?: Unit
     token?: `0x${string}`
+}
 
+export type FetchToken = {
+    chainId?: number
+    address: `0x${string}`
+    formatUnits?: Unit
 }

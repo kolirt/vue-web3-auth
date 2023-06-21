@@ -1,4 +1,5 @@
 import * as Chains from '@wagmi/core/chains'
+import exp from 'constants'
 
 export type {Chain, Options} from './types'
 
@@ -27,6 +28,10 @@ export {
 export {
     fetchBalance
 } from './balance'
+
+export {
+    fetchToken
+} from './token'
 
 export {
     readContract,
