@@ -15,7 +15,7 @@ export function $emit(event: Events, ...args: any[]) {
         chainState.currentChain = chainState.bufferChain
     }
 
-    eventBus.emit(event, null, ...args)
+    setTimeout(eventBus.emit, 0, event, null, ...args)
 }
 
 export function $on(event: Events, callback: (...args: any) => void) {

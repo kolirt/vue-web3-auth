@@ -1,5 +1,5 @@
 import type {AccountState, ConnectedAccount, Chain} from './types'
-import {reactive, watch} from 'vue'
+import {reactive,  watchEffect} from 'vue'
 import {disconnect as masterDisconnect} from '@wagmi/core'
 import {web3Modal} from './web3Modal'
 import {init} from './wc'
@@ -43,11 +43,11 @@ export function shortAddressFilter(value = '') {
     return `${value.slice(0, 5)}...${value.slice(-4)}`
 }
 
-watch(() => state.currentAccount, (newAccount) => {
-    if (newAccount) {
+watchEffect(() => {
+    if (state.currentAccount) {
         account.connected = true
-        account.address = newAccount.address
-        account.shortAddress = shortAddressFilter(newAccount.address)
+        account.address = state.currentAccount.address
+        account.shortAddress = shortAddressFilter(state.currentAccount.address)
     } else {
         account.connected = false
         account.address = undefined
