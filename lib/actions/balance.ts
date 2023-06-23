@@ -1,6 +1,6 @@
 import type {FetchBalance, FetchBalanceOptions} from '../types'
 import type {FetchBalanceResult} from '@wagmi/core'
-import {ref, watch} from 'vue'
+import {reactive, ref, watch} from 'vue'
 import {fetchBalance as masterFetchBalance} from '@wagmi/core'
 import {chain} from '../chain'
 
@@ -16,7 +16,7 @@ export function fetchBalance(data: FetchBalance) {
 export function useFetchBalance(params: FetchBalance, options?: FetchBalanceOptions) {
     const loaded = ref(false)
     const fetching = ref(false)
-    const data = ref<FetchBalanceResult>({
+    const data = reactive<FetchBalanceResult>({
         decimals: 0,
         formatted: '',
         symbol: '',
@@ -38,11 +38,11 @@ export function useFetchBalance(params: FetchBalance, options?: FetchBalanceOpti
 
             await fetchBalance(params)
                 .then(fetchData => {
-                    if (fetchData.value !== data.value.value || !loaded.value) {
-                        data.value.decimals = fetchData.decimals
-                        data.value.formatted = fetchData.formatted
-                        data.value.symbol = fetchData.symbol
-                        data.value.value = fetchData.value
+                    if (fetchData.value !== data.value || !loaded.value) {
+                        data.decimals = fetchData.decimals
+                        data.formatted = fetchData.formatted
+                        data.symbol = fetchData.symbol
+                        data.value = fetchData.value
                     }
                 })
                 .finally(() => {
@@ -72,12 +72,10 @@ export function useFetchBalance(params: FetchBalance, options?: FetchBalanceOpti
 
     function resetData() {
         loaded.value = false
-        data.value = {
-            decimals: 0,
-            formatted: '',
-            symbol: '',
-            value: 0n
-        }
+        data.decimals = 0
+        data.formatted = ''
+        data.symbol = ''
+        data.value = 0n
     }
 
     function update() {

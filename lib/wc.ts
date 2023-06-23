@@ -1,6 +1,7 @@
 import type {BufferChain, WcState} from './types'
 import {reactive, toRaw, watch} from 'vue'
 import {configureChains, watchAccount, watchNetwork, createConfig, GetNetworkResult} from '@wagmi/core'
+import {publicProvider} from 'wagmi/providers/public'
 import {EthereumClient, w3mConnectors, w3mProvider} from '@web3modal/ethereum'
 import {disconnect, state as accountState} from './account'
 import {state as chainState} from './chain'
@@ -78,15 +79,26 @@ function emitOnChange(
 export function init() {
     if (web3Modal.value) return
 
-    const {publicClient} = configureChains(toRaw(optionsState.chains), [w3mProvider({projectId: optionsState.projectId})])
+    const chains = toRaw(optionsState.chains)
+    const providers = []
+
+    if (optionsState.enableCustomProvider) {
+        providers.push(publicProvider())
+    } else {
+        providers.push(w3mProvider({projectId: optionsState.projectId}))
+    }
+
+    const {publicClient, webSocketPublicClient} = configureChains(chains, providers)
+
     const wagmiConfig = createConfig({
         autoConnect: optionsState.autoConnect,
         connectors: w3mConnectors({
             projectId: optionsState.projectId,
             version: 2,
-            chains: toRaw(optionsState.chains)
+            chains: chains
         }),
-        publicClient
+        publicClient,
+        webSocketPublicClient
     })
 
     watchNetwork((data: GetNetworkResult) => {
@@ -102,7 +114,7 @@ export function init() {
     // @ts-ignore
     watch([() => accountState.bufferAccount, () => chainState.bufferChain], emitOnChange)
 
-    const client = new EthereumClient(wagmiConfig, toRaw(optionsState.chains))
+    const client = new EthereumClient(wagmiConfig, chains)
     state.client = client
     initWeb3Modal(client)
 }

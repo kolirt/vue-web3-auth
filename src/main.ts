@@ -18,6 +18,7 @@ app.use(createWeb3Auth({
     disconnectUnknownChain: true,
     reconnectToChain: true,
     logEnabled: true,
+    enableCustomProvider: true,
     web3modalOptions: {
         themeMode: 'light',
         themeVariables: {

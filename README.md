@@ -12,6 +12,8 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Getting started](#getting-started)
     - [Installation](#installation)
     - [Setup](#setup)
+      - [Configure](#configure)
+      - [Custom chain](#custom-chain)
 - [Usage](#usage)
     - [Basic usage](#basic-usage)
         - [Connect wallet button](#connect-wallet-button)
@@ -52,6 +54,8 @@ yarn add @kolirt/vue-web3-auth
 
 ## Setup
 
+### Configure
+
 Add dependencies to your `main.js`:
 
 ```javascript
@@ -70,6 +74,48 @@ app.use(createWeb3Auth({
 }))
 
 app.mount('#app')
+```
+
+### Custom chain
+```ts
+import {Chain} from '@kolirt/vue-web3-auth'
+
+const bsc: Chain = {
+    id: 56,
+    name: 'BNB Smart Chain',
+    network: 'bsc',
+    nativeCurrency: {
+        decimals: 18,
+        name: 'BNB',
+        symbol: 'BNB',
+    },
+    rpcUrls: {
+        default: {
+            http: ['https://rpc.ankr.com/bsc'],
+            webSocket: ['wss://bsc-ws-node.nariox.org:443']
+        },
+        public: {
+            http: ['https://rpc.ankr.com/bsc'],
+            webSocket: ['wss://bsc-ws-node.nariox.org:443']
+        },
+    },
+    blockExplorers: {
+        etherscan: {
+            name: 'BscScan',
+            url: 'https://bscscan.com',
+        },
+        default: {
+            name: 'BscScan',
+            url: 'https://bscscan.com',
+        },
+    },
+    contracts: {
+        multicall3: {
+            address: '0xca11bde05977b3631167028862be2a173976ca11',
+            blockCreated: 15921452,
+        },
+    },
+}
 ```
 
 # Usage
@@ -281,8 +327,6 @@ let data = await writeContract({
 ```
 
 ### WatchContractEvent
-
-The function works on the basis of pooling, not on the websockets
 
 ```js
 import {erc20ABI, watchContractEvent} from '@kolirt/vue-web3-auth'

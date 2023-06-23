@@ -1,4 +1,3 @@
-import type { BlockTag } from 'viem/src/types/block';
 import type { Chain } from '@wagmi/core';
 import * as Chains from '@wagmi/core/chains';
 import type { ComputedRef } from 'vue';
@@ -23,6 +22,8 @@ export declare const account: {
 };
 
 export declare function accountDetails(): Promise<void>;
+
+declare type BlockTag = 'latest' | 'earliest' | 'pending' | 'safe' | 'finalized';
 
 export { Chain }
 
@@ -191,13 +192,32 @@ declare type MulticallContract = {
 };
 
 export declare type Options = {
+    /**
+     * if true, plugin WalletConnect will init automatically
+     */
     autoInit?: boolean;
+    /**
+     * generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
+     */
     projectId: string;
     chains: Chain[];
+    /**
+     * if true, wc will auto connect if was connected previously
+     */
     autoConnect?: boolean;
+    /**
+     * when selected unknown chain, account will disconnect
+     */
     disconnectUnknownChain?: boolean;
+    /**
+     * when chain changed account will disconnect then connect again. when true, event "chain_switched" isn't available
+     */
     reconnectToChain?: boolean;
     logEnabled?: boolean;
+    /**
+     * if true, the w3m provider will be disabled and a custom rpc based on the rpc from the chain configuration will be activated
+     */
+    enableCustomProvider?: boolean;
     web3modalOptions?: ThemeCtrlState;
 };
 
@@ -240,12 +260,12 @@ export declare function switchChain(newChain: Chain): Promise<void>;
 export declare function useFetchBalance(params: FetchBalance, options?: FetchBalanceOptions): {
     loaded: Ref<boolean>;
     fetching: Ref<boolean>;
-    data: Ref<{
+    data: {
         decimals: number;
         formatted: string;
         symbol: string;
         value: bigint;
-    }>;
+    };
     fetch: () => Promise<void>;
     reload: () => Promise<void>;
     disableAutoReload: () => void;

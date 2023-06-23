@@ -1,16 +1,36 @@
 import type {Chain, Unit} from '@wagmi/core'
 import type {ThemeCtrlState} from '@web3modal/core'
 import type {EthereumClient} from '@web3modal/ethereum'
-import type {BlockTag} from 'viem/src/types/block'
+
+type BlockTag = 'latest' | 'earliest' | 'pending' | 'safe' | 'finalized'
 
 export type Options = {
-    autoInit?: boolean // when true, plugin WalletConnect will init automatically
+    /**
+     * if true, plugin WalletConnect will init automatically
+     */
+    autoInit?: boolean
+    /**
+     * generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
+     */
     projectId: string
     chains: Chain[]
-    autoConnect?: boolean // when true wc will auto connect if was connected previously
-    disconnectUnknownChain?: boolean // when selected unknown chain, account will disconnect
-    reconnectToChain?: boolean // when chain changed account will disconnect then connect again. when true, event "chain_switched" isn't available
+    /**
+     * if true, wc will auto connect if was connected previously
+     */
+    autoConnect?: boolean
+    /**
+     * when selected unknown chain, account will disconnect
+     */
+    disconnectUnknownChain?: boolean
+    /**
+     * when chain changed account will disconnect then connect again. when true, event "chain_switched" isn't available
+     */
+    reconnectToChain?: boolean
     logEnabled?: boolean
+    /**
+     * if true, the w3m provider will be disabled and a custom rpc based on the rpc from the chain configuration will be activated
+     */
+    enableCustomProvider?: boolean
     web3modalOptions?: ThemeCtrlState
 }
 

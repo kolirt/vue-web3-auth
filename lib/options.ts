@@ -10,6 +10,7 @@ export const state = reactive<Options>({
     disconnectUnknownChain: true,
     reconnectToChain: true,
     logEnabled: false,
+    enableCustomProvider: false,
     web3modalOptions: {
         themeMode: 'light',
         themeVariables: {}
@@ -24,6 +25,7 @@ export function setOptions(newOptions: Options | {}): void {
     if ('disconnectUnknownChain' in newOptions) state.disconnectUnknownChain = newOptions.disconnectUnknownChain
     if ('reconnectToChain' in newOptions) state.reconnectToChain = newOptions.reconnectToChain
     if ('logEnabled' in newOptions) state.logEnabled = newOptions.logEnabled
+    if ('enableCustomProvider' in newOptions) state.enableCustomProvider = newOptions.enableCustomProvider
 
     // @ts-ignore
     if ('web3modalOptions' in newOptions) {
