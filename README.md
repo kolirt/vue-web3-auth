@@ -14,6 +14,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
     - [Setup](#setup)
       - [Configuration](#configuration)
       - [Custom chain](#custom-chain)
+      - [Custom rpc provider](#custom-rpc-provider)
 - [Usage](#usage)
     - [Basic usage](#basic-usage)
         - [Connect wallet button](#connect-wallet-button)
@@ -118,6 +119,16 @@ const bsc: Chain = {
 }
 ```
 
+### Custom rpc provider
+
+By default, the package uses the w3m rpc provider. If you want to use a custom rpc from the chain, you can set the `enableCustomProvider` option to true.
+
+```ts
+app.use(createWeb3Auth({
+    enableCustomProvider: true
+})
+```
+
 # Usage
 
 ## Basic usage
@@ -125,7 +136,6 @@ const bsc: Chain = {
 ### Connect wallet button
 
 ```vue
-
 <script setup lang="ts">
 import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
 </script>
