@@ -12,7 +12,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
 - [Getting started](#getting-started)
     - [Installation](#installation)
     - [Setup](#setup)
-      - [Configure](#configure)
+      - [Configuration](#configuration)
       - [Custom chain](#custom-chain)
 - [Usage](#usage)
     - [Basic usage](#basic-usage)
@@ -54,7 +54,7 @@ yarn add @kolirt/vue-web3-auth
 
 ## Setup
 
-### Configure
+### Configuration
 
 Add dependencies to your `main.js`:
 
