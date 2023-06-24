@@ -15,7 +15,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
       - [Configuration](#configuration)
       - [Custom chain](#custom-chain)
       - [Custom rpc provider](#custom-rpc-provider)
-- [Usage](#usage)
+- [Usage](#usage) 
     - [Basic usage](#basic-usage)
         - [Connect wallet button](#connect-wallet-button)
         - [FetchGasPrice](#fetchgasprice)
@@ -137,13 +137,18 @@ app.use(createWeb3Auth({
 
 ```vue
 <script setup lang="ts">
-import {account, disconnect, connect} from '@kolirt/vue-web3-auth'
+import {account, disconnect, connect, accountDetails} from '@kolirt/vue-web3-auth'
 </script>
 
 <template>
-  <button v-if="account.connected" @click="disconnect()">
-    {{ account.address }}
-  </button>
+  <div v-if="account.connected">
+    <button @click="accountDetails()">
+      {{ account.address }}
+    </button>
+    <button @click="disconnect()">
+      Disconnect
+    </button>
+  </div>
   <button v-else @click="connect()">
     Connect wallet
   </button>
