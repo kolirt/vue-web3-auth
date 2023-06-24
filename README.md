@@ -121,7 +121,7 @@ const bsc: Chain = {
 
 ### Custom rpc provider
 
-By default, the package uses the w3m rpc provider. If you want to use a custom rpc from the chain, you can set the `enableCustomProvider` option to true.
+By default, the package uses the walletconnect rpc provider. If you want to use a custom rpc from the chain, you can set the `enableCustomProvider` option to true.
 
 ```ts
 app.use(createWeb3Auth({
