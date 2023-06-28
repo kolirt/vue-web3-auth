@@ -54,6 +54,7 @@
   "bugs": {
     "url": "https://github.com/kolirt/vue-web3-auth/issues"
   },
+  "homepage": "https://github.com/kolirt/vue-web3-auth#readme",
   "peerDependencies": {
     "vue": "^3.0.0"
   },
