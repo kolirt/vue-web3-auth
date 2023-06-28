@@ -1,6 +1,6 @@
 import * as be from "@wagmi/core/chains";
 import { reactive as f, toRaw as G, watch as $, watchEffect as S, ref as I, computed as R } from "vue";
-import { configureChains as _, createConfig as j, watchNetwork as D, watchAccount as H, disconnect as V, fetchBalance as W, fetchBlockNumber as z, readContract as L, writeContract as q, waitForTransaction as x, getPublicClient as J, watchContractEvent as K, fetchFeeData as Q, signMessage as X, multicall as Y, fetchToken as Z, fetchTransaction as O, sendTransaction as B } from "@wagmi/core";
+import { configureChains as _, createConfig as j, watchNetwork as D, watchAccount as H, disconnect as V, fetchBalance as W, fetchBlockNumber as z, readContract as L, writeContract as q, getPublicClient as J, waitForTransaction as x, watchContractEvent as K, fetchFeeData as Q, signMessage as X, multicall as Y, fetchToken as Z, fetchTransaction as O, sendTransaction as B } from "@wagmi/core";
 import { Web3Modal as ee } from "@web3modal/html";
 import ne from "js-event-bus";
 import { w3mProvider as te, w3mConnectors as ae, EthereumClient as ie } from "@web3modal/ethereum";
@@ -281,11 +281,17 @@ async function Ae(e) {
     nonce: e.nonce,
     value: e.value
   });
-  return x({
-    chainId: e.chainId || c.value.id,
+  function a() {
+    return x({
+      chainId: e.chainId || c.value.id,
+      hash: n,
+      confirmations: e.confirmations || 1
+    });
+  }
+  return {
     hash: n,
-    confirmations: e.confirmations || 1
-  });
+    wait: a
+  };
 }
 async function Ne(e) {
   return await J({ chainId: e.chainId || c.value.id }).estimateContractGas({

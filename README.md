@@ -334,12 +334,19 @@ let data = await readContract({
 ```ts
 import {erc20ABI, writeContract} from '@kolirt/vue-web3-auth'
 
-let data = await writeContract({
+await writeContract({
     abi: erc20ABI,
     address: '0x55d398326f99059fF775485246999027B3197955',
     functionName: 'approve',
     args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
 })
+    .then(async (data) => {
+        console.log('hash', data.hash)
+
+        await data.wait()
+
+        console.log('transaction successfully')
+    })
 ```
 
 ### WatchContractEvent

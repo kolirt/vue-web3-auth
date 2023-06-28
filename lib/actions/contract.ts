@@ -1,3 +1,4 @@
+import type {WaitForTransactionResult} from '@wagmi/core'
 import type {ReadContract, WriteContract} from '../types'
 import {
     getPublicClient,
@@ -37,11 +38,18 @@ export async function writeContract(data: WriteContract) {
         value: data.value
     })
 
-    return waitForTransaction({
-        chainId: data.chainId || chain.value.id,
+    function wait() {
+        return waitForTransaction({
+            chainId: data.chainId || chain.value.id,
+            hash,
+            confirmations: data.confirmations || 1
+        })
+    }
+
+    return {
         hash,
-        confirmations: data.confirmations || 1
-    })
+        wait
+    } as { hash: `0x${string}`, wait: () => Promise<WaitForTransactionResult> }
 }
 
 export async function estimateWriteContractGas(data: WriteContract) {

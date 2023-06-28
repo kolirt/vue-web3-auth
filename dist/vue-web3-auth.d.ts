@@ -10,6 +10,7 @@ import type { ThemeCtrlState } from '@web3modal/core';
 import type { Transaction } from 'viem';
 import type { TransactionReceipt } from 'viem';
 import type { Unit } from '@wagmi/core';
+import type { WaitForTransactionResult } from '@wagmi/core';
 
 export declare function $off(event: Events, callback: (...args: any) => void): void;
 
@@ -296,6 +297,9 @@ declare type WriteContract = {
     confirmations?: number;
 };
 
-export declare function writeContract(data: WriteContract): Promise<TransactionReceipt>;
+export declare function writeContract(data: WriteContract): Promise<{
+    hash: `0x${string}`;
+    wait: () => Promise<WaitForTransactionResult>;
+}>;
 
 export { }
