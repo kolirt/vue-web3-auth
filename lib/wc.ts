@@ -94,7 +94,6 @@ export function init() {
         autoConnect: optionsState.autoConnect,
         connectors: w3mConnectors({
             projectId: optionsState.projectId,
-            version: 2,
             chains: chains
         }),
         publicClient,

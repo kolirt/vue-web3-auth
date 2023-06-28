@@ -111,7 +111,6 @@ function v() {
     autoConnect: t.autoConnect,
     connectors: ae({
       projectId: t.projectId,
-      version: 2,
       chains: e
     }),
     publicClient: a,
