@@ -1,5 +1,5 @@
 import type {AccountState, ConnectedAccount, Chain} from './types'
-import {reactive,  watchEffect} from 'vue'
+import {reactive, watchEffect} from 'vue'
 import {disconnect as masterDisconnect} from '@wagmi/core'
 import {web3Modal} from './web3Modal'
 import {init} from './wc'
