@@ -14,6 +14,7 @@ export {
 } from './contract'
 
 export {
+    parseEvents,
     watchContractEvent
 } from './event'
 
@@ -35,5 +36,6 @@ export {
 
 export {
     fetchTransaction,
+    fetchTransactionReceipt,
     sendTransaction
 } from './transaction'

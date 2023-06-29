@@ -105,6 +105,10 @@ export type WriteContract = {
     confirmations?: number
 }
 
+export type ParseEvents = {
+    abi: any
+}
+
 export type WatchContractEvent = {
     chainId?: number
     address: `0x${string}` | `0x${string}`[]
@@ -141,6 +145,11 @@ export type FetchBlockNumber = {
 }
 
 export type FetchTransaction = {
+    chainId?: number
+    hash: `0x${string}`
+}
+
+export type FetchTransactionReceipt = {
     chainId?: number
     hash: `0x${string}`
 }

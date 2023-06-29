@@ -1,13 +1,23 @@
-import type {FetchTransaction, SendTransaction} from '../types'
+import type {FetchTransaction, FetchTransactionReceipt, SendTransaction} from '../types'
 import {
     fetchTransaction as masterFetchTransaction,
-    sendTransaction as masterSendTransaction, waitForTransaction
+    sendTransaction as masterSendTransaction,
+    waitForTransaction,
+    getPublicClient
 } from '@wagmi/core'
 import {chain} from '../chain'
 
 export function fetchTransaction(data: FetchTransaction) {
     return masterFetchTransaction({
         chainId: data.chainId || chain.value.id,
+        hash: data.hash
+    })
+}
+
+export function fetchTransactionReceipt(data: FetchTransactionReceipt) {
+    const publicClient = getPublicClient({chainId: data.chainId || chain.value.id})
+
+    return publicClient.getTransactionReceipt({
         hash: data.hash
     })
 }

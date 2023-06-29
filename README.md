@@ -21,6 +21,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
         - [FetchGasPrice](#fetchgasprice)
         - [FetchBlockNumber](#fetchblocknumber)
         - [FetchTransaction](#fetchtransaction)
+        - [FetchTransactionReceipt](#fetchtransactionreceipt)
         - [SendTransaction](#sendtransaction)
         - [SignMessage](#signmessage)
         - [Multicall](#multicall)
@@ -28,6 +29,7 @@ Simple WalletConnect v2 integration package for Vue3 apps.
         - [FetchToken](#fetchtoken)
         - [ReadContract](#readcontract)
         - [WriteContract](#writecontract)
+        - [ParseEvents](#parseevents)
         - [WatchContractEvent](#watchcontractevent)
         - [EstimateWriteContractGas](#estimatewritecontractgas)
     - [Composable](#composable)
@@ -194,7 +196,17 @@ let data = await fetchBlockNumber()
 ```js
 import {fetchTransaction} from '@kolirt/vue-web3-auth'
 
-let txn = await fetchTransaction({
+let transaction = await fetchTransaction({
+    hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
+})
+```
+
+### fetchTransactionReceipt
+
+```js
+import {fetchTransactionReceipt} from '@kolirt/vue-web3-auth'
+
+let transactionReceipt = await fetchTransactionReceipt({
     hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
 })
 ```
@@ -347,6 +359,32 @@ await writeContract({
 
         console.log('transaction successfully')
     })
+```
+
+### ParseEvents
+
+```js
+import {erc20ABI, fetchTransactionReceipt, parseEvents} from '@kolirt/vue-web3-auth'
+
+const transactionReceipt = await fetchTransactionReceipt({
+    hash: '0x2a328737e94bb243b1ff64792ae68cd6c179797dc1de1e092c96137f0d3404c3'
+})
+
+const events = parseEvents({abi: erc20ABI}, transactionReceipt)
+/**
+ * Result in events
+ * 
+ * [
+ *  {
+ *   args: {
+ *    owner: '0xaA916B4a4cDbEFC045fa24542673F500a11F5413',
+ *    spender: '0x023963f7e755bE4F743047183d1F49C31E84AEa4',
+ *    value: 1000000000000000000n
+ *   },
+ *   eventName: 'Approval'
+ *  }
+ * ]
+ */
 ```
 
 ### WatchContractEvent

@@ -8,7 +8,8 @@ import type { Plugin as Plugin_2 } from 'vue';
 import type { Ref } from 'vue';
 import type { ThemeCtrlState } from '@web3modal/core';
 import type { Transaction } from 'viem';
-import type { TransactionReceipt } from 'viem';
+import type { TransactionReceipt } from 'viem/src/types/transaction';
+import type { TransactionReceipt as TransactionReceipt_2 } from 'viem';
 import type { Unit } from '@wagmi/core';
 import type { WaitForTransactionResult } from '@wagmi/core';
 
@@ -131,6 +132,13 @@ declare type FetchTransaction = {
 
 export declare function fetchTransaction(data: FetchTransaction): Promise<Transaction>;
 
+declare type FetchTransactionReceipt = {
+    chainId?: number;
+    hash: `0x${string}`;
+};
+
+export declare function fetchTransactionReceipt(data: FetchTransactionReceipt): Promise<TransactionReceipt_2>;
+
 export declare function getAvailableChains(): Chain[];
 
 export declare function init(): void;
@@ -222,6 +230,15 @@ export declare type Options = {
     web3modalOptions?: ThemeCtrlState;
 };
 
+declare type ParseEvents = {
+    abi: any;
+};
+
+export declare function parseEvents(data: ParseEvents, transactionReceipt: TransactionReceipt): ({
+    eventName: string;
+    args: readonly [] | {};
+} | undefined)[];
+
 declare type ReadContract = {
     chainId?: number;
     address: `0x${string}`;
@@ -250,7 +267,7 @@ declare type SendTransaction = {
     confirmations?: number;
 };
 
-export declare function sendTransaction(data: SendTransaction): Promise<TransactionReceipt>;
+export declare function sendTransaction(data: SendTransaction): Promise<TransactionReceipt_2>;
 
 export declare function shortAddressFilter(value?: string): string;
 
