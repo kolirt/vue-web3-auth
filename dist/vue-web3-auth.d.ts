@@ -37,6 +37,11 @@ export declare function connect(chain?: Chain): Promise<void>;
 
 export declare function createWeb3Auth(options: Options): Plugin_2;
 
+declare type DecodedEvent = {
+    eventName: string;
+    args: [] | {};
+};
+
 export declare function disconnect(): Promise<void>;
 
 export declare const erc20ABI: ({
@@ -234,10 +239,7 @@ declare type ParseEvents = {
     abi: any;
 };
 
-export declare function parseEvents(data: ParseEvents, transactionReceipt: TransactionReceipt): ({
-    eventName: string;
-    args: readonly [] | {};
-} | undefined)[];
+export declare function parseEvents(data: ParseEvents, transactionReceipt: TransactionReceipt): DecodedEvent[];
 
 declare type ReadContract = {
     chainId?: number;

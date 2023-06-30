@@ -29,9 +29,9 @@ Simple WalletConnect v2 integration package for Vue3 apps.
         - [FetchToken](#fetchtoken)
         - [ReadContract](#readcontract)
         - [WriteContract](#writecontract)
+        - [EstimateWriteContractGas](#estimatewritecontractgas)
         - [ParseEvents](#parseevents)
         - [WatchContractEvent](#watchcontractevent)
-        - [EstimateWriteContractGas](#estimatewritecontractgas)
     - [Composable](#composable)
         - [UseFetchBalance](#usefetchbalance)
 - [Demo](#demo)
@@ -361,6 +361,20 @@ await writeContract({
     })
 ```
 
+### EstimateWriteContractGas
+
+```ts
+import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
+
+const gas = await estimateWriteContractGas({
+    abi: erc20ABI,
+    address: '0x55d398326f99059fF775485246999027B3197955',
+    functionName: 'approve',
+    args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
+}).catch(e => {
+})
+```
+
 ### ParseEvents
 
 ```js
@@ -398,20 +412,6 @@ const unwatch = watchContractEvent({
     eventName: 'Transfer'
 }, (log) => {
     console.log(log)
-})
-```
-
-### EstimateWriteContractGas
-
-```ts
-import {erc20ABI, estimateWriteContractGas} from '@kolirt/vue-web3-auth'
-
-const gas = await estimateWriteContractGas({
-    abi: erc20ABI,
-    address: '0x55d398326f99059fF775485246999027B3197955',
-    functionName: 'approve',
-    args: ['0x685B1ded8013785d6623CC18D214320b6Bb64759', 100]
-}).catch(e => {
 })
 ```
 

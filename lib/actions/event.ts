@@ -1,21 +1,25 @@
 import type {TransactionReceipt} from 'viem/src/types/transaction'
-import type {ParseEvents, WatchContractEvent} from '../types'
+import type {ParseEvents, DecodedEvent, WatchContractEvent} from '../types'
 import {watchContractEvent as masterWatchContractEvent} from '@wagmi/core'
 import {decodeEventLog} from 'viem'
 import {chain} from '../chain'
 
 export function parseEvents(data: ParseEvents, transactionReceipt: TransactionReceipt) {
-    return transactionReceipt.logs.map(log => {
+    const result: DecodedEvent[] = []
+
+    transactionReceipt.logs.forEach(log => {
         try {
-            return decodeEventLog({
+            result.push(decodeEventLog({
                 abi: data.abi,
                 topics: log.topics,
                 data: log.data
-            })
+            }))
         } catch (e) {
-            return undefined
+            /* empty */
         }
-    }).filter(item => item)
+    })
+
+    return result
 }
 
 export function watchContractEvent(data: WatchContractEvent, callback: (log: any) => void) {

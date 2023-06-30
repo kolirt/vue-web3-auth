@@ -1,6 +1,6 @@
 import * as fe from "@wagmi/core/chains";
 import { reactive as f, toRaw as R, watch as $, watchEffect as S, ref as k, computed as _ } from "vue";
-import { configureChains as j, createConfig as D, watchNetwork as H, watchAccount as V, disconnect as W, fetchBalance as L, fetchBlockNumber as z, readContract as q, writeContract as J, getPublicClient as x, waitForTransaction as F, watchContractEvent as K, fetchFeeData as Q, signMessage as X, multicall as Y, fetchToken as Z, fetchTransaction as O, sendTransaction as B } from "@wagmi/core";
+import { configureChains as j, createConfig as D, watchNetwork as H, watchAccount as V, disconnect as W, fetchBalance as L, fetchBlockNumber as z, readContract as q, writeContract as J, getPublicClient as x, waitForTransaction as E, watchContractEvent as K, fetchFeeData as Q, signMessage as X, multicall as Y, fetchToken as Z, fetchTransaction as O, sendTransaction as B } from "@wagmi/core";
 import { Web3Modal as ee } from "@web3modal/html";
 import ne from "js-event-bus";
 import { w3mProvider as te, w3mConnectors as ae, EthereumClient as ie } from "@web3modal/ethereum";
@@ -87,7 +87,7 @@ function d(...e) {
 }
 var o = /* @__PURE__ */ ((e) => (e.Connected = "connected", e.Disconnected = "disconnect", e.ChainSwitched = "chain_switched", e.UnknownChain = "unknown_chain", e.ModalStateChanged = "modal_state_changed", e))(o || {});
 let P;
-const E = f({
+const F = f({
   client: null
 });
 function b(e) {
@@ -124,7 +124,7 @@ function v() {
     p.bufferAccount = l.address ? l : null;
   }), $([() => p.bufferAccount, () => u.bufferChain], me);
   const T = new ie(s, e);
-  E.client = T, he(T);
+  F.client = T, he(T);
 }
 const p = f({
   bufferAccount: null,
@@ -185,11 +185,11 @@ const u = f({
 function xe() {
   return a.chains;
 }
-async function Fe(e) {
+async function Ee(e) {
   var n;
-  r.value || v(), await ((n = E.client) == null ? void 0 : n.switchNetwork({ chainId: e.id }));
+  r.value || v(), await ((n = F.client) == null ? void 0 : n.switchNetwork({ chainId: e.id }));
 }
-async function Ee() {
+async function Fe() {
   var e;
   r.value || v(), await ((e = r.value) == null ? void 0 : e.openModal({
     route: "SelectNetwork"
@@ -282,7 +282,7 @@ async function Ge(e) {
     value: e.value
   });
   function t() {
-    return F({
+    return E({
       chainId: e.chainId || c.value.id,
       hash: n,
       confirmations: e.confirmations || 1
@@ -309,17 +309,17 @@ async function Re(e) {
   });
 }
 function Se(e, n) {
-  return n.logs.map((t) => {
+  const t = [];
+  return n.logs.forEach((i) => {
     try {
-      return se({
+      t.push(se({
         abi: e.abi,
-        topics: t.topics,
-        data: t.data
-      });
+        topics: i.topics,
+        data: i.data
+      }));
     } catch {
-      return;
     }
-  }).filter((t) => t);
+  }), t;
 }
 function _e(e, n) {
   return K({
@@ -391,7 +391,7 @@ async function ze(e) {
     nonce: e.nonce,
     value: e.value
   });
-  return F({
+  return E({
     chainId: e.chainId || c.value.id,
     hash: n,
     confirmations: e.confirmations || 1
@@ -764,11 +764,11 @@ export {
   Je as multicallABI,
   Se as parseEvents,
   Ne as readContract,
-  Ee as selectChain,
+  Fe as selectChain,
   ze as sendTransaction,
   ye as shortAddressFilter,
   De as signMessage,
-  Fe as switchChain,
+  Ee as switchChain,
   Ue as useFetchBalance,
   _e as watchContractEvent,
   Ge as writeContract

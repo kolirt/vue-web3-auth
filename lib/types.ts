@@ -109,6 +109,11 @@ export type ParseEvents = {
     abi: any
 }
 
+export type DecodedEvent = {
+    eventName: string
+    args: [] | {}
+}
+
 export type WatchContractEvent = {
     chainId?: number
     address: `0x${string}` | `0x${string}`[]
