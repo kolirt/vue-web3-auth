@@ -111,7 +111,7 @@ export type ParseEvents = {
 
 export type DecodedEvent = {
     eventName: string
-    args: [] | {}
+    args: any
 }
 
 export type WatchContractEvent = {

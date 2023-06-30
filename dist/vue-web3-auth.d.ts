@@ -39,7 +39,7 @@ export declare function createWeb3Auth(options: Options): Plugin_2;
 
 declare type DecodedEvent = {
     eventName: string;
-    args: [] | {};
+    args: any;
 };
 
 export declare function disconnect(): Promise<void>;
