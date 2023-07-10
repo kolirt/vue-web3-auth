@@ -444,7 +444,7 @@ const {
 
 # FAQ
 
-Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) to get answers for most asked questions.
+Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) with `FAQ` label to get answers for most asked questions.
 
 # License
 
