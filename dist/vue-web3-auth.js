@@ -735,7 +735,7 @@ const qe = [
 function Ke(e) {
   return {
     install() {
-      le(e), v();
+      le(e), a.autoInit && v();
     }
   };
 }
