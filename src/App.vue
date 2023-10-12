@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import type {Chain} from '../lib'
-import {computed, reactive} from 'vue'
+import { computed, reactive } from 'vue'
+
+import type { Chain } from '../lib'
 import {
   $off,
   $on,
+  Events,
   account,
   accountDetails,
   chain,
+  getAvailableChains,
   connect as masterConnect,
   disconnect as masterDisconnect,
-  Events,
-  getAvailableChains,
-  selectChain,
-  switchChain as masterSwitchChain
+  switchChain as masterSwitchChain,
+  selectChain
 } from '../lib'
 
 const loading = reactive({
@@ -56,20 +57,18 @@ async function disconnect() {
 
   $on(Events.Disconnected, handler)
 
-  await masterDisconnect()
-      .catch(() => {
-        loading.logouting = false
-        $off(Events.Disconnected, handler)
-      })
+  await masterDisconnect().catch(() => {
+    loading.logouting = false
+    $off(Events.Disconnected, handler)
+  })
 }
 
 async function switchChain(chain: Chain) {
   if (!loading.switchingTo[chain.id]) {
     loading.switchingTo[chain.id] = true
-    await masterSwitchChain(chain)
-        .finally(() => {
-          loading.switchingTo[chain.id] = false
-        })
+    await masterSwitchChain(chain).finally(() => {
+      loading.switchingTo[chain.id] = false
+    })
   }
 }
 
@@ -82,25 +81,33 @@ async function reconnect(newChain: Chain) {
 
 const chains = getAvailableChains()
 const availableChains = computed(() => {
-  return chains.filter(item => item.id !== chain.value.id)
+  return chains.filter((item) => item.id !== chain.value.id)
 })
 </script>
 
 <template>
   <div class="container py-5">
-    <div class="bg-body-secondary p-5 rounded">
-      <div class="mb-3 d-grid gap-2 d-sm-flex">
+    <div class="bg-body-secondary rounded p-5">
+      <div class="d-grid d-sm-flex mb-3 gap-2">
         <img
-            src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js"
-            alt="vuejs"/>
-        <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" alt="dapp"/>
+          src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js"
+          alt="vuejs"
+        />
+        <img src="https://img.shields.io/badge/Made%20for-Dapps-orange?style=for-the-badge&logo=ethereum" alt="dapp" />
       </div>
 
-      <iframe src="https://ghbtns.com/github-btn.html?user=kolirt&repo=vue-web3-auth&type=star&count=true&size=large"
-              frameborder="0" scrolling="0" width="170" height="30" title="GitHub" class="mb-3">
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=kolirt&repo=vue-web3-auth&type=star&count=true&size=large"
+        frameborder="0"
+        scrolling="0"
+        width="170"
+        height="30"
+        title="GitHub"
+        class="mb-3"
+      >
       </iframe>
 
-      <div class="mb-3 d-grid gap-2 d-sm-flex">
+      <div class="d-grid d-sm-flex mb-3 gap-2">
         <a href="https://github.com/kolirt/vue-web3-auth" target="_blank">Github</a>
         <a href="https://www.npmjs.com/package/@kolirt/vue-web3-auth" target="_blank">Npmjs</a>
         <a href="https://github.com/kolirt/vue-web3-auth/blob/master/README.md" target="_blank">Docs</a>
@@ -137,47 +144,51 @@ const availableChains = computed(() => {
           </li>
         </ul>
 
-        <hr>
+        <hr />
 
-        <div class="mb-3 d-grid gap-2 d-sm-flex">
-          <button @click="accountDetails" class="btn btn-primary">
-            Account details
-          </button>
+        <div class="d-grid d-sm-flex mb-3 gap-2">
+          <button @click="accountDetails" class="btn btn-primary">Account details</button>
         </div>
 
-        <div class="mb-3 d-grid gap-2 d-sm-flex">
-          <button @click="selectChain" class="btn btn-primary">
-            Select chain via the wc modal
-          </button>
+        <div class="d-grid d-sm-flex mb-3 gap-2">
+          <button @click="selectChain" class="btn btn-primary">Select chain via the wc modal</button>
         </div>
 
-        <div class="mb-3 d-grid gap-2 d-sm-flex">
-          <button v-for="item in availableChains" @click="switchChain(item)" class="btn btn-outline-primary"
-                  :key="item.id">
+        <div class="d-grid d-sm-flex mb-3 gap-2">
+          <button
+            v-for="item in availableChains"
+            @click="switchChain(item)"
+            :key="item.id"
+            class="btn btn-outline-primary"
+          >
             {{ loading.switchingTo[item.id] ? `Switching chain to ${item.name}...` : `Switch chain to ${item.name}` }}
           </button>
         </div>
 
-        <div class="mb-3 d-grid gap-2 d-sm-flex">
-          <button v-for="item in availableChains" @click="reconnect(item)" class="btn btn-outline-primary"
-                  :key="item.id">
+        <div class="d-grid d-sm-flex mb-3 gap-2">
+          <button
+            v-for="item in availableChains"
+            @click="reconnect(item)"
+            :key="item.id"
+            class="btn btn-outline-primary"
+          >
             Reconnect to {{ item.name }}
           </button>
         </div>
 
-        <hr>
+        <hr />
 
         <button @click="disconnect" class="btn btn-danger">
           {{ loading.logouting ? 'Logouting...' : 'Logout' }}
         </button>
       </template>
 
-      <div v-else class="mb-3 d-grid gap-2 d-sm-flex">
+      <div v-else class="d-grid d-sm-flex mb-3 gap-2">
         <button @click="connect()" class="btn btn-primary">
           {{ loading.connecting ? 'Connecting...' : 'Connect wallet' }}
         </button>
 
-        <button v-for="item in chains" @click="connect(item)" class="btn btn-outline-primary" :key="item.id">
+        <button v-for="item in chains" @click="connect(item)" :key="item.id" class="btn btn-outline-primary">
           {{ loading.connectingTo[item.id] ? `Connecting to ${item.name}...` : `Connect to ${item.name}` }}
         </button>
       </div>
@@ -185,5 +196,4 @@ const availableChains = computed(() => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

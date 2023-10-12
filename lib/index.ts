@@ -4,36 +4,18 @@ export * from './actions'
 
 export * from './utils/abi'
 
-export {
-    connect,
-    disconnect,
-    accountDetails,
-    shortAddressFilter,
-    account
-} from './account'
+export { connect, disconnect, accountDetails, shortAddressFilter, account } from './account'
 
-export {
-    selectChain,
-    switchChain,
-    getAvailableChains,
-    chain
-} from './chain'
+export { selectChain, switchChain, getAvailableChains, chain } from './chain'
 
-export {
-    Events
-} from './enums'
+export { Events } from './enums'
 
-export {
-    $on,
-    $off
-} from './event'
+export { $on, $off } from './event'
 
-export {createWeb3Auth} from './plugin'
+export { createWeb3Auth } from './plugin'
 
-export type {Chain, Options} from './types'
+export type { Chain, Options } from './types'
 
-export {init} from './wc'
+export { init } from './wc'
 
-export {
-    Chains
-}
+export { Chains }
