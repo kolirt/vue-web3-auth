@@ -3,7 +3,6 @@ name: 📝 deploy demo
 on:
   release:
     types: [ published ]
-
   workflow_dispatch:
 
 permissions:
@@ -25,6 +24,19 @@ jobs:
     steps:
       - name: 📚 Checkout
         uses: actions/checkout@v3
+      - name: 🟢 Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+      - name: 🕵 Yarn install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: 🏗 Build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build-demo
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

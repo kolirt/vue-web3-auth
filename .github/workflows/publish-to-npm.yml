@@ -16,6 +16,14 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
+      - name: 🕵 Yarn install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: 🏗 Build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build-lib
       - name: 🚀 Publish
         run: npm publish --provenance --access public
         env:
