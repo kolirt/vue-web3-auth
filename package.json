@@ -31,7 +31,7 @@
     "dev-demo": "vite serve -c vite.demo.config.ts",
     "build-demo": "vite build -c vite.demo.config.ts",
     "preview-demo": "vite preview -c vite.demo.config.ts",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore --ignore-path .eslintignore",
     "format": "prettier --write src/ --write lib/ --write examples/vue-cli-service/src --write examples/vite/src"
   },
   "pre-commit": [
