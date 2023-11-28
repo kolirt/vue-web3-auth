@@ -110,8 +110,8 @@ const availableChains = computed(() => {
       <div class="d-grid d-sm-flex mb-3 gap-2">
         <a href="https://github.com/kolirt/vue-web3-auth" target="_blank">Github</a>
         <a href="https://www.npmjs.com/package/@kolirt/vue-web3-auth" target="_blank">Npmjs</a>
-        <a href="https://github.com/kolirt/vue-web3-auth/blob/master/README.md" target="_blank">Docs</a>
-        <a href="https://github.com/kolirt/vue-web3-auth/blob/master/src" target="_blank">Example</a>
+        <a href="https://github.com/kolirt/vue-web3-auth/tree/master/README.md" target="_blank">Docs</a>
+        <a href="https://github.com/kolirt/vue-web3-auth/tree/master/examples" target="_blank">Example</a>
       </div>
 
       <h1>Web3 authentication for Vue3 apps</h1>

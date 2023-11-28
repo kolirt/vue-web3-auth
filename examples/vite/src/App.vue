@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import type { Chain } from '@kolirt/vue-web3-auth'
 import {
   $off,
   $on,
@@ -16,13 +17,13 @@ import { computed, reactive } from 'vue'
 
 const loading = reactive({
   connecting: false,
-  connectingTo: {},
-  switchingTo: {},
+  connectingTo: {} as any,
+  switchingTo: {} as any,
   logouting: false
 })
 
-async function connect(chain) {
-  const handler = (state) => {
+async function connect(chain?: Chain) {
+  const handler = (state: boolean) => {
     if (!state) {
       if (chain) {
         loading.connectingTo[chain.id] = false
@@ -61,7 +62,7 @@ async function disconnect() {
   })
 }
 
-async function switchChain(chain) {
+async function switchChain(chain: Chain) {
   if (!loading.switchingTo[chain.id]) {
     loading.switchingTo[chain.id] = true
     await masterSwitchChain(chain).finally(() => {
@@ -70,7 +71,7 @@ async function switchChain(chain) {
   }
 }
 
-async function reconnect(newChain) {
+async function reconnect(newChain: Chain) {
   if (chain.value.id !== newChain.id) {
     await masterDisconnect()
     await masterConnect(newChain)
@@ -156,8 +157,8 @@ const availableChains = computed(() => {
           <button
             v-for="item in availableChains"
             @click="switchChain(item)"
-            class="btn btn-outline-primary"
             :key="item.id"
+            class="btn btn-outline-primary"
           >
             {{ loading.switchingTo[item.id] ? `Switching chain to ${item.name}...` : `Switch chain to ${item.name}` }}
           </button>
@@ -167,8 +168,8 @@ const availableChains = computed(() => {
           <button
             v-for="item in availableChains"
             @click="reconnect(item)"
-            class="btn btn-outline-primary"
             :key="item.id"
+            class="btn btn-outline-primary"
           >
             Reconnect to {{ item.name }}
           </button>
@@ -186,10 +187,12 @@ const availableChains = computed(() => {
           {{ loading.connecting ? 'Connecting...' : 'Connect wallet' }}
         </button>
 
-        <button v-for="item in chains" @click="connect(item)" class="btn btn-outline-primary" :key="item.id">
+        <button v-for="item in chains" @click="connect(item)" :key="item.id" class="btn btn-outline-primary">
           {{ loading.connectingTo[item.id] ? `Connecting to ${item.name}...` : `Connect to ${item.name}` }}
         </button>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped></style>

@@ -440,7 +440,7 @@ const {
 
 # Example
 
-[Example here](https://github.com/kolirt/vue-web3-auth/blob/master/src).
+[Example here](https://github.com/kolirt/vue-web3-auth/tree/master/examples).
 
 # FAQ
 
@@ -448,7 +448,7 @@ Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) with `FAQ`
 
 # License
 
-[MIT](https://github.com/kolirt/vue-web3-auth/blob/master/LICENSE).
+[MIT](https://github.com/kolirt/vue-web3-auth/tree/master/LICENSE).
 
 # Other projects
 

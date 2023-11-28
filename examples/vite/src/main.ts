@@ -1,8 +1,8 @@
+import App from './App.vue'
+
 import { Chains, createWeb3Auth } from '@kolirt/vue-web3-auth'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createApp } from 'vue'
-
-import App from './App.vue'
 
 const app = createApp(App)
 

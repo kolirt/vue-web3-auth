@@ -32,7 +32,7 @@
     "build-demo": "vite build -c vite.demo.config.ts",
     "preview-demo": "vite preview -c vite.demo.config.ts",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/ --write lib/"
+    "format": "prettier --write src/ --write lib/ --write examples/vue-cli-service/src --write examples/vite/src"
   },
   "pre-commit": [
     "lint",
