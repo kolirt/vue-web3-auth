@@ -14,7 +14,7 @@ export { $on, $off } from './event'
 
 export { createWeb3Auth } from './plugin'
 
-export type { Chain, Options } from './types'
+export type { Chain, Options, MulticallArgs, MulticallContract } from './types'
 
 export { init } from './wc'
 
