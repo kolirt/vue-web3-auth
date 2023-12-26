@@ -60,7 +60,7 @@ export type AccountState = {
 
 export type MulticallContract = {
   abi: any
-  contractAddress: string
+  contractAddress: `0x${string}`
   calls: [string, Array<any>?][]
 }
 
@@ -174,3 +174,5 @@ export type SendTransaction = {
   value?: bigint
   confirmations?: number
 }
+
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] }

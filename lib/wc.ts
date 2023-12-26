@@ -1,4 +1,4 @@
-import { GetNetworkResult, configureChains, createConfig, watchAccount, watchNetwork } from '@wagmi/core'
+import { type GetNetworkResult, configureChains, createConfig, watchAccount, watchNetwork } from '@wagmi/core'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { reactive, toRaw, watch } from 'vue'
 import { publicProvider } from 'wagmi/providers/public'

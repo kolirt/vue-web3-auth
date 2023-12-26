@@ -1,9 +1,9 @@
-import { multicall as masterMulticall } from '@wagmi/core'
+import { type MulticallConfig, multicall as masterMulticall } from '@wagmi/core'
 
-import type { MulticallArgs } from '../types'
+import type { MulticallArgs, Writeable } from '../types'
 
 export async function multicall(params: MulticallArgs) {
-  const contracts: any[] = []
+  const contracts: Writeable<MulticallConfig['contracts']> = []
 
   params.calls.forEach((item) => {
     item.calls.forEach(([functionName, args]) => {

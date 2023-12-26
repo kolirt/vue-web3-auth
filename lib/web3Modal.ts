@@ -1,7 +1,7 @@
-import { ModalCtrlState, ThemeCtrlState } from '@web3modal/core/dist/_types/src/types/controllerTypes'
-import { EthereumClient } from '@web3modal/ethereum'
+import type { ModalCtrlState, ThemeCtrlState } from '@web3modal/core/dist/_types/src/types/controllerTypes'
+import { type EthereumClient } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/html'
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 
 import { Events } from './enums'
 import { $emit } from './event'
