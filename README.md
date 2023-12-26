@@ -1,4 +1,4 @@
-<h1 align="center">Web3 authentication for Vue3 apps based on WalletConnect Web3Modal v2 and wagmi</h1>
+<h1 align="center">Web3 authentication for Vue3 apps based on <a href="https://github.com/WalletConnect/web3modal/tree/V2">WalletConnect Web3Modal v2</a> and wagmi</h1>
 
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=Made%20with&message=VueJS&color=limegreen&style=for-the-badge&logo=vue.js" />
