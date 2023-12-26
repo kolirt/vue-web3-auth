@@ -113,7 +113,7 @@ const availableChains = computed(() => {
       </div>
 
       <h1>Web3 authentication for Vue3 apps</h1>
-      <p class="lead">Simple WalletConnect v2 integration package for Vue3 dApps</p>
+      <p class="lead">Simple WalletConnect Web3Modal v2 integration package for Vue3 dApps</p>
 
       <template v-if="account.connected">
         <ul>
