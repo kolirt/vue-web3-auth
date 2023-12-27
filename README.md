@@ -7,8 +7,15 @@
 
 Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
 
-**Table of Contents**
+### Versions
+| package version | web3modal |
+|-----------------|-------------------|
+| [2.x.x](https://github.com/kolirt/vue-web3-auth/tree/v2)       | [v2](https://github.com/WalletConnect/web3modal/tree/V2)            |
 
+
+### Table of Contents
+
+- [Versions](#versions)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Setup](#setup)

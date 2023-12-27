@@ -1156,10 +1156,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@kolirt/vue-web3-auth@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@kolirt/vue-web3-auth/-/vue-web3-auth-0.1.4.tgz#64c079c3b36a441496ff68869de53dd26d02a8d5"
-  integrity sha512-c2hKleOXKdUtoOC0JH9DPgv5w1JXfGCnH92YYKVqgJnqSSc1z+ib+cfsYGbpdUiLD7x9JmjpL9+cJi+RueGq5Q==
+"@kolirt/vue-web3-auth@^2":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@kolirt/vue-web3-auth/-/vue-web3-auth-2.0.0.tgz#5d966d63987e86da80fdd58c0227af3df5f0f01f"
+  integrity sha512-pNWNuAVOV9yOJCVa27IYc1EQJE0Zgd6/wAfPmC10q/crv0nh+IopjmenIx3WojM5VrUQlxlVcAPai7EcDduUXA==
   dependencies:
     "@wagmi/core" "^1.2.1"
     "@web3modal/ethereum" "^2.4.7"
