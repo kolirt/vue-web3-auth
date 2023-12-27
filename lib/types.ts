@@ -64,12 +64,12 @@ export type MulticallContract = {
   calls: [string, Array<any>?][]
 }
 
-export type MulticallArgs = {
+export type MulticallArgs<TAllowFailure extends boolean = true> = {
   chainId?: number
   calls: MulticallContract[]
   multicallAddress?: `0x${string}`
   batchSize?: number
-  allowFailure?: boolean
+  allowFailure?: TAllowFailure
 } & (
   | {
       blockNumber?: bigint
@@ -174,5 +174,3 @@ export type SendTransaction = {
   value?: bigint
   confirmations?: number
 }
-
-export type Writeable<T> = { -readonly [P in keyof T]: T[P] }

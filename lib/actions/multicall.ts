@@ -1,9 +1,13 @@
-import { type MulticallConfig, multicall as masterMulticall } from '@wagmi/core'
+import { multicall as masterMulticall } from '@wagmi/core'
+import { type ContractFunctionConfig, type MulticallParameters } from 'viem'
 
-import type { MulticallArgs, Writeable } from '../types'
+import type { MulticallArgs } from '../types'
 
-export async function multicall(params: MulticallArgs) {
-  const contracts: Writeable<MulticallConfig['contracts']> = []
+export async function multicall<TContracts extends ContractFunctionConfig[], TAllowFailure extends boolean = true>(
+  params: MulticallArgs<TAllowFailure>
+) {
+  // @ts-ignore
+  const contracts: TContracts = [] as TContracts
 
   params.calls.forEach((item) => {
     item.calls.forEach(([functionName, args]) => {
@@ -16,9 +20,9 @@ export async function multicall(params: MulticallArgs) {
     })
   })
 
-  return await masterMulticall({
+  return await masterMulticall<TContracts, TAllowFailure>({
     chainId: params.chainId,
-    contracts,
+    contracts: contracts as MulticallParameters<TContracts, TAllowFailure>['contracts'],
     multicallAddress: params.multicallAddress,
     blockTag: params.blockTag,
     blockNumber: params.blockNumber,

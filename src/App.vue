@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 
-import type { Chain } from '../lib'
 import {
   $off,
   $on,
+  type Chain,
   Events,
   account,
   accountDetails,
