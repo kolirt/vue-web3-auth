@@ -426,7 +426,7 @@ const unwatch = watchContractEvent(
 ```js
 import { watchAsset } from '@kolirt/vue-web3-auth'
 
-const unwatch = watchAsset({
+const result = watchAsset({
   address: '0x6b175474e89094c44da98b954eedeac495271d0f',
   decimals: 18,
   symbol: 'DAI'
