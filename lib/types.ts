@@ -1,6 +1,7 @@
 import type { Chain, Unit } from '@wagmi/core'
 import type { ThemeCtrlState } from '@web3modal/core'
 import type { EthereumClient } from '@web3modal/ethereum'
+import type { WatchAssetParams } from 'viem/src/types/eip1193'
 
 type BlockTag = 'latest' | 'earliest' | 'pending' | 'safe' | 'finalized'
 
@@ -130,6 +131,10 @@ export type FetchBalance = {
   formatUnits?: Unit
   token?: `0x${string}`
 }
+
+export type WatchAsset = {
+  chainId?: number
+} & WatchAssetParams['options']
 
 export type FetchBalanceOptions = {
   disableAutoFetch?: boolean

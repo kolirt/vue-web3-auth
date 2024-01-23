@@ -8,10 +8,10 @@
 Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
 
 ### Versions
-| package version | web3modal |
-|-----------------|-------------------|
-| [2.x.x](https://github.com/kolirt/vue-web3-auth/tree/v2)       | [v2](https://github.com/WalletConnect/web3modal/tree/V2)            |
 
+| package version                                          | web3modal                                                |
+| -------------------------------------------------------- | -------------------------------------------------------- |
+| [2.x.x](https://github.com/kolirt/vue-web3-auth/tree/v2) | [v2](https://github.com/WalletConnect/web3modal/tree/V2) |
 
 ### Table of Contents
 
@@ -39,6 +39,7 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
     - [EstimateWriteContractGas](#estimatewritecontractgas)
     - [ParseEvents](#parseevents)
     - [WatchContractEvent](#watchcontractevent)
+    - [WatchAsset](#watchasset)
   - [Composable](#composable)
     - [UseFetchBalance](#usefetchbalance)
 - [Demo](#demo)
@@ -418,6 +419,18 @@ const unwatch = watchContractEvent(
     console.log(log)
   }
 )
+```
+
+### WatchAsset
+
+```js
+import { watchAsset } from '@kolirt/vue-web3-auth'
+
+const unwatch = watchAsset({
+  address: '0x6b175474e89094c44da98b954eedeac495271d0f',
+  decimals: 18,
+  symbol: 'DAI'
+})
 ```
 
 ## Composable

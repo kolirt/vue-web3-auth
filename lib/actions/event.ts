@@ -1,6 +1,6 @@
 import { watchContractEvent as masterWatchContractEvent } from '@wagmi/core'
-import { decodeEventLog } from 'viem'
 import type { TransactionReceipt } from 'viem/src/types/transaction'
+import { decodeEventLog } from 'viem/utils'
 
 import { chain } from '../chain'
 import type { DecodedEvent, ParseEvents, WatchContractEvent } from '../types'

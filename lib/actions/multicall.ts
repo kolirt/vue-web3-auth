@@ -1,5 +1,6 @@
 import { multicall as masterMulticall } from '@wagmi/core'
-import { type ContractFunctionConfig, type MulticallParameters } from 'viem'
+import { type MulticallParameters } from 'viem/actions'
+import { type ContractFunctionConfig } from 'viem/src/types/contract'
 
 import type { MulticallArgs } from '../types'
 

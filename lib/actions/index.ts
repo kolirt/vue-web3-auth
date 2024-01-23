@@ -1,3 +1,5 @@
+export { watchAsset } from './asset'
+
 export { fetchBalance, useFetchBalance } from './balance'
 
 export { fetchBlockNumber } from './block'
