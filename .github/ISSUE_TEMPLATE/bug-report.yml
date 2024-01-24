@@ -26,6 +26,16 @@ body:
     validations:
       required: true
   - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: |
+        How do you trigger this bug? Please walk us through it step by step.
+        Note that you can use [Markdown](https://guides.github.com/features/mastering-markdown/) to format lists and code.
+      placeholder: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
     id: bug-description
     attributes:
       label: Describe the bug
