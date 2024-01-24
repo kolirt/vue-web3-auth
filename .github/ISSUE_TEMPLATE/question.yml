@@ -1,0 +1,15 @@
+name: 💬 Question
+description: Ask a question about the vue-web3-auth.
+title: '[Question]: '
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before asking a question, please make sure that you have read through our [documentation](https://github.com/kolirt/vue-web3-auth?tab=readme-ov-file#web3-authentication-for-vue3-apps-based-on-walletconnect-web3modal-v2-and-wagmi) and existing [issues](https://github.com/kolirt/vue-web3-auth/issues).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
