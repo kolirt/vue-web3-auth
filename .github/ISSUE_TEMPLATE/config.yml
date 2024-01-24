@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/kolirt/vue-web3-auth?tab=readme-ov-file#web3-authentication-for-vue3-apps-based-on-walletconnect-web3modal-v2-and-wagmi
+    about: Check the documentation for guides and examples.
