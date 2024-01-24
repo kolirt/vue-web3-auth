@@ -486,15 +486,15 @@ const { loaded, fetching, data, fetch, reload, disableAutoReload } = useFetchBal
 
 # Example
 
-[Example here](https://github.com/kolirt/vue-web3-auth/tree/master/examples).
+[Example here](https://github.com/kolirt/vue-web3-auth/tree/v2/examples).
 
 # FAQ
 
-Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) with `FAQ` label to get answers for most asked questions.
+Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues?q=label%3AFAQ) with `FAQ` label to get answers for most asked questions.
 
 # License
 
-[MIT](https://github.com/kolirt/vue-web3-auth/tree/master/LICENSE).
+[MIT](https://github.com/kolirt/vue-web3-auth/tree/v2/LICENSE).
 
 # Other projects
 
