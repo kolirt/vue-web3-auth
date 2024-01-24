@@ -1,5 +1,6 @@
 name: 💬 Question
 description: Ask a question about the vue-web3-auth.
+title: '[Question]: '
 labels: [question]
 body:
   - type: markdown
