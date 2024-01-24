@@ -1,0 +1,42 @@
+name: 🐞 Bug report
+description: Create a report to help us improve vue-web3-auth.
+labels: [bug, v2]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before reporting a bug, please make sure that you have read through our [documentation](https://github.com/kolirt/vue-web3-auth?tab=readme-ov-file#web3-authentication-for-vue3-apps-based-on-walletconnect-web3modal-v2-and-wagmi) and existing [issues](https://github.com/kolirt/vue-web3-auth/issues).
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: v2.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Package configuration
+      description: Show how you configured the package.
+      placeholder: |
+        createWeb3Auth({
+          projectId: '', // remove your projectId
+          chains: [Chains.bsc, Chains.mainnet, Chains.polygon]
+        })
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description. Thanks!
+      placeholder: Bug description
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Context & Screenshots (if applicable)
+      description: |
+        If applicable, provide any additional context or screenshots of the bug.
+        You can drag and drop images here to add them to the issue.
