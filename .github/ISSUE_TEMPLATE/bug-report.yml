@@ -50,3 +50,10 @@ body:
       description: |
         If applicable, provide any additional context or screenshots of the bug.
         You can drag and drop images here to add them to the issue.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Optional if provided reproduction. Please try not to insert an image but copy paste the log text.
+      render: shell-script
