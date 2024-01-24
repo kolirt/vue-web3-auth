@@ -25,6 +25,8 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
 - [Usage](#usage)
   - [Basic usage](#basic-usage)
     - [Connect wallet button](#connect-wallet-button)
+    - [Switch chain](#switch-chain)
+    - [Select chain via Web3Modal](#select-chain-via-web3modal)
     - [FetchGasPrice](#fetchgasprice)
     - [FetchBlockNumber](#fetchblocknumber)
     - [FetchTransaction](#fetchtransaction)
@@ -160,6 +162,31 @@ import { account, accountDetails, connect, disconnect } from '@kolirt/vue-web3-a
     <button @click="disconnect()">Disconnect</button>
   </div>
   <button v-else @click="connect()">Connect wallet</button>
+</template>
+```
+
+### Switch chain
+To switch the chain, you need to add it during [configuration](#configuration). 
+
+```vue
+<script setup lang="ts">
+import { switchChain, Chains } from '@kolirt/vue-web3-auth'
+</script>
+
+<template>
+  <button @click="switchChain(Chains.polygon)">Switch to polygon</button>
+</template>
+```
+
+### Select chain via Web3Modal
+
+```vue
+<script setup lang="ts">
+import { selectChain } from '@kolirt/vue-web3-auth'
+</script>
+
+<template>
+  <button @click="selectChain">Select chain</button>
 </template>
 ```
 
