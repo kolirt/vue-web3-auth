@@ -93,7 +93,7 @@ app.mount('#app')
 ### Custom chain
 
 ```ts
-import { Chain } from '@kolirt/vue-web3-auth'
+import { type Chain } from '@kolirt/vue-web3-auth'
 
 const bsc: Chain = {
   id: 56,
