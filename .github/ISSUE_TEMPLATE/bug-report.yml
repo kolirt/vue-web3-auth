@@ -1,5 +1,6 @@
 name: 🐞 Bug report
 description: Create a report to help us improve vue-web3-auth.
+title: '[Bug]: '
 labels: [bug, v2]
 body:
   - type: markdown
