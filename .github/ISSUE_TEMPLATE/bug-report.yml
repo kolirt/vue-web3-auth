@@ -17,9 +17,9 @@ body:
     id: configuration
     attributes:
       label: Package configuration
-      description: Show how you configured the package.
+      description: Show how you configured the package. You can check how to configure the package [here](https://github.com/kolirt/vue-web3-auth?tab=readme-ov-file#configuration).
       placeholder: |
-        createWeb3Auth({
+        createWeb3Auth({ |
           projectId: '', // remove your projectId
           chains: [Chains.bsc, Chains.mainnet, Chains.polygon]
         })
