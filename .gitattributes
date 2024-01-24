@@ -1,4 +1,0 @@
-*.ts linguist-detectable=false
-*.js linguist-detectable=false
-*.html linguist-detectable=false
-Makefile linguist-detectable=false
