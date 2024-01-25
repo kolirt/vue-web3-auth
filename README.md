@@ -23,7 +23,8 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
     - [Custom chain](#custom-chain)
     - [Custom rpc provider](#custom-rpc-provider)
 - [Usage](#usage)
-  - [Basic usage](#basic-usage)
+  - [Basic usage](#basic-usage) 
+    - [Info about the user's connected wallet and wallet type](#info-about-the-users-connected-wallet-and-wallet-type)
     - [Connect wallet button](#connect-wallet-button)
     - [Switch chain](#switch-chain)
     - [Select chain via Web3Modal](#select-chain-via-web3modal)
@@ -159,7 +160,7 @@ account.wallet.id // current wallet id
 account.wallet.name // current wallet name
 ```
 
-### Connect wallet button````
+### Connect wallet button
 
 ```vue
 <script setup lang="ts">
