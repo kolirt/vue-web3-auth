@@ -1,7 +1,7 @@
 name: 🚀 Feature request
 description: Suggest a feature that will improve vue-web3-auth.
 title: '[Feature]: '
-labels: [feature request]
+labels: [feature request, v2]
 body:
   - type: markdown
     attributes:
