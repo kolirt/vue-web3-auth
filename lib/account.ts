@@ -1,5 +1,5 @@
 import { disconnect as masterDisconnect } from '@wagmi/core'
-import { reactive, watchEffect } from 'vue'
+import { reactive, readonly, watchEffect } from 'vue'
 
 import { state as optionsState } from './options'
 import type { AccountState, Chain, ConnectedAccount } from './types'
@@ -11,11 +11,17 @@ export const state = reactive<AccountState>({
   currentAccount: null
 })
 
-export const account = reactive<ConnectedAccount>({
+ const accountState = reactive<ConnectedAccount>({
   connected: false,
   address: undefined,
-  shortAddress: undefined
+  shortAddress: undefined,
+  wallet: {
+    id: undefined,
+    name: undefined
+  }
 })
+
+export const account = readonly(accountState)
 
 export async function disconnect() {
   await masterDisconnect()
@@ -46,12 +52,16 @@ export function shortAddressFilter(value = '') {
 
 watchEffect(() => {
   if (state.currentAccount) {
-    account.connected = true
-    account.address = state.currentAccount.address
-    account.shortAddress = shortAddressFilter(state.currentAccount.address)
+    accountState.connected = true
+    accountState.address = state.currentAccount.address
+    accountState.shortAddress = shortAddressFilter(state.currentAccount.address)
+    accountState.wallet.id = state.currentAccount.connector?.id
+    accountState.wallet.name = state.currentAccount.connector?.name
   } else {
-    account.connected = false
-    account.address = undefined
-    account.shortAddress = undefined
+    accountState.connected = false
+    accountState.address = undefined
+    accountState.shortAddress = undefined
+    accountState.wallet.id = undefined
+    accountState.wallet.name = undefined
   }
 })

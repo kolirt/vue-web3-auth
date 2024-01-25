@@ -147,7 +147,19 @@ app.use(createWeb3Auth({
 
 ## Basic usage
 
-### Connect wallet button
+### Info about the user's connected wallet and wallet type
+
+```ts
+import { account } from '@kolirt/vue-web3-auth'
+
+account.connected // if connected
+account.address // current account address
+account.shortAddress // current account address with 3 dots
+account.wallet.id // current wallet id
+account.wallet.name // current wallet name
+```
+
+### Connect wallet button````
 
 ```vue
 <script setup lang="ts">
@@ -159,11 +171,11 @@ import { account, accountDetails, connect, disconnect } from '@kolirt/vue-web3-a
     <button @click="accountDetails()">
       {{ account.address }}
     </button>
-    <button @click="disconnect()">Disconnect</button>
+    <button @click="disconnect()">Disconnect from {{ account.wallet.name }}</button>
   </div>
   <button v-else @click="connect()">Connect wallet</button>
 </template>
-```
+```````
 
 ### Switch chain
 To switch the chain, you need to add it during [configuration](#configuration). 

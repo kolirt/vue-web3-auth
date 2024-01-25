@@ -1,4 +1,4 @@
-import type { Chain, Unit } from '@wagmi/core'
+import type { Chain, GetAccountResult, Unit } from '@wagmi/core'
 import type { ThemeCtrlState } from '@web3modal/core'
 import type { EthereumClient } from '@web3modal/ethereum'
 import type { WatchAssetParams } from 'viem/src/types/eip1193'
@@ -41,6 +41,10 @@ export type ConnectedAccount = {
   connected: boolean
   address?: `0x${string}`
   shortAddress?: string
+  wallet: {
+    id?: string
+    name?: string
+  }
 }
 
 export type BufferChain = Chain & { unsupported?: boolean }
@@ -55,8 +59,8 @@ export type WcState = {
 }
 
 export type AccountState = {
-  bufferAccount: any
-  currentAccount: any
+  bufferAccount: GetAccountResult | null
+  currentAccount: GetAccountResult | null
 }
 
 export type MulticallContract = {
