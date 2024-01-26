@@ -16,4 +16,10 @@ export { multicall } from './multicall'
 
 export { fetchToken } from './token'
 
-export { fetchTransaction, fetchTransactionReceipt, sendTransaction } from './transaction'
+export {
+  fetchTransaction,
+  fetchTransactionReceipt,
+  prepareSendTransaction,
+  sendTransaction,
+  waitForTransaction
+} from './transaction'

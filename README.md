@@ -32,7 +32,9 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
     - [FetchBlockNumber](#fetchblocknumber)
     - [FetchTransaction](#fetchtransaction)
     - [FetchTransactionReceipt](#fetchtransactionreceipt)
+    - [PrepareSendTransaction](#preparesendtransaction)
     - [SendTransaction](#sendtransaction)
+    - [WaitForTransaction](#waitfortransaction)
     - [SignMessage](#signmessage)
     - [Multicall](#multicall)
     - [FetchBalance](#fetchbalance)
@@ -205,10 +207,10 @@ import { selectChain } from '@kolirt/vue-web3-auth'
 
 ### FetchGasPrice
 
-```js
+```ts
 import { fetchGasPrice } from '@kolirt/vue-web3-auth'
 
-let data = await fetchGasPrice()
+const data = await fetchGasPrice()
 
 /**
  * Result in data
@@ -224,10 +226,10 @@ let data = await fetchGasPrice()
 
 ### FetchBlockNumber
 
-```js
+```ts
 import { fetchBlockNumber } from '@kolirt/vue-web3-auth'
 
-let data = await fetchBlockNumber()
+const data = await fetchBlockNumber()
 
 /**
  * Result in data
@@ -238,38 +240,59 @@ let data = await fetchBlockNumber()
 
 ### FetchTransaction
 
-```js
+```ts
 import { fetchTransaction } from '@kolirt/vue-web3-auth'
 
-let transaction = await fetchTransaction({
+const transaction = await fetchTransaction({
   hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
 })
 ```
 
-### fetchTransactionReceipt
+### FetchTransactionReceipt
 
-```js
+```ts
 import { fetchTransactionReceipt } from '@kolirt/vue-web3-auth'
 
-let transactionReceipt = await fetchTransactionReceipt({
+const transactionReceipt = await fetchTransactionReceipt({
   hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb'
 })
 ```
 
-### SendTransaction
+### PrepareSendTransaction
 
-```js
-import { sendTransaction } from '@kolirt/vue-web3-auth'
+```ts
+import { prepareSendTransaction } from '@kolirt/vue-web3-auth'
 
-let txn = await sendTransaction({
+const preparedTxn = await prepareSendTransaction({
   to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
   value: 1n
 })
 ```
 
+### SendTransaction
+
+```ts
+import { sendTransaction } from '@kolirt/vue-web3-auth'
+
+const txn = await sendTransaction({
+  to: '0x2D4C407BBe49438ED859fe965b140dcF1aaB71a9',
+  value: 1n
+})
+```
+
+### WaitForTransaction
+
+```ts
+import { waitForTransaction } from '@kolirt/vue-web3-auth'
+
+const transactionReceipt = await waitForTransaction({
+  hash: '0x7ed8dc64f54ae43f4d53173e95aa929c52de44ec5cea8c28246989914ed7f4fb',
+})
+```
+
 ### SignMessage
 
-```js
+```ts
 import { signMessage } from '@kolirt/vue-web3-auth'
 
 const signature = await signMessage('test message')
@@ -307,7 +330,7 @@ let data = await multicall({
 
 ### FetchBalance
 
-```js
+```ts
 import { fetchBalance } from '@kolirt/vue-web3-auth'
 
 let bnbBalance = await fetchBalance({
@@ -344,7 +367,7 @@ let tokenBalance = await fetchBalance({
 
 ### FetchToken
 
-```js
+```ts
 import { fetchToken } from '@kolirt/vue-web3-auth'
 
 let data = await fetchToken({
@@ -420,7 +443,7 @@ const gas = await estimateWriteContractGas({
 
 ### ParseEvents
 
-```js
+```ts
 import { erc20ABI, fetchTransactionReceipt, parseEvents } from '@kolirt/vue-web3-auth'
 
 const transactionReceipt = await fetchTransactionReceipt({
@@ -446,7 +469,7 @@ const events = parseEvents({ abi: erc20ABI }, transactionReceipt)
 
 ### WatchContractEvent
 
-```js
+```ts
 import { erc20ABI, watchContractEvent } from '@kolirt/vue-web3-auth'
 
 const unwatch = watchContractEvent(
@@ -463,7 +486,7 @@ const unwatch = watchContractEvent(
 
 ### WatchAsset
 
-```js
+```ts
 import { watchAsset } from '@kolirt/vue-web3-auth'
 
 const result = watchAsset({
@@ -477,7 +500,7 @@ const result = watchAsset({
 
 ### UseFetchBalance
 
-```js
+```ts
 import { useFetchBalance } from '@kolirt/vue-web3-auth'
 
 // use `fetch` for manual init when `disableAutoFetch` is `true`

@@ -1,12 +1,19 @@
 import {
   getPublicClient,
   fetchTransaction as masterFetchTransaction,
+  prepareSendTransaction as masterPrepareSendTransaction,
   sendTransaction as masterSendTransaction,
-  waitForTransaction
+  waitForTransaction as masterWaitForTransaction
 } from '@wagmi/core'
 
 import { chain } from '../chain'
-import type { FetchTransaction, FetchTransactionReceipt, SendTransaction } from '../types'
+import type {
+  FetchTransaction,
+  FetchTransactionReceipt,
+  PrepareSendTransaction,
+  SendTransaction,
+  WaitTransaction
+} from '../types'
 
 export function fetchTransaction(data: FetchTransaction) {
   return masterFetchTransaction({
@@ -23,22 +30,23 @@ export function fetchTransactionReceipt(data: FetchTransactionReceipt) {
   })
 }
 
-export async function sendTransaction(data: SendTransaction) {
-  const { hash } = await masterSendTransaction({
+export function prepareSendTransaction(data: PrepareSendTransaction) {
+  return masterPrepareSendTransaction({
     chainId: data.chainId || chain.value.id,
-    to: data.to,
-    account: data.account,
-    gas: data.gas,
-    gasPrice: data.gasPrice,
-    maxFeePerGas: data.maxFeePerGas,
-    maxPriorityFeePerGas: data.maxPriorityFeePerGas,
-    nonce: data.nonce,
-    value: data.value
+    ...data
   })
+}
 
-  return waitForTransaction({
+export function sendTransaction(data: SendTransaction) {
+  return masterSendTransaction({
     chainId: data.chainId || chain.value.id,
-    hash,
-    confirmations: data.confirmations || 1
+    ...data
+  })
+}
+
+export function waitForTransaction(data: WaitTransaction) {
+  return masterWaitForTransaction({
+    chainId: data.chainId || chain.value.id,
+    ...data
   })
 }

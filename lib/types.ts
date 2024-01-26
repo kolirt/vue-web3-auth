@@ -1,4 +1,11 @@
-import type { Chain, GetAccountResult, Unit } from '@wagmi/core'
+import type {
+  Chain,
+  GetAccountResult,
+  PrepareSendTransactionArgs,
+  SendTransactionArgs,
+  Unit,
+  WaitForTransactionArgs
+} from '@wagmi/core'
 import type { ThemeCtrlState } from '@web3modal/core'
 import type { EthereumClient } from '@web3modal/ethereum'
 import type { WatchAssetParams } from 'viem/src/types/eip1193'
@@ -171,15 +178,12 @@ export type FetchTransactionReceipt = {
   hash: `0x${string}`
 }
 
-export type SendTransaction = {
-  chainId?: number
-  to: string
-  account?: `0x${string}`
-  gas?: bigint
-  gasPrice?: bigint
-  maxFeePerGas?: bigint
-  maxPriorityFeePerGas?: bigint
-  nonce?: number
+export type PrepareSendTransaction = Omit<PrepareSendTransactionArgs, 'walletClient'> & {
   value?: bigint
-  confirmations?: number
 }
+
+export type SendTransaction = SendTransactionArgs & {
+  value?: bigint
+}
+
+export type WaitTransaction = WaitForTransactionArgs

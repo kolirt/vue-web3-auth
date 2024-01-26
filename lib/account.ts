@@ -11,7 +11,7 @@ export const state = reactive<AccountState>({
   currentAccount: null
 })
 
- const accountState = reactive<ConnectedAccount>({
+const accountState = reactive<ConnectedAccount>({
   connected: false,
   address: undefined,
   shortAddress: undefined,
