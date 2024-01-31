@@ -1,12 +1,12 @@
-import { multicall as masterMulticall } from '@wagmi/core'
+import { type MulticallResult, multicall as masterMulticall } from '@wagmi/core'
 import { type MulticallParameters } from 'viem/actions'
-import { type ContractFunctionConfig } from 'viem/src/types/contract'
+import { type ContractFunctionConfig } from 'viem/types/contract'
 
 import type { MulticallArgs } from '../types'
 
 export async function multicall<TContracts extends ContractFunctionConfig[], TAllowFailure extends boolean = true>(
   params: MulticallArgs<TAllowFailure>
-) {
+): Promise<MulticallResult<TContracts, TAllowFailure>> {
   // @ts-ignore
   const contracts: TContracts = [] as TContracts
 

@@ -199,6 +199,8 @@ async function signMessage() {
           </button>
         </div>
 
+        <hr />
+
         <div class="d-grid d-sm-flex mb-3 gap-2">
           <button
             v-for="item in availableChains"
@@ -208,13 +210,11 @@ async function signMessage() {
           >
             Reconnect to {{ item.name }}
           </button>
+
+          <button @click="disconnect" class="btn btn-danger">
+            {{ loading.logouting ? 'Logouting...' : 'Logout' }}
+          </button>
         </div>
-
-        <hr />
-
-        <button @click="disconnect" class="btn btn-danger">
-          {{ loading.logouting ? 'Logouting...' : 'Logout' }}
-        </button>
       </template>
 
       <div v-else class="d-grid d-sm-flex mb-3 gap-2">

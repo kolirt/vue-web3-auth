@@ -1,6 +1,6 @@
 {
   "name": "@kolirt/vue-web3-auth",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Web3 authentication for Vue3 apps based on WalletConnect Web3Modal v2",
   "author": "kolirt",
   "license": "MIT",
@@ -62,17 +62,17 @@
   },
   "homepage": "https://github.com/kolirt/vue-web3-auth#readme",
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": ">=3"
   },
   "dependencies": {
-    "@wagmi/core": "^1.2.1",
-    "@web3modal/ethereum": "^2.4.7",
-    "@web3modal/html": "^2.4.7",
+    "@wagmi/core": "1.4.13",
+    "@web3modal/ethereum": "2.7.1",
+    "@web3modal/html": "2.7.1",
     "bootstrap": "5.3.0",
-    "js-event-bus": "^1.1.1",
-    "viem": "^1.1.6",
+    "js-event-bus": "1.1.1",
+    "viem": "1.21.4",
     "vue": "^3.3.2",
-    "wagmi": "^1.2.1"
+    "wagmi": "1.4.13"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
