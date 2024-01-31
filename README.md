@@ -526,7 +526,7 @@ const { loaded, fetching, data, fetch, reload, disableAutoReload } = useFetchBal
 
 # FAQ
 
-Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues?q=label%3AFAQ) with `FAQ` label to get answers for most asked questions.
+Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) to get answers for most asked questions.
 
 # License
 
