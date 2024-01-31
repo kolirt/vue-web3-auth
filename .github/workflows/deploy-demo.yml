@@ -1,8 +1,11 @@
 name: 📝 deploy demo
 
 on:
-  release:
-    types: [ published ]
+  push:
+    branches:
+      - v2
+    paths:
+      - src/**
   workflow_dispatch:
 
 permissions:

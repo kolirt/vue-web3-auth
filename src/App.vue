@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 import {
   $off,
@@ -12,6 +12,7 @@ import {
   getAvailableChains,
   connect as masterConnect,
   disconnect as masterDisconnect,
+  signMessage as masterSignMessage,
   switchChain as masterSwitchChain,
   selectChain
 } from '../lib'
@@ -83,6 +84,26 @@ const chains = getAvailableChains()
 const availableChains = computed(() => {
   return chains.filter((item) => item.id !== chain.value.id)
 })
+
+const signMessageLoading = ref(false)
+const message = ref('')
+const messageResponse = ref('')
+async function signMessage() {
+  if (!signMessageLoading.value) {
+    signMessageLoading.value = true
+    messageResponse.value = ''
+    masterSignMessage(message.value)
+      .then((data) => {
+        messageResponse.value = data
+      })
+      .catch((e) => {
+        messageResponse.value = e
+      })
+      .finally(() => {
+        signMessageLoading.value = false
+      })
+  }
+}
 </script>
 
 <template>
@@ -143,6 +164,19 @@ const availableChains = computed(() => {
             </ul>
           </li>
         </ul>
+
+        <hr />
+
+        <div class="mb-3">
+          <label for="signMessageInput" class="form-label">Message</label>
+          <textarea class="form-control" id="signMessageInput" rows="3" v-model="message"></textarea>
+        </div>
+        <p v-if="messageResponse">{{ messageResponse }}</p>
+        <div>
+          <button @click="signMessage" :disabled="signMessageLoading" class="btn btn-primary" type="submit">
+            {{ signMessageLoading ? 'Signing...' : 'Sign message' }}
+          </button>
+        </div>
 
         <hr />
 
