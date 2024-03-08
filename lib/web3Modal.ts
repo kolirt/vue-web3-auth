@@ -1,7 +1,7 @@
 import type { ModalCtrlState, ThemeCtrlState } from '@web3modal/core/dist/_types/src/types/controllerTypes'
 import { type EthereumClient } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/html'
-import { type Ref, ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
 import { Events } from './enums'
 import { $emit } from './event'
@@ -22,7 +22,7 @@ export function initWeb3Modal(ethereumClient: EthereumClient) {
   web3Modal.value = new Web3Modal(
     {
       projectId: optionsState.projectId,
-      ...(optionsState?.web3modalOptions || [])
+      ...(optionsState?.web3modalOptions || {})
     },
     ethereumClient
   )

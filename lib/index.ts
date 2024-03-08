@@ -1,21 +1,12 @@
 import * as Chains from '@wagmi/core/chains'
 
+export { account, accountDetails, connect, disconnect, shortAddressFilter } from './account'
 export * from './actions'
-
-export * from './utils/abi'
-
-export { connect, disconnect, accountDetails, shortAddressFilter, account } from './account'
-
-export { selectChain, switchChain, getAvailableChains, chain } from './chain'
-
+export { chain, getAvailableChains, selectChain, switchChain } from './chain'
 export { Events } from './enums'
-
-export { $on, $off } from './event'
-
+export { $off, $on } from './event'
 export { createWeb3Auth } from './plugin'
-
-export type { Chain, Options, MulticallArgs, MulticallContract } from './types'
-
+export type { Chain, MulticallArgs, MulticallContract, Options } from './types'
+export * from './utils/abi'
 export { init } from './wc'
-
 export { Chains }

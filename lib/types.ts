@@ -6,7 +6,7 @@ import type {
   Unit,
   WaitForTransactionArgs
 } from '@wagmi/core'
-import type { ThemeCtrlState } from '@web3modal/core'
+import type { ConfigCtrlState, ThemeCtrlState } from '@web3modal/core'
 import type { EthereumClient } from '@web3modal/ethereum'
 import type { WatchAssetParams } from 'viem/types/eip1193'
 
@@ -39,7 +39,20 @@ export type Options = {
    * if true, the w3m provider will be disabled and a custom rpc based on the rpc from the chain configuration will be activated
    */
   enableCustomProvider?: boolean
-  web3modalOptions?: ThemeCtrlState
+  web3modalOptions?: Pick<
+    ConfigCtrlState,
+    | 'mobileWallets'
+    | 'desktopWallets'
+    | 'walletImages'
+    | 'chainImages'
+    | 'tokenImages'
+    | 'tokenContracts'
+    | 'explorerRecommendedWalletIds'
+    | 'explorerExcludedWalletIds'
+    | 'termsOfServiceUrl'
+    | 'privacyPolicyUrl'
+  > &
+    ThemeCtrlState
 }
 
 export type { Chain }
