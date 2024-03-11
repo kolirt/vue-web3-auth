@@ -168,9 +168,9 @@
   integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
 
 "@kolirt/vue-web3-auth@^2":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@kolirt/vue-web3-auth/-/vue-web3-auth-2.3.1.tgz#e05ad97c490830fddd550a1780eb6c6bdf2fa11e"
-  integrity sha512-huGl5eynKCrHRi7JWocUd1sLkmRro6hvhKsHMOR4BBTin6SlYqzkiIz3mZKOwFmuAL1QrrK7HfbOPDOKsEVO7w==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@kolirt/vue-web3-auth/-/vue-web3-auth-2.3.2.tgz#db86eb02e19746bcb08a584d13f8c00e06c54db4"
+  integrity sha512-yTB8YjdF9wsOvNMC06PTouvb4hH5smiSfDWg3MxNAwNlBG1IGsKCq5iLUCSmO7B4QlYSrxAAkgO7kZL9tfwCoA==
   dependencies:
     "@wagmi/core" "1.4.13"
     "@web3modal/ethereum" "2.7.1"
