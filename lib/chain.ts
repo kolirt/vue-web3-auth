@@ -1,4 +1,4 @@
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 import { state as optionsState } from './options'
 import type { Chain, ChainState } from './types'
@@ -18,10 +18,26 @@ export function getAvailableChains(): Chain[] {
   return optionsState.chains
 }
 
-export async function switchChain(newChain: Chain) {
-  if (!web3Modal.value) init()
+export function switchChain(newChain: Chain) {
+  return new Promise<Chain>((resolve, reject) => {
+    if (!web3Modal.value) init()
 
-  await wcState.client?.switchNetwork({ chainId: newChain.id })
+    const unwatch = watch(
+      () => chain.value,
+      (changedChain) => {
+        unwatch()
+        if (changedChain.id === newChain.id) {
+          resolve(changedChain)
+        } else {
+          reject(new Error('Chain switch failed'))
+        }
+      }
+    )
+
+    wcState.client?.switchNetwork({ chainId: newChain.id }).catch((e) => {
+      reject(e)
+    })
+  })
 }
 
 export async function selectChain() {

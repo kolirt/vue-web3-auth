@@ -3,7 +3,7 @@ dev:
 format:
 	yarn format
 check:
-	yarn type-check-lib && yarn lint
+	yarn type-check && yarn lint
 build:
 	yarn build-lib && yarn build-demo
 build-demo:

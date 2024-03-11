@@ -65,9 +65,16 @@ async function disconnect() {
 async function switchChain(newChain: Chain) {
   if (!loading.switchingTo[newChain.id]) {
     loading.switchingTo[newChain.id] = true
-    await masterSwitchChain(newChain).finally(() => {
-      loading.switchingTo[newChain.id] = false
-    })
+    await masterSwitchChain(newChain)
+      .then(() => {
+        console.log('switchChainSuccess', chain.value)
+      })
+      .catch((err) => {
+        console.log('switchChainErr', err)
+      })
+      .finally(() => {
+        loading.switchingTo[newChain.id] = false
+      })
   }
 }
 

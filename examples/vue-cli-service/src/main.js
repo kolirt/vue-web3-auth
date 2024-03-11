@@ -8,7 +8,7 @@ const app = createApp(App)
 
 app.use(
   createWeb3Auth({
-    projectId: '3c5c8069ff37304cc62e07ae8cb592a8', // generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
+    projectId: '', // generate here https://cloud.walletconnect.com/ and turn on 'Supports Sign v2'
     chains: [Chains.bsc, Chains.mainnet, Chains.polygon]
   })
 )

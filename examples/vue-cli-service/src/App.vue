@@ -21,11 +21,11 @@ const loading = reactive({
   logouting: false
 })
 
-async function connect(chain) {
+async function connect(newChain) {
   const handler = (state) => {
     if (!state) {
-      if (chain) {
-        loading.connectingTo[chain.id] = false
+      if (newChain) {
+        loading.connectingTo[newChain.id] = false
       } else {
         loading.connecting = false
       }
@@ -36,13 +36,13 @@ async function connect(chain) {
 
   $on(Events.ModalStateChanged, handler)
 
-  if (chain) {
-    loading.connectingTo[chain.id] = true
+  if (newChain) {
+    loading.connectingTo[newChain.id] = true
   } else {
     loading.connecting = true
   }
 
-  await masterConnect(chain)
+  await masterConnect(newChain)
 }
 
 async function disconnect() {
@@ -61,11 +61,11 @@ async function disconnect() {
   })
 }
 
-async function switchChain(chain) {
-  if (!loading.switchingTo[chain.id]) {
-    loading.switchingTo[chain.id] = true
-    await masterSwitchChain(chain).finally(() => {
-      loading.switchingTo[chain.id] = false
+async function switchChain(newChain) {
+  if (!loading.switchingTo[newChain.id]) {
+    loading.switchingTo[newChain.id] = true
+    await masterSwitchChain(newChain).finally(() => {
+      loading.switchingTo[newChain.id] = false
     })
   }
 }

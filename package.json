@@ -1,6 +1,6 @@
 {
   "name": "@kolirt/vue-web3-auth",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Web3 authentication for Vue3 apps based on WalletConnect Web3Modal v2",
   "author": "kolirt",
   "license": "MIT",
@@ -25,18 +25,18 @@
     "ethers"
   ],
   "scripts": {
-    "build-lib": "run-p type-check-lib build-only-lib",
+    "build-lib": "run-p type-check build-only-lib",
     "build-only-lib": "vite build -c vite.lib.config.ts",
-    "type-check-lib": "vue-tsc --noEmit -p tsconfig.lib.json --composite false",
     "dev-demo": "vite serve -c vite.demo.config.ts",
     "build-demo": "vite build -c vite.demo.config.ts",
     "preview-demo": "vite preview -c vite.demo.config.ts",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore --ignore-path .eslintignore",
-    "format": "prettier --write src/ --write lib/ --write examples/vue-cli-service/src --write examples/vite/src"
+    "format": "prettier --write \"**/*.{ts,js,cjs,vue,json}\""
   },
   "pre-commit": [
     "lint",
-    "type-check-lib"
+    "type-check"
   ],
   "private": false,
   "type": "module",
