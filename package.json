@@ -51,7 +51,8 @@
       "types": "./dist/vue-web3-auth.d.ts",
       "import": "./dist/vue-web3-auth.js",
       "require": "./dist/vue-web3-auth.umd.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
