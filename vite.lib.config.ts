@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import eslint from 'vite-plugin-eslint'
+import pkg from './package.json'
 
 export default defineConfig({
   plugins: [
@@ -20,24 +21,16 @@ export default defineConfig({
     },
     emptyOutDir: true,
     rollupOptions: {
-      external: [
-        'vue',
-        'js-event-bus',
-        '@wagmi/core',
-        '@wagmi/core/chains',
-        '@web3modal/ethereum',
-        '@web3modal/html',
-        'viem'
-      ],
+      external: [...Object.keys(pkg.dependencies)],
       output: {
         globals: {
-          vue: 'vue',
-          'js-event-bus': 'jsEventBus',
-          '@wagmi/core': 'wagmiCore',
-          '@wagmi/core/chains': 'wagmiCoreChains',
-          '@web3modal/ethereum': 'web3modalEthereum',
-          '@web3modal/html': 'web3modalHtml',
-          viem: 'viem'
+          ...(() => {
+            const obj: Record<string, string> = {}
+            Object.keys(pkg.dependencies).forEach((key) => {
+              obj[key] = key
+            })
+            return obj
+          })()
         }
       }
     }
