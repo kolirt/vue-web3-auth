@@ -95,13 +95,13 @@ const availableChains = computed(() => {
       </div>
 
       <iframe
+        class="mb-3"
         src="https://ghbtns.com/github-btn.html?user=kolirt&repo=vue-web3-auth&type=star&count=true&size=large"
         frameborder="0"
         scrolling="0"
         width="170"
         height="30"
         title="GitHub"
-        class="mb-3"
       >
       </iframe>
 
@@ -145,18 +145,18 @@ const availableChains = computed(() => {
         <hr />
 
         <div class="d-grid d-sm-flex mb-3 gap-2">
-          <button @click="accountDetails" class="btn btn-primary">Account details</button>
+          <button class="btn btn-primary" @click="accountDetails">Account details</button>
         </div>
 
         <div class="d-grid d-sm-flex mb-3 gap-2">
-          <button @click="selectChain" class="btn btn-primary">Select chain via the wc modal</button>
+          <button class="btn btn-primary" @click="selectChain">Select chain via the wc modal</button>
         </div>
 
         <div class="d-grid d-sm-flex mb-3 gap-2">
           <button
+            class="btn btn-outline-primary"
             v-for="item in availableChains"
             @click="switchChain(item)"
-            class="btn btn-outline-primary"
             :key="item.id"
           >
             {{ loading.switchingTo[item.id] ? `Switching chain to ${item.name}...` : `Switch chain to ${item.name}` }}
@@ -165,9 +165,9 @@ const availableChains = computed(() => {
 
         <div class="d-grid d-sm-flex mb-3 gap-2">
           <button
+            class="btn btn-outline-primary"
             v-for="item in availableChains"
             @click="reconnect(item)"
-            class="btn btn-outline-primary"
             :key="item.id"
           >
             Reconnect to {{ item.name }}
@@ -176,17 +176,17 @@ const availableChains = computed(() => {
 
         <hr />
 
-        <button @click="disconnect" class="btn btn-danger">
+        <button class="btn btn-danger" @click="disconnect">
           {{ loading.logouting ? 'Logouting...' : 'Logout' }}
         </button>
       </template>
 
-      <div v-else class="d-grid d-sm-flex mb-3 gap-2">
-        <button @click="connect()" class="btn btn-primary">
+      <div class="d-grid d-sm-flex mb-3 gap-2" v-else>
+        <button class="btn btn-primary" @click="connect()">
           {{ loading.connecting ? 'Connecting...' : 'Connect wallet' }}
         </button>
 
-        <button v-for="item in chains" @click="connect(item)" class="btn btn-outline-primary" :key="item.id">
+        <button class="btn btn-outline-primary" v-for="item in chains" @click="connect(item)" :key="item.id">
           {{ loading.connectingTo[item.id] ? `Connecting to ${item.name}...` : `Connect to ${item.name}` }}
         </button>
       </div>

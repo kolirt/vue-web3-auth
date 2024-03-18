@@ -5,5 +5,9 @@
   "printWidth": 120,
   "semi": false,
   "singleQuote": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+   "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-organize-attributes"
+  ]
 }

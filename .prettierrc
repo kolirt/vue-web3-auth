@@ -8,8 +8,7 @@
   "endOfLine": "auto",
   "plugins": [
     "prettier-plugin-organize-imports",
-    "prettier-plugin-organize-attributes",
-    "prettier-plugin-tailwindcss"
+    "prettier-plugin-organize-attributes"
   ],
   "attributeGroups": [
     "^ref",

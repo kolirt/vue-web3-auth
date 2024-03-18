@@ -1,8 +1,10 @@
 {
   "name": "@kolirt/vue-web3-auth",
   "version": "2.3.2",
+  "type": "module",
   "description": "Web3 authentication for Vue3 apps based on WalletConnect Web3Modal v2",
   "author": "kolirt",
+  "private": false,
   "license": "MIT",
   "keywords": [
     "vue",
@@ -38,8 +40,6 @@
     "lint",
     "type-check"
   ],
-  "private": false,
-  "type": "module",
   "files": [
     "dist"
   ],
@@ -86,10 +86,9 @@
     "eslint-plugin-vue": "^9.11.0",
     "npm-run-all": "^4.1.5",
     "pre-commit": "^1.2.2",
-    "prettier": "^3.0.3",
+    "prettier": "^3.2.5",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "prettier-plugin-organize-imports": "^3.2.4",
-    "prettier-plugin-tailwindcss": "^0.5.5",
     "typescript": "~5.0.4",
     "vite": "^4.3.5",
     "vite-plugin-dts": "^2.3.0",
