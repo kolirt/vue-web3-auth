@@ -1,10 +1,6 @@
 <div align="center">
-  <a href="https://vuejs.org/">
-    <img width="200" height="200" hspace="10" src="https://camo.githubusercontent.com/0b17e5a01574a2c1251b51c910c422f6ca6cb968a52686a770b668a634792c09/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" alt="vite logo" />
-  </a>
-  <a href="https://docs.walletconnect.com/web3modal/v2/about">
-    <img width="200" height="200" hspace="10" src="https://docs.walletconnect.com/img/walletconnect-logo-black.svg" alt="vite logo" />
-  </a>
+  <a href="https://vuejs.org/"><img width="200" height="200" hspace="10" src="https://camo.githubusercontent.com/0b17e5a01574a2c1251b51c910c422f6ca6cb968a52686a770b668a634792c09/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" alt="vite logo" /></a>
+  <a href="https://docs.walletconnect.com/web3modal/v2/about"><img width="200" height="200" hspace="10" src="https://docs.walletconnect.com/img/walletconnect-logo-black.svg" alt="vite logo" /></a>
 </div>
 
 <h1 align="center">Vue web3 auth</h1>
@@ -17,8 +13,7 @@
   <img src="https://img.shields.io/bundlephobia/minzip/%40kolirt%2Fvue-web3-auth" alt="npm bundle size"/>
   
   <a href="https://www.npmjs.com/package/@kolirt/vue-web3-auth" target="_blank">
-    <img src="https://img.shields.io/npm/v/%40kolirt%2Fvue-web3-auth" alt="npm-version" />
-  </a>
+    <img src="https://img.shields.io/npm/v/%40kolirt%2Fvue-web3-auth" alt="npm-version" /></a>
 
   <img src="https://img.shields.io/npm/l/vite-plugin-robots" alt="licence" />
 </div>
