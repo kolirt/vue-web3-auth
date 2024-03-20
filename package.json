@@ -34,7 +34,7 @@
     "preview-demo": "vite preview -c vite.demo.config.ts",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore --ignore-path .eslintignore",
-    "format": "prettier --write \"**/*.{ts,js,cjs,vue,json}\""
+    "format": "prettier --write \"**/*.{ts,js,cjs,vue,json,prettierrc}\""
   },
   "pre-commit": [
     "lint",

@@ -6,8 +6,5 @@
   "semi": false,
   "singleQuote": true,
   "endOfLine": "auto",
-   "plugins": [
-    "prettier-plugin-organize-imports",
-    "prettier-plugin-organize-attributes"
-  ]
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-organize-attributes"]
 }
