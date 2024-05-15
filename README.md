@@ -69,7 +69,7 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
 - [Example](#example)
 - [Faq](#faq)
 - [License](#license)
-- [Other projects](#other-projects)
+- [Other packages](#other-packages)
 
 <a href="https://www.buymeacoffee.com/kolirt" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
@@ -550,8 +550,6 @@ Check closed [issues](https://github.com/kolirt/vue-web3-auth/issues) to get ans
 
 [MIT](https://github.com/kolirt/vue-web3-auth/tree/v2/LICENSE).
 
-# Other projects
+# Other packages
 
-Check out my other projects:
-
-- [@kolirt/vue-modal](https://github.com/kolirt/vue-modal) - easy to use and highly customizable Vue3 modal package.
+Check out my other projects on my [GitHub profile](https://github.com/kolirt).
