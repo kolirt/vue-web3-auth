@@ -5,7 +5,7 @@
 
 <h1 align="center">Vue web3 auth</h1>
 
-<p align="center">Web3 authentication for Vue3 apps based on <a href="https://github.com/WalletConnect/web3modal/tree/V2">WalletConnect Web3Modal v2</a> and wagmi</p>
+<p align="center">Web3 authentication for Vue3 apps based on <a href="https://github.com/reown-com/appkit/tree/V2">WalletConnect Web3Modal v2</a> and wagmi</p>
 
 <div align="center">
   <img src="https://img.shields.io/npm/dependency-version/%40kolirt%2Fvue-web3-auth/peer/vue" alt="vue-version" />
@@ -29,7 +29,7 @@ Simple WalletConnect Web3Modal v2 integration package for Vue3 apps.
 
 | package version                                          | web3modal                                                |
 | -------------------------------------------------------- | -------------------------------------------------------- |
-| [2.x.x](https://github.com/kolirt/vue-web3-auth/tree/v2) | [v2](https://github.com/WalletConnect/web3modal/tree/V2) |
+| [2.x.x](https://github.com/kolirt/vue-web3-auth/tree/v2) | [v2](https://github.com/reown-com/appkit/tree/V2) |
 
 ### Table of Contents
 
