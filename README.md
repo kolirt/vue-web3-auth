@@ -1,10 +1,6 @@
 <div align="center">
-  <a href="https://vuejs.org/">
-    <img height="185" hspace="10" src="https://github.com/kolirt/vue-web3-auth/blob/v2/assets/vue.png" alt="Vue logo">
-  </a>
-  <a href="https://docs.walletconnect.com/web3modal/v2/about">
-    <img height="185" hspace="10" src="https://github.com/kolirt/vue-web3-auth/blob/v2/assets/wc.png" alt="Wallet connect logo" />
-  </a>
+  <a href="https://vuejs.org/"><img height="185" hspace="10" src="https://github.com/kolirt/vue-web3-auth/blob/v2/assets/vue.png" alt="Vue logo"></a>
+  <a href="https://docs.walletconnect.com/web3modal/v2/about"><img height="185" hspace="10" src="https://github.com/kolirt/vue-web3-auth/blob/v2/assets/wc.png" alt="Wallet connect logo"></a>
 </div>
 
 <h1 align="center">Vue web3 auth</h1>
