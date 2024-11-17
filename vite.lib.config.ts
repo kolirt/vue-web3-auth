@@ -21,12 +21,12 @@ export default defineConfig({
     },
     emptyOutDir: true,
     rollupOptions: {
-      external: [...Object.keys(pkg.dependencies)],
+      external: Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }),
       output: {
         globals: {
           ...(() => {
             const obj: Record<string, string> = {}
-            Object.keys(pkg.dependencies).forEach((key) => {
+            Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }).forEach((key) => {
               obj[key] = key
             })
             return obj
